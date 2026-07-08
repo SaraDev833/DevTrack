@@ -2,15 +2,17 @@ import React from 'react'
 import Navbar from '../components/landing/Navbar'
 import Banner from '../components/landing/banner/Banner'
 import LandingFooter from '../components/landing/LandingFooter'
+import LandingFooter2 from '../components/landing/LandingFooter2'
 const Landing = () => {
   
     return (
         <div className='w-full bg-white '>
-            <div className="container mx-auto w-full py-6  ">
+            <div className="max-w-7xl mx-auto w-full py-6  ">
                <Navbar/>
                <Banner/>
-               <LandingFooter/>
             </div>
+               <LandingFooter/>
+               <LandingFooter2/>
         </div>
     )
 }
