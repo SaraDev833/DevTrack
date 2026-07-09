@@ -7,10 +7,10 @@ const LandingFooter = () => {
     <div className="bg-indigo-600/10 ">
       <div className="max-w-7xl py-15 mx-auto">
                <div className="title">
-                <h2 className='text-3xl font-bold text-center mb-3'>Everything your team needs to succeed</h2>
-                <p className='text-slate-600 text-center'>Powerful Features to streamline your workflow and boost productivity</p>
+                <h2 className='md:text-2xl lg:text-3xl font-bold text-center mb-3 text-xl'>Everything your team needs to succeed</h2>
+                <p className='text-slate-600 text-center md:text-lg text-sm'>Powerful Features to streamline your workflow and boost productivity</p>
                </div>
-               <div className="flex justify-between items-center ">
+               <div className="flex justify-between items-center flex-col md:flex-row ">
              <LandingFooterCard icon = {<FolderClosed className='text-indigo-700'/>} title="Project Management" description = "Create projects, set deadlines and organize work efficiently"/>
              <LandingFooterCard icon={<SquareCheckBig />} title="Task Tracking" description="Break down work into tasks and track progress in real time" />
              <LandingFooterCard icon={<SquareKanban />} title="Kanbar Boards" description="Visualize your work flow and move tasks across stages"/>

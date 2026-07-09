@@ -20,14 +20,14 @@ const LandingFooter2 = () => {
         },
     ]
   return (
-    <div className=' py-10 bg-indigo-950'>
+    <div className=' py-10 bg-indigo-950 px-6 md:px-0'>
        <div className="title">
-        <h2 className='text-3xl text-white font-bold text-center'>Trusted By 500+ teams worldwide </h2>
-        <p className='text-lg text-slate-300 text-center mt-4'>Join thousands of teams who choose Plannix to build better software</p>
+        <h2 className='text-xl md:text-2xl lg:text-3xl text-white font-bold text-center'>Trusted By 500+ teams worldwide </h2>
+        <p className='md:text-lg text-slate-300 text-center mt-4 text-sm'>Join thousands of teams who choose Plannix to build better software</p>
        </div>
-       <div className='flex  items-center justify-center gap-10 mt-15'>
+       <div className='flex  items-center justify-center gap-10 md:mt-15 mt-10 flex-wrap'>
              {iconsText.map((item)=>(
-                 <div key={item.name} className='flex items-center justify-between gap-2'>
+                 <div key={item.name} className='flex items-center justify-between gap-2 '>
               
                 <div className="icon  text-slate-300" >{item.icon}</div>
                 <div className="name  font-medium text-slate-300">{item.name}</div>

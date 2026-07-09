@@ -2,7 +2,7 @@ import React from 'react'
 
 const LandingFooterCard = ({icon , title , description}) => {
   return (
-    <div className='flex flex-col gap-3 items-center justify-center w-[300px] p-6 border-r border-slate-300 last:border-r-0 mt-10'>
+    <div className='flex flex-col gap-3 items-center justify-center w-[300px] p-6 md:border-r border-slate-300 md:last:border-r-0 mt-10 border-b last:border-b-0 md:border-b-0'>
       <div className="icon h-15 w-15 bg-indigo-700/10 flex justify-center items-center rounded-lg">
         {icon}
       </div>

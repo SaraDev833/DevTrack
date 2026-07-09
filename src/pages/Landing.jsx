@@ -11,8 +11,8 @@ const Landing = () => {
                <Navbar/>
                <Banner/>
             </div>
-               {/* <LandingFooter/>
-               <LandingFooter2/> */}
+               <LandingFooter/>
+               <LandingFooter2/>
         </div>
     )
 }
