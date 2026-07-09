@@ -7,12 +7,12 @@ const Landing = () => {
   
     return (
         <div className='w-full bg-white '>
-            <div className="max-w-7xl mx-auto w-full py-6  ">
+            <div className="max-w-7xl mx-auto w-full py-6 px-6 lg:px-6 xl:px-0 ">
                <Navbar/>
                <Banner/>
             </div>
-               <LandingFooter/>
-               <LandingFooter2/>
+               {/* <LandingFooter/>
+               <LandingFooter2/> */}
         </div>
     )
 }
