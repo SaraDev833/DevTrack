@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import { Sparkles, Menu } from 'lucide-react'
+import Logo from '../Logo'
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
     const menu = ["Features", "Pricing", "How it works", "About", "Contact"]
 
     return (
         <div className='flex justify-between items-center'>
-            <div className="logo flex justify items-center gap-2">
-                <Sparkles className='text-indigo-600 text-xl' fill='currentColor' />
-                <p className='lg:text-3xl font-bold text-2xl'>Plan<span className='text-indigo-600'>nix</span></p>
-            </div>
+        <Logo/>
             <div className="menu md:flex items-center gap-5 font-semibold hidden ">
                 {menu.map((item, index) => (
                     <ul key={item[index]}>
