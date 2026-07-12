@@ -1,9 +1,12 @@
 import React from 'react'
+import Navbar from '../components/Dashboard/Navbar'
+import Kanban from '../components/Kanban'
 
 const Dashboard = () => {
   return (
-    <div className='w-full '>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque dicta est rem numquam obcaecati praesentium, ipsa reiciendis pariatur dolorem, iure ut dolor expedita dignissimos quos itaque temporibus magnam facilis libero.
+    <div className='w-full bg-slate-100'>
+<Navbar/>
+<Kanban/>
     </div>
   )
 }

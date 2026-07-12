@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import manImg from "../assets/man-1.jfif"
 import {
   LayoutDashboard,
   FolderKanban,
@@ -74,6 +75,7 @@ const Sidebar = () => {
       </div>
 
       {/* Nav Items */}
+    
       <nav className="mt-8 flex flex-col gap-2">
         {navItems.map((item) => {
           const Icon = item.icon;
@@ -101,6 +103,17 @@ const Sidebar = () => {
           );
         })}
       </nav>
+        {isOpen && (
+                <div className="fixed bottom-5 flex gap-4 py-1 px-4 bg-white/10 border border-white/50 rounded-full shadow backdrop-blur-2xl">
+          <img src={manImg} className="w-10 h-10 rounded-full object-cover" alt="" />
+        
+          <div className="flex flex-col gap-0.5"> 
+                 <h2 className="text-white font-medium">Shakib Hasan</h2>
+                 <span className="text-slate-300 text-xs">Project Manager</span>
+          </div>
+      </div>
+        )}
+
     </aside>
   );
 };
