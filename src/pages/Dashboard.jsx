@@ -8,28 +8,22 @@ import UpcomingDeadlines from '../components/Dashboard/UpcomingDeadlines'
 
 const Dashboard = () => {
   return (
-    <div className='w-full bg-slate-100'>
-<Navbar/>
-<Kanban/>
-<div className='flex justify-between  my-6 gap-6 items-stretch'>
-  <div className='w-1/2'>
-     <TaskOverViewChart/>
-  </div>
- <div className='w-1/2'> 
-      <RecentProjects/>
- </div>
-</div>
-<div className='flex justify-between items-center w-full'>
-      <div className='w-1/3'>
-        <RecentActivity/>
+    <div className="w-full min-w-0 bg-slate-100">
+      <Navbar />
+      <Kanban />
+
+      {/* Chart + Recent Projects */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 my-6 items-stretch">
+        <TaskOverViewChart />
+        <RecentProjects />
       </div>
-      <div className='w-1/3'>
-        <UpcomingDeadlines/>
+
+      {/* Bottom 3 Cards */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 items-stretch">
+        <RecentActivity />
+        <UpcomingDeadlines />
+        <UpcomingDeadlines />
       </div>
-      <div className='w-1/3'>
-        <UpcomingDeadlines/>
-      </div>
-</div>
     </div>
   )
 }

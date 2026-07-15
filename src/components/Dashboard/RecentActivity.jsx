@@ -53,9 +53,9 @@ const RecentActivity = () => {
                     <div>
                         <img src={list.image} alt="" className='w-10 h-10 rounded-full object-cover object-top' />
                     </div>
-                    <div className='flex flex-col gap w-70 '>
-                        <div><span className='text-xs font-bold text-slate-900'>{list.name}</span> <span className='text-slate-800  text-xs '>{list.status}</span></div>
-                        <p className='text-xs text-slate-500'>{list.comment}</p>
+                    <div className='flex flex-col gap min-w-0 '>
+                        <div><span className='text-sm font-bold text-slate-900'>{list.name}</span> <span className='text-slate-800  text-sm '>{list.status}</span></div>
+                        <p className='text-sm text-slate-500'>{list.comment}</p>
                     </div>
                     <div>
                         <span className='text-sm text-slate-500 text-nowrap '>{list.time}</span>

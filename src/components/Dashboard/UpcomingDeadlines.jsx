@@ -55,8 +55,17 @@ const UpcomingDeadlines = () => {
                 <a href="#" className='text-sm font-medium text-indigo-600'>View Calender</a>
             </div>
             {lists.map(list => (
-                <div key={list.name} className='flex justify-between items-center '>
-                    <div></div>
+                <div key={list.name} className='flex justify-between items-center py-3 border-b border-slate-200 last:border-0'>
+                    <div className='flex items-center justify-center gap-6'>
+                        <div className="date flex flex-col gap-[0.5] py-1 px-3 rounded-md border border-slate-300 shadow-sm">
+                            <span className='text-sm font-medium'>{list.month}</span>
+                            <span className='text-sm '>{list.date}</span>
+                        </div>
+                        <div className='flex flex-col gap-1 min-w-0'> 
+                              <p className='text-sm font-bold'>{list.task}</p>
+                              <span className='text-sm '>{list.title}</span>
+                        </div>
+                    </div>
                     <div>
                         <span className={`${list.color} ${list.bgColor} py-1 px-1 rounded md font-medium`}>{list.priority}</span>
                     </div>
