@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Dashboard/Navbar";
+import Navbar from "../components/common/Navbar";
 import Kanban from "../components/Kanban";
 import TaskOverViewChart from "../components/Dashboard/TaskOverViewChart";
 import RecentProjects from "../components/Dashboard/RecentProjects";
@@ -10,7 +10,8 @@ import TeamOverview from "../components/Dashboard/TeamOverview";
 const Dashboard = () => {
   return (
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
-      <Navbar />
+      <Navbar title="Dashboard" description=" Welcome back, Sakib! Here's what's happening with your
+          projects."/>
       <Kanban />
 
       {/* Chart + Recent Projects */}

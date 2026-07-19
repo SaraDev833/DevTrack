@@ -4,6 +4,7 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import DashboardLayout from "./components/DashboardLayout"
+import Projects from "./pages/Projects"
 
 
 
@@ -18,6 +19,8 @@ function App() {
   
     <Route element={<DashboardLayout/>}>
     <Route path="/dashboard" element={<Dashboard/>}/>
+    <Route path="/projects" element={<Projects/>}/>
+  
 </Route>
    </Routes>
     </>
