@@ -5,6 +5,7 @@ import Login from "./pages/Login"
 import Dashboard from "./pages/Dashboard"
 import DashboardLayout from "./components/DashboardLayout"
 import Projects from "./pages/Projects"
+import ProjectDetail from "./components/projects/ProjectDetail"
 
 
 
@@ -20,6 +21,8 @@ function App() {
     <Route element={<DashboardLayout/>}>
     <Route path="/dashboard" element={<Dashboard/>}/>
     <Route path="/projects" element={<Projects/>}/>
+    <Route path="/projects" element={<Projects/>}/>
+    <Route path="/project-detail/:id" element={<ProjectDetail/>}/>
   
 </Route>
    </Routes>
