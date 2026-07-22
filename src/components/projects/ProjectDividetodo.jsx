@@ -4,6 +4,7 @@ import Man1 from "../../assets/man-1.jfif"
 import Man2 from "../../assets/man-2.jfif"
 import Man3 from "../../assets/man-3.jfif"
 import TaskModal from './TaskModal'
+import projects from '../../data/ProjectData'
 const ProjectDividetodo = ({project}) => {
    
     const [isModalOpen , setIsModalOpen] = useState(false)
@@ -18,7 +19,7 @@ const ProjectDividetodo = ({project}) => {
         ))}
   
     <button onClick={()=>setIsModalOpen(true)} className='text-indigo-600 bg-white py-2 rounded-md font-medium text-sm cursor-pointer text-left px-3'>+ Add task</button>
-    {isModalOpen && <TaskModal closeModal={onClose}/>}
+    {isModalOpen && <TaskModal closeModal={onClose} teamMembers = {project.teamMembers}/>}
     </div>
   )
 }
