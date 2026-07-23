@@ -1,7 +1,30 @@
 import { X } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 
-const TaskModal = ({closeModal , teamMembers}) => {
+const TaskModal = ({closeModal , teamMembers , onAddTask}) => {
+  const [formData , setFormData] = useState({
+    name: "",
+    description:"",
+    title:"",
+    status:"",
+    priority:"",
+    assignedTo:"",
+    dueDate:""
+  })
+  console.log(formData)
+  const handleChange=(e)=>{
+    setFormData({
+      ...formData, [e.target.name]:e.target.value,
+    })
+  }
+  const handleSubmit = (e)=>{
+     e.preventDefault();
+      if (!formData.title || !formData.assignedTo || !formData.dueDate || !formData.status || !formData.dueDate || !formData.priority || !formData.description ) {
+    alert("All fields are required");
+    return;
+  }
+    
+  }
   return (
 
     <div className='fixed inset-0  bg-black/50 backdrop-blur-sm  z-50 flex items-center justify-center'>
@@ -11,20 +34,27 @@ const TaskModal = ({closeModal , teamMembers}) => {
           <X size={20} className='text-slate-700 cursor-pointer' onClick={closeModal} />
         </div>
         <div className='my-3 '>
-          <form action="" className='w-full pr-3 flex flex-col gap-3'>
+          <form action="" className='w-full pr-3 flex flex-col gap-3' onSubmit={handleSubmit}>
             <div className='flex flex-col gap-1.5'>
               <label htmlFor="" className='text-sm font-medium text-slate-900'>Project Name</label>
-              <input type="text" placeholder='Enter Project Name' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' />
+              <input name='name' type="text" placeholder='Enter Project Name' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}/>
             </div>
+            {/* title */}
+                <div className='flex flex-col gap-1.5 '>
+              <label htmlFor="" className='text-sm font-medium text-slate-900'>Title</label>
+              <textarea type="text" placeholder='Enter Project Name' name='title' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}/>
+            </div>
+            {/* description */}
             <div className='flex flex-col gap-1.5 '>
               <label htmlFor="" className='text-sm font-medium text-slate-900'>Description</label>
-              <textarea type="text" placeholder='Enter Project Name' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' />
+              <textarea type="text" placeholder='Enter Project Name' name='description' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}/>
             </div>
+        
             {/* priority + status */}
             <div className='flex  items-center w-full gap-3'>
               <div className='flex flex-col gap-1.5 w-1/2'>
                 <label htmlFor="" className='text-sm font-medium text-slate-900'>Priority</label>
-                <select name="" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium'>
+                <select name="priority" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}>
                   <option value="High">High</option>
                   <option value="Medium">Medium</option>
                   <option value="Low">Low</option>
@@ -32,7 +62,7 @@ const TaskModal = ({closeModal , teamMembers}) => {
               </div>
               <div className='flex flex-col gap-1.5 w-1/2'>
                 <label htmlFor="" className='text-sm font-medium text-slate-900'>Status</label>
-                <select name="" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium'>
+                <select name="status" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}>
                   <option value="To Do">To Do</option>
                   <option value="In Progress">In Progress</option>
                   <option value="Completed">Completed</option>
@@ -43,7 +73,7 @@ const TaskModal = ({closeModal , teamMembers}) => {
             <div className='flex  items-center w-full gap-3'>
               <div className='flex flex-col gap-1.5 w-1/2'>
                 <label htmlFor="" className='text-sm font-medium text-slate-900'>Assign To</label>
-                <select name="" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium'>
+                <select name="assignedTo" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}>
                   {teamMembers.map((member)=>(
                     <>
    <option key={member} value={member}>{member}</option>
@@ -54,12 +84,12 @@ const TaskModal = ({closeModal , teamMembers}) => {
                 </select>
               </div>
               <div className='flex flex-col gap-1.5 w-1/2'>
-                <label htmlFor="" className='text-sm font-medium text-slate-900'>Status</label>
+                <label htmlFor="" className='text-sm font-medium text-slate-900'>Due Date</label>
           <input
         type="date"
         name="dueDate"
       className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium'
-
+      onChange={handleChange}
       />
               </div>
             </div>
