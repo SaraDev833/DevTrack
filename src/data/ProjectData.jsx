@@ -1,3 +1,4 @@
+
 const projects = [
   {
     id: 1,
@@ -7,6 +8,12 @@ const projects = [
     status: "In Progress",
     dueDate: "May 20, 2024",
     priority: "High",
+    client: "Tech Solution BD",
+    manager: "Rafi Ahmed",
+    budget: "$15,000",
+    category: "Web Development",
+    createdAt: "5 May 2024",
+    updatedAt: "18 May 2024",
     teamMembers: ["Rafi Ahmed", "Maham Tanvir", "Hasan Mahmud"],
     tasks: [
       {
@@ -55,6 +62,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jun 15, 2024",
     priority: "High",
+    client: "AppNova Studio",
+    manager: "Maham Tanvir",
+    budget: "$22,000",
+    category: "Mobile App",
+    createdAt: "10 May 2024",
+    updatedAt: "20 May 2024",
     teamMembers: ["Nusrat Jahan", "Hasan Mahmud", "Rafi Ahmed"],
     tasks: [
       {
@@ -94,6 +107,12 @@ const projects = [
     status: "Planning",
     dueDate: "May 30, 2024",
     priority: "High",
+    client: "Bright Marketing Agency",
+    manager: "Sarah Kim",
+    budget: "$8,500",
+    category: "Marketing",
+    createdAt: "12 May 2024",
+    updatedAt: "20 May 2024",
     teamMembers: ["Sarah Kim", "Maham Tanvir"],
     tasks: [
       {
@@ -133,6 +152,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jul 10, 2024",
     priority: "High",
+    client: "ShopEase Ltd.",
+    manager: "Hasan Mahmud",
+    budget: "$30,000",
+    category: "E-commerce",
+    createdAt: "15 May 2024",
+    updatedAt: "25 May 2024",
     teamMembers: ["Rafi Ahmed", "Hasan Mahmud", "Nusrat Jahan"],
     tasks: [
       {
@@ -172,6 +197,12 @@ const projects = [
     status: "Planning",
     dueDate: "May 18, 2024",
     priority: "High",
+    client: "DataVision Analytics",
+    manager: "Rafi Ahmed",
+    budget: "$18,000",
+    category: "Analytics Dashboard",
+    createdAt: "18 May 2024",
+    updatedAt: "22 May 2024",
     teamMembers: ["Hasan Mahmud", "Rafi Ahmed"],
     tasks: [
       {
@@ -211,6 +242,12 @@ const projects = [
     status: "On Hold",
     dueDate: "Jun 05, 2024",
     priority: "High",
+    client: "SecureCore Ltd.",
+    manager: "Hasan Mahmud",
+    budget: "$12,000",
+    category: "Cyber Security",
+    createdAt: "20 May 2024",
+    updatedAt: "23 May 2024",
     teamMembers: ["Hasan Mahmud"],
     tasks: [
       {
@@ -241,6 +278,12 @@ const projects = [
     status: "Completed",
     dueDate: "Apr 25, 2024",
     priority: "High",
+    client: "SalesBridge CRM",
+    manager: "Rafi Ahmed",
+    budget: "$10,000",
+    category: "Integration",
+    createdAt: "1 Apr 2024",
+    updatedAt: "25 Apr 2024",
     teamMembers: ["Rafi Ahmed", "Hasan Mahmud"],
     tasks: [
       {
@@ -271,6 +314,12 @@ const projects = [
     status: "Completed",
     dueDate: "Apr 12, 2024",
     priority: "High",
+    client: "Launchly",
+    manager: "Maham Tanvir",
+    budget: "$6,000",
+    category: "UI/UX Design",
+    createdAt: "2 Apr 2024",
+    updatedAt: "12 Apr 2024",
     teamMembers: ["Maham Tanvir"],
     tasks: [
       {
@@ -301,6 +350,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jul 01, 2024",
     priority: "High",
+    client: "StockFlow Warehouse",
+    manager: "Nusrat Jahan",
+    budget: "$20,000",
+    category: "Inventory System",
+    createdAt: "1 Jun 2024",
+    updatedAt: "15 Jun 2024",
     teamMembers: ["Rafi Ahmed", "Nusrat Jahan"],
     tasks: [
       {
@@ -340,6 +395,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jun 28, 2024",
     priority: "High",
+    client: "PayBox Finance",
+    manager: "Hasan Mahmud",
+    budget: "$14,000",
+    category: "Payment Integration",
+    createdAt: "5 Jun 2024",
+    updatedAt: "18 Jun 2024",
     teamMembers: ["Hasan Mahmud"],
     tasks: [
       {
@@ -379,6 +440,12 @@ const projects = [
     status: "Planning",
     dueDate: "Jul 08, 2024",
     priority: "Medium",
+    client: "ContentNest",
+    manager: "Nusrat Jahan",
+    budget: "$9,000",
+    category: "CMS",
+    createdAt: "8 Jun 2024",
+    updatedAt: "12 Jun 2024",
     teamMembers: ["Nusrat Jahan", "Rafi Ahmed"],
     tasks: [
       {
@@ -409,6 +476,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jul 20, 2024",
     priority: "High",
+    client: "HelpDesk Pro",
+    manager: "Sarah Kim",
+    budget: "$17,500",
+    category: "Support System",
+    createdAt: "10 Jun 2024",
+    updatedAt: "22 Jun 2024",
     teamMembers: ["Rafi Ahmed", "Sarah Kim"],
     tasks: [
       {
@@ -448,6 +521,12 @@ const projects = [
     status: "Planning",
     dueDate: "Aug 01, 2024",
     priority: "High",
+    client: "PeopleCare HR",
+    manager: "Hasan Mahmud",
+    budget: "$24,000",
+    category: "HR Software",
+    createdAt: "12 Jun 2024",
+    updatedAt: "25 Jun 2024",
     teamMembers: ["Nusrat Jahan", "Hasan Mahmud"],
     tasks: [
       {
@@ -478,6 +557,12 @@ const projects = [
     status: "Completed",
     dueDate: "Mar 30, 2024",
     priority: "Low",
+    client: "Personal Project",
+    manager: "Rafi Ahmed",
+    budget: "$1,500",
+    category: "Portfolio",
+    createdAt: "10 Mar 2024",
+    updatedAt: "30 Mar 2024",
     teamMembers: ["Rafi Ahmed"],
     tasks: [
       {
@@ -508,6 +593,12 @@ const projects = [
     status: "On Hold",
     dueDate: "Jul 15, 2024",
     priority: "High",
+    client: "WorkflowX",
+    manager: "Hasan Mahmud",
+    budget: "$16,000",
+    category: "Automation",
+    createdAt: "15 Jun 2024",
+    updatedAt: "28 Jun 2024",
     teamMembers: ["Hasan Mahmud", "Rafi Ahmed"],
     tasks: [
       {
@@ -538,6 +629,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Aug 10, 2024",
     priority: "Low",
+    client: "EduSmart Academy",
+    manager: "Nusrat Jahan",
+    budget: "$28,000",
+    category: "Education Platform",
+    createdAt: "20 Jun 2024",
+    updatedAt: "5 Jul 2024",
     teamMembers: ["Nusrat Jahan", "Maham Tanvir", "Hasan Mahmud"],
     tasks: [
       {
@@ -577,6 +674,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jun 22, 2024",
     priority: "High",
+    client: "MediCare Clinic",
+    manager: "Rafi Ahmed",
+    budget: "$11,000",
+    category: "Booking System",
+    createdAt: "1 Jun 2024",
+    updatedAt: "16 Jun 2024",
     teamMembers: ["Rafi Ahmed", "Nusrat Jahan"],
     tasks: [
       {
@@ -616,6 +719,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jul 05, 2024",
     priority: "High",
+    client: "FoodDash",
+    manager: "Sarah Kim",
+    budget: "$19,000",
+    category: "Food Delivery",
+    createdAt: "7 Jun 2024",
+    updatedAt: "26 Jun 2024",
     teamMembers: ["Hasan Mahmud", "Sarah Kim"],
     tasks: [
       {
@@ -655,6 +764,12 @@ const projects = [
     status: "Completed",
     dueDate: "Apr 05, 2024",
     priority: "High",
+    client: "CareerPilot",
+    manager: "Rafi Ahmed",
+    budget: "$5,000",
+    category: "Productivity Tool",
+    createdAt: "15 Mar 2024",
+    updatedAt: "5 Apr 2024",
     teamMembers: ["Rafi Ahmed"],
     tasks: [
       {
@@ -685,6 +800,12 @@ const projects = [
     status: "Completed",
     dueDate: "Mar 18, 2024",
     priority: "Medium",
+    client: "BudgetMate",
+    manager: "Nusrat Jahan",
+    budget: "$4,500",
+    category: "Finance App",
+    createdAt: "1 Mar 2024",
+    updatedAt: "18 Mar 2024",
     teamMembers: ["Nusrat Jahan"],
     tasks: [
       {
@@ -715,6 +836,12 @@ const projects = [
     status: "Planning",
     dueDate: "Aug 15, 2024",
     priority: "High",
+    client: "HomeFinder BD",
+    manager: "Maham Tanvir",
+    budget: "$26,000",
+    category: "Real Estate",
+    createdAt: "1 Jul 2024",
+    updatedAt: "8 Jul 2024",
     teamMembers: ["Rafi Ahmed", "Maham Tanvir"],
     tasks: [
       {
@@ -745,6 +872,12 @@ const projects = [
     status: "On Hold",
     dueDate: "Sep 01, 2024",
     priority: "High",
+    client: "ChatHive",
+    manager: "Maham Tanvir",
+    budget: "$7,500",
+    category: "Messaging UI",
+    createdAt: "5 Jul 2024",
+    updatedAt: "10 Jul 2024",
     teamMembers: ["Maham Tanvir"],
     tasks: [
       {
@@ -775,6 +908,12 @@ const projects = [
     status: "In Progress",
     dueDate: "Jun 30, 2024",
     priority: "Low",
+    client: "AdminCore",
+    manager: "Rafi Ahmed",
+    budget: "$13,000",
+    category: "Dashboard",
+    createdAt: "1 Jun 2024",
+    updatedAt: "26 Jun 2024",
     teamMembers: ["Rafi Ahmed", "Hasan Mahmud"],
     tasks: [
       {
@@ -814,6 +953,12 @@ const projects = [
     status: "Completed",
     dueDate: "Feb 28, 2024",
     priority: "High",
+    client: "QuizMaster",
+    manager: "Nusrat Jahan",
+    budget: "$6,800",
+    category: "Education App",
+    createdAt: "5 Feb 2024",
+    updatedAt: "28 Feb 2024",
     teamMembers: ["Nusrat Jahan"],
     tasks: [
       {
@@ -844,6 +989,12 @@ const projects = [
     status: "Planning",
     dueDate: "Jul 25, 2024",
     priority: "Medium",
+    client: "MailCraft",
+    manager: "Sarah Kim",
+    budget: "$9,500",
+    category: "Marketing Tool",
+    createdAt: "20 Jun 2024",
+    updatedAt: "2 Jul 2024",
     teamMembers: ["Sarah Kim", "Maham Tanvir"],
     tasks: [
       {
@@ -874,6 +1025,12 @@ const projects = [
     status: "On Hold",
     dueDate: "Aug 05, 2024",
     priority: "High",
+    client: "DinePoint",
+    manager: "Hasan Mahmud",
+    budget: "$21,000",
+    category: "POS System",
+    createdAt: "25 Jun 2024",
+    updatedAt: "9 Jul 2024",
     teamMembers: ["Hasan Mahmud", "Rafi Ahmed"],
     tasks: [
       {
@@ -904,6 +1061,12 @@ const projects = [
     status: "Completed",
     dueDate: "Jan 25, 2024",
     priority: "High",
+    client: "FitLife",
+    manager: "Rafi Ahmed",
+    budget: "$5,200",
+    category: "Health App",
+    createdAt: "2 Jan 2024",
+    updatedAt: "25 Jan 2024",
     teamMembers: ["Rafi Ahmed"],
     tasks: [
       {
@@ -934,6 +1097,12 @@ const projects = [
     status: "Planning",
     dueDate: "Aug 20, 2024",
     priority: "Medium",
+    client: "TripMate",
+    manager: "Sarah Kim",
+    budget: "$10,500",
+    category: "Travel App",
+    createdAt: "3 Jul 2024",
+    updatedAt: "12 Jul 2024",
     teamMembers: ["Nusrat Jahan", "Sarah Kim"],
     tasks: [
       {
@@ -964,6 +1133,12 @@ const projects = [
     status: "Archived",
     dueDate: "Sep 10, 2024",
     priority: "High",
+    client: "NotifyHub",
+    manager: "Hasan Mahmud",
+    budget: "$8,000",
+    category: "Notification System",
+    createdAt: "10 Jul 2024",
+    updatedAt: "15 Jul 2024",
     teamMembers: ["Hasan Mahmud"],
     tasks: [
       {
@@ -994,6 +1169,12 @@ const projects = [
     status: "Archived",
     dueDate: "Dec 15, 2023",
     priority: "Low",
+    client: "OldServe Ltd.",
+    manager: "Rafi Ahmed",
+    budget: "$7,000",
+    category: "Client Portal",
+    createdAt: "1 Dec 2023",
+    updatedAt: "15 Dec 2023",
     teamMembers: ["Rafi Ahmed", "Sarah Kim"],
     tasks: [
       {
@@ -1019,3 +1200,4 @@ const projects = [
 ];
 
 export default projects;
+
