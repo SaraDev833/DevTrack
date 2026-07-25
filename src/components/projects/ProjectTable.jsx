@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom"
 import ProjectDetail from "./ProjectDetail";
 
-const ProjectTable = ({ project, Ondelete }) => {
+const ProjectTable = ({ project, Ondelete , setEditModalOpen , editModalOpen}) => {
  const calculateProgress = (tasks=[])=>{
    if(tasks.length === 0){
     return 0
@@ -29,10 +29,10 @@ const ProjectTable = ({ project, Ondelete }) => {
 
       <div><span className="lg:hidden font-semibold text-slate-900">Status: </span>{project.status}</div>
   <div className="flex  items-center justify-start gap-2">
-      <div onClick={() => Ondelete(project.id)} className="bg-red-700 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
-        <span className="lg:hidden font-semibold text-slate-900">Action: </span >Delete</div>
-      <div  className="bg-indigo-700/50 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
-        <span className="lg:hidden font-semibold text-slate-900">Action: </span >Edit</div>
+      <button onClick={() => Ondelete(project.id)} className="bg-red-700 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
+      Delete</button>
+      <button onClick={()=>setEditModalOpen(!editModalOpen)} className="bg-indigo-700/50 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
+       Edit</button>
 </div>
     </div>
   );

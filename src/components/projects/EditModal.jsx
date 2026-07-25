@@ -1,9 +1,9 @@
-import { X } from "lucide-react";
-import React, { useState } from "react";
-import teamMembers from "../../data/teamMembers";
+import { X } from 'lucide-react';
+import React, { useState } from 'react'
+import teamMembers from '../../data/teamMembers';
 
-const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
-  const [formData, setFormData] = useState({
+const EditModal = ({setEditModalOpen, projects, setProjects}) => {
+   const [formData, setFormData] = useState({
     name: "",
     description: "",
     client: "",
@@ -107,7 +107,7 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
           <X
             size={20}
             className="text-slate-700 cursor-pointer"
-            onClick={() => setIsCreateModalOpen(false)}
+            onClick={() => setEditModalOpen(false)}
           />
         </div>
 
@@ -325,4 +325,4 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
   );
 };
 
-export default ProjectModal;
+export default EditModal
