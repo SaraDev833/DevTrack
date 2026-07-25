@@ -34,10 +34,10 @@ const ProjectDivide = ({project}) => {
         </div>
         <ProjectDivideCompleted />
        </div>
-       <div>
+       <div className='rounded-md shadow-sm p-3 border border-slate-200 bg-white flex flex-col'>
         <div className="title "><h3 className='font-medium text-lg flex mb-3 items-center text-slate-900 gap-3'>Project Info</h3>
         </div>
-        <ProjectInfo/>
+        <ProjectInfo project={project}/>
        </div>
       
     </div>

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Bell, Plus, Search } from "lucide-react";
 import manImg from "../../assets/man-1.jfif";
+import ProjectData from "../../data/ProjectData"
+import ProjectModal from "../projects/ProjectModal";
 
 const Navbar = ({title, description}) => {
+  const[projects , setProjects] = useState(ProjectData);
+  const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
   return (
     <header className="w-full min-w-0">
       <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-center 2xl:justify-between">
@@ -35,11 +39,11 @@ const Navbar = ({title, description}) => {
 
           {/* Actions */}
           <div className="flex items-center gap-3 shrink-0">
-            <button className="h-11 px-4 bg-indigo-600 text-white rounded-xl flex items-center justify-center gap-2 text-sm font-semibold hover:bg-indigo-700 transition">
+            <button onClick={()=>setIsCreateModalOpen(!isCreateModalOpen)} className="py-2 px-4 bg-indigo-600 text-white rounded-md flex items-center justify-center gap-1 text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer">
               <Plus size={18} />
-              <span>New Task</span>
+              <span>New Project</span>
             </button>
-
+        {isCreateModalOpen && (<ProjectModal setProjects = {setProjects} setIsCreateModalOpen={setIsCreateModalOpen}/>)}
             <button className="relative h-11 w-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50 transition">
               <Bell size={20} className="text-slate-700" />
 
@@ -50,7 +54,7 @@ const Navbar = ({title, description}) => {
 
             <img
               src={manImg}
-              className="h-11 w-11 rounded-xl object-cover shrink-0"
+              className="h-11 w-11 rounded-xl object-cover shrink-0 object-top"
               alt="Profile"
             />
           </div>

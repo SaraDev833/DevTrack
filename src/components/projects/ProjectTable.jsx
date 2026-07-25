@@ -11,10 +11,18 @@ const ProjectTable = ({ project, Ondelete }) => {
       </Link>
 
       <div><span className="lg:hidden font-semibold text-slate-900">Progress: </span> {project.progress}%</div>
+
       <div><span className="lg:hidden font-semibold text-slate-900">Team: </span>{project.teamMembers.length}</div>
+
       <div><span className="lg:hidden font-semibold text-slate-900">Tasks: </span>{project.dueDate}</div>
+
       <div><span className="lg:hidden font-semibold text-slate-900">Status: </span>{project.status}</div>
-      <div onClick={()=>Ondelete(project.id)} className="text-red-600 font-bold cursor-pointer"><span className="lg:hidden font-semibold text-slate-900">Action: </span >Delete</div>
+  <div className="flex  items-center justify-start gap-2">
+      <div onClick={() => Ondelete(project.id)} className="bg-red-700 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
+        <span className="lg:hidden font-semibold text-slate-900">Action: </span >Delete</div>
+      <div  className="bg-indigo-700/50 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
+        <span className="lg:hidden font-semibold text-slate-900">Action: </span >Edit</div>
+</div>
     </div>
   );
 };
