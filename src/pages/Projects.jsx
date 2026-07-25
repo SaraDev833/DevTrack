@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Navbar from "../components/common/Navbar";
 import ProjectTable from "../components/projects/ProjectTable";
-
-import projects from "../data/ProjectData";
+import ProjectModal from "../components/projects/ProjectModal";
+import projectData from "../data/ProjectData";
 const Projects = () => {
   const [selectedTab, setSelectedTab] = useState("All Projects");
   const [currentPage, setCurrentPage] = useState(1);
-
-  const [Projects, setProjects] = useState(projects)
-
+ const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
+  const [projects, setProjects] = useState(projectData)
+ 
   const tabs = [
     "All Projects",
     "In Progress",
@@ -43,10 +43,12 @@ const Projects = () => {
   return (
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
       <Navbar
+      isCreateModalOpen={isCreateModalOpen}
+      setIsCreateModalOpen={setIsCreateModalOpen}
         title="Projects"
         description="View and manage all your projects in one place"
       />
-
+  {isCreateModalOpen && (<ProjectModal setProjects = {setProjects} setIsCreateModalOpen={setIsCreateModalOpen} projects={projects}/>)}
       <div className="flex items-center gap-6 border-b border-slate-200 mb-6 overflow-x-auto">
         {tabs.map((tab) => (
           <button

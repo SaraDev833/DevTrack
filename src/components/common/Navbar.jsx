@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Bell, Plus, Search } from "lucide-react";
 import manImg from "../../assets/man-1.jfif";
-import ProjectData from "../../data/ProjectData"
-import ProjectModal from "../projects/ProjectModal";
 
-const Navbar = ({title, description}) => {
-  const[projects , setProjects] = useState(ProjectData);
-  const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
+
+
+const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen}) => {
+
+ 
   return (
     <header className="w-full min-w-0">
       <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-center 2xl:justify-between">
@@ -43,7 +43,7 @@ const Navbar = ({title, description}) => {
               <Plus size={18} />
               <span>New Project</span>
             </button>
-        {isCreateModalOpen && (<ProjectModal setProjects = {setProjects} setIsCreateModalOpen={setIsCreateModalOpen}/>)}
+      
             <button className="relative h-11 w-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50 transition">
               <Bell size={20} className="text-slate-700" />
 
@@ -60,7 +60,8 @@ const Navbar = ({title, description}) => {
           </div>
         </div>
       </div>
-    </header>
+      
+    </header> 
   );
 };
 
