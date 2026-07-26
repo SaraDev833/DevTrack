@@ -21,7 +21,6 @@ function App() {
     <Route element={<DashboardLayout/>}>
     <Route path="/dashboard" element={<Dashboard/>}/>
     <Route path="/projects" element={<Projects/>}/>
-    <Route path="/projects" element={<Projects/>}/>
     <Route path="/project-detail/:id" element={<ProjectDetail/>}/>
   
 </Route>

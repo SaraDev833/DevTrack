@@ -2,19 +2,29 @@ import { X } from 'lucide-react';
 import React, { useState } from 'react'
 import teamMembers from '../../data/teamMembers';
 
-const EditModal = ({setEditModalOpen, projects, setProjects}) => {
-   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    client: "",
-    budget: "",
-    category: "",
-    priority: "",
-    dueDate: "",
-    status: "Planning",
-    teamMembers: [],
+const EditModal = ({ setEditModalOpen, project, projects, setProjects }) => {
+
+
+
+  const [formData, setFormData] = useState({
+    name: project?.name || "",
+    description: project?.description || "",
+    client: project?.client || "",
+    budget: project?.budget || "",
+    category: project?.category || "",
+    priority: project?.priority || "",
+    dueDate: project?.dueDate || "",
+    status: project?.status || "Planning",
+    teamMembers: project?.teamMembers || [],
   });
 
+  const statuses = [
+    "Planning",
+    "In Progress",
+    "On Hold",
+    "Completed",
+    "Archived",
+  ];
   const categories = [
     "Web Development",
     "Mobile App",
@@ -69,12 +79,14 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
       return;
     }
 
-    const newProject = {
+    const updatedProject = {
+      ...project,
       ...formData,
-      status: "Planning",
-    };
+      updatedAt: new Date().toLocaleDateString()
 
-    setProjects([newProject, ...projects]);
+    }
+
+    setProjects([updatedProject, ...projects]);
 
     setFormData({
       name: "",
@@ -94,7 +106,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-white w-[95%] sm:w-[90%] md:w-[650px] max-h-[90vh] overflow-y-auto rounded-lg p-4 sm:p-6">
-        
+
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <h3 className="text-lg text-slate-900 font-medium flex flex-col gap-1">
@@ -116,7 +128,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
 
           {/* Name + Client */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
-            
+
             <div className="w-full sm:w-1/2">
               <label className="text-sm font-medium text-slate-900">
                 Project Name
@@ -125,6 +137,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
               <input
                 type="text"
                 name="name"
+                value={formData.name}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
               />
@@ -139,6 +152,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
               <input
                 type="text"
                 name="client"
+                value={formData.client}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
               />
@@ -158,10 +172,11 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
 
               <select
                 name="category"
+                value={formData.category}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
               >
-                <option value=""></option>
+                <option ></option>
 
                 {categories.map((category) => (
                   <option key={category} value={category}>
@@ -182,6 +197,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
               <input
                 type="text"
                 name="budget"
+                value={formData.budget}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
               />
@@ -203,6 +219,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
               <select
                 name="priority"
                 onChange={handleChange}
+                value={formData.priority}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
               >
 
@@ -211,6 +228,28 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
                 {priorities.map((priority) => (
                   <option key={priority} value={priority}>
                     {priority}
+                  </option>
+                ))}
+
+              </select>
+            </div>
+            <div className="w-full sm:w-1/2">
+              <label className="text-sm font-medium text-slate-900">
+                Status
+              </label>
+
+              <select
+                name="status"
+                onChange={handleChange}
+                value={formData.status}
+                className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
+              >
+
+                <option value=""></option>
+
+                {statuses.map((status) => (
+                  <option key={status} value={status}>
+                    {status}
                   </option>
                 ))}
 
@@ -227,6 +266,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
               <input
                 type="date"
                 name="dueDate"
+                value={formData.dueDate}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
               />
@@ -295,6 +335,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
             <textarea
               name="description"
               rows={4}
+              value={formData.description}
               onChange={handleChange}
               className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600 resize-none"
               placeholder="Description"
@@ -312,7 +353,7 @@ const EditModal = ({setEditModalOpen, projects, setProjects}) => {
               type="submit"
               className="w-full sm:w-auto px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md font-medium transition"
             >
-              Create Project
+              Edit Project
             </button>
 
           </div>

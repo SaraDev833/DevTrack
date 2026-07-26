@@ -7,6 +7,7 @@ import TotalProjectBoard from './TotalProjectBoard'
 import ProjectDivide from './ProjectDivide'
 
 const ProjectDetail = () => {
+  
     const { id } = useParams();
     const project = projects.find((p) => (
         p.id === Number(id)

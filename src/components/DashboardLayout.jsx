@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Sidebar from "../components/Sidebar";
-
+import projectData from "../data/ProjectData"
 const DashboardLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState(true);
-
+  const[projects , setProjects] = useState(projectData)
+   const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
   return (
     <div className="min-h-screen bg-slate-100 flex overflow-x-hidden">
       {/* Mobile dark overlay */}
@@ -36,7 +37,7 @@ const DashboardLayout = () => {
         </div>
 
         <div className="p-4 sm:p-5 lg:p-6 min-w-0">
-          <Outlet />
+          <Outlet context={{projects, setProjects , isCreateModalOpen , setIsCreateModalOpen}}/>
         </div>
       </main>
     </div>

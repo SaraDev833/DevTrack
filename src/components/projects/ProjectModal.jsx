@@ -4,6 +4,7 @@ import teamMembers from "../../data/teamMembers";
 
 const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
   const [formData, setFormData] = useState({
+    id: Date.now(),
     name: "",
     description: "",
     client: "",

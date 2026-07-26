@@ -1,11 +1,30 @@
 import React from "react";
 import { FolderClosed, ListTodo, ClockAlert, Check } from "lucide-react";
 
-const Kanban = () => {
+const Kanban = ({projects , setProjects}) => {
+  const totalTasks = projects.reduce((total , project)=> {
+    return (total + project.tasks?.length || 0)
+  },0)
+  const completedTasks =  projects.reduce((total , project)=>{
+        const filteredTasks = project.tasks?.filter((task)=>(
+          task.status === "Completed"
+        ))
+        return (total + filteredTasks?.length || 0)
+  },0)
+  const overDueTasks = projects.reduce((total , project)=>{
+    const today = new Date();
+      today.setHours(0,0,0,0);
+      const filteredTasks = project.tasks?.filter((task)=>{
+        const dueDate = new Date(task.dueDate);
+        dueDate.setHours(0,0,0,0);
+        return dueDate < today && task.status !== "Completed"
+      })
+      return (total + filteredTasks?.length || 0)
+  }, 0)
   const cards = [
     {
       name: "Total Projects",
-      count: 12,
+      count: projects.length,
       icon: FolderClosed,
       bgColor: "bg-indigo-200/50",
       color: "text-indigo-600",
@@ -13,7 +32,7 @@ const Kanban = () => {
     },
     {
       name: "Total Tasks",
-      count: 8,
+      count: totalTasks,
       icon: ListTodo,
       bgColor: "bg-blue-200/50",
       color: "text-blue-600",
@@ -21,7 +40,7 @@ const Kanban = () => {
     },
     {
       name: "Completed Tasks",
-      count: 12,
+      count: completedTasks,
       icon: Check,
       bgColor: "bg-green-200/50",
       color: "text-green-600",

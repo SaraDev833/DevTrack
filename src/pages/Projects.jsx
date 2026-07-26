@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import Navbar from "../components/common/Navbar";
 import ProjectTable from "../components/projects/ProjectTable";
 import ProjectModal from "../components/projects/ProjectModal";
-import projectData from "../data/ProjectData";
 import EditModal from "../components/projects/EditModal";
+import { useOutletContext } from "react-router-dom";
 const Projects = () => {
   const [selectedTab, setSelectedTab] = useState("All Projects");
   const [currentPage, setCurrentPage] = useState(1);
- const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
-  const [projects, setProjects] = useState(projectData)
+
  const [editModalOpen , setEditModalOpen] = useState(false);
+ const [selectedProject , setSelectedProject] = useState(null);
+ const {projects , setProjects , isCreateModalOpen , setIsCreateModalOpen} = useOutletContext();
   const tabs = [
     "All Projects",
     "In Progress",
@@ -41,6 +42,11 @@ const Projects = () => {
   const firstIndex = lastIndex - taskPerPage;
   const currentProjects = filteredProjects.slice(firstIndex, lastIndex);
 
+const handleEdit = (project)=>{
+  setSelectedProject(project);
+  setEditModalOpen(true)
+}
+
   return (
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
       <Navbar
@@ -49,10 +55,12 @@ const Projects = () => {
         title="Projects"
         description="View and manage all your projects in one place"
       />
-      {editModalOpen && (<EditModal 
-             setProjects={setProjects}
+      {editModalOpen && selectedProject && (<EditModal 
+            project = {selectedProject}
              setEditModalOpen={setEditModalOpen}
-             projects = {projects}
+             projects ={projects}
+             setProjects = {setProjects}
+            
       />)}
   {isCreateModalOpen && (<ProjectModal setProjects = {setProjects} setIsCreateModalOpen={setIsCreateModalOpen} projects={projects}/>)}
       <div className="flex items-center gap-6 border-b border-slate-200 mb-6 overflow-x-auto">
@@ -86,7 +94,7 @@ const Projects = () => {
 
         {/* project rows */}
         {currentProjects.map((project) => (
-          <ProjectTable key={project.id} project={project} Ondelete={deleteProject} setEditModalOpen = {setEditModalOpen} editModalOpen={editModalOpen}/>
+          <ProjectTable key={project.id} project={project} Ondelete={deleteProject} setEditModalOpen = {setEditModalOpen} editModalOpen={editModalOpen} onEdit={handleEdit}/>
         ))}
 
         {currentProjects.length === 0 && (
