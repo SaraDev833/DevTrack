@@ -14,6 +14,7 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
     dueDate: "",
     status: "Planning",
     teamMembers: [],
+    
   });
 
   const categories = [
@@ -73,6 +74,7 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
     const newProject = {
       ...formData,
       status: "Planning",
+      tasks:[]
     };
 
     setProjects([newProject, ...projects]);

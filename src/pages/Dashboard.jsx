@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/common/Navbar";
 import Kanban from "../components/Kanban";
 import TaskOverViewChart from "../components/Dashboard/TaskOverViewChart";
-import RecentProjects from "../components/Dashboard/RecentProjects";
+// import RecentProjects from "../components/Dashboard/RecentProjects";
 import RecentActivity from "../components/Dashboard/RecentActivity";
 import UpcomingDeadlines from "../components/Dashboard/UpcomingDeadlines";
 import TeamOverview from "../components/Dashboard/TeamOverview";
@@ -33,8 +33,8 @@ const Dashboard = () => {
             "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
         }}
       >
-        <TaskOverViewChart />
-        <RecentProjects />
+        {/* <TaskOverViewChart /> */}
+        {/* <RecentProjects  projects = {projects} /> */}
       </div>
 
       {/* Bottom 3 Cards */}

@@ -3,6 +3,7 @@ import { FolderClosed, ListTodo, ClockAlert, Check } from "lucide-react";
 
 const Kanban = ({projects , setProjects}) => {
   const totalTasks = projects.reduce((total , project)=> {
+  
     return (total + project.tasks?.length || 0)
   },0)
   const completedTasks =  projects.reduce((total , project)=>{
@@ -28,7 +29,7 @@ const Kanban = ({projects , setProjects}) => {
       icon: FolderClosed,
       bgColor: "bg-indigo-200/50",
       color: "text-indigo-600",
-      desc: "2 from last month",
+   
     },
     {
       name: "Total Tasks",
@@ -36,7 +37,7 @@ const Kanban = ({projects , setProjects}) => {
       icon: ListTodo,
       bgColor: "bg-blue-200/50",
       color: "text-blue-600",
-      desc: "8 from last month",
+   
     },
     {
       name: "Completed Tasks",
@@ -44,15 +45,15 @@ const Kanban = ({projects , setProjects}) => {
       icon: Check,
       bgColor: "bg-green-200/50",
       color: "text-green-600",
-      desc: "2 from last month",
+    
     },
     {
       name: "Overdue Tasks",
-      count: 12,
+      count: overDueTasks,
       icon: ClockAlert,
       bgColor: "bg-red-200/50",
       color: "text-red-600",
-      desc: "2 from last month",
+  
     },
   ];
 

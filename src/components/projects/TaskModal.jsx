@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 
 const TaskModal = ({ closeModal, teamMembers, onAddTask, project }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
+    
+    
     title: "",
+    description: "",
     status: "To Do",
     priority: "",
     assignedTo: "",
@@ -27,7 +28,7 @@ const TaskModal = ({ closeModal, teamMembers, onAddTask, project }) => {
     const newTask = {
       id: Date.now(),
       name: formData.name,
-      description: formData.descriptions,
+      description: formData.description,
       title: formData.title,
       status: formData.status,
       priority: formData.priority,
