@@ -8,6 +8,7 @@ import UpcomingDeadlines from "../components/Dashboard/UpcomingDeadlines";
 import TeamOverview from "../components/Dashboard/TeamOverview";
 import { useOutletContext } from "react-router-dom";
 import ProjectModal from "../components/projects/ProjectModal";
+import RecentProjects from "../components/Dashboard/RecentProjects";
 
 const Dashboard = () => {
    const {isCreateModalOpen , setIsCreateModalOpen , projects , setProjects} = useOutletContext()
@@ -34,7 +35,7 @@ const Dashboard = () => {
         }}
       >
         {/* <TaskOverViewChart /> */}
-        {/* <RecentProjects  projects = {projects} /> */}
+        <RecentProjects  projects = {projects} />
       </div>
 
       {/* Bottom 3 Cards */}

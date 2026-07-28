@@ -1145,7 +1145,7 @@ const projects = [
         id: 2901,
         title: "Notification dropdown",
         description: "Create notification bell dropdown UI",
-        status: "To Do",
+        status: "Completed",
         priority: "Medium",
         assignedTo: "Hasan Mahmud",
         dueDate: "Aug 20, 2024",
