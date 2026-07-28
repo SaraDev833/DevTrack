@@ -18,7 +18,7 @@ const { id } = useParams()
     const project = projects.find((p) => {
   return p.id === Number(id);
 });
-   console.log(project)
+  
     return (
         <div className='w-full min-w-0 bg-slate-100 space-y-6'>
             <Navbar title="Project Details" description="Track project progress , tasks and team activity" />

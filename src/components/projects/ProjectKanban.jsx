@@ -6,7 +6,7 @@ import Man3 from "../../assets/man-3.jfif"
 
 import { CalendarDays, Laptop } from 'lucide-react'
 const ProjectKanban = ({project}) => {
-    console.log(project)
+  
   return (
      <div className='space-y-3 bg-white rounded-md shadow-sm p-6 grid grid-cols-1 md:grid-cols-2'>
                 <div className=' grid grid-cols-[auto_1fr] w-fit gap-10 place-items-center md:border-r md:border-r-slate-200 md:border-b-0 border-b md:pr-8 border-b-slate-200 pb-8 lg:pb-0'>

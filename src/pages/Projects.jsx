@@ -7,7 +7,6 @@ import { useOutletContext } from "react-router-dom";
 const Projects = () => {
   const [selectedTab, setSelectedTab] = useState("All Projects");
   const [currentPage, setCurrentPage] = useState(1);
-
  const [editModalOpen , setEditModalOpen] = useState(false);
  const [selectedProject , setSelectedProject] = useState(null);
  const {projects , setProjects , isCreateModalOpen , setIsCreateModalOpen} = useOutletContext();
