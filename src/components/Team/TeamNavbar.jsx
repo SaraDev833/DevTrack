@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import { Bell, Plus, Search } from "lucide-react";
-import manImg from "../../assets/man-1.jfif";
-
-
-
-const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen}) => {
-
+import React from 'react'
+import manImg from "../../assets/man-1.jfif"
+import { Plus, Search } from 'lucide-react'
+import { useOutletContext } from 'react-router-dom'
+const TeamNavbar = () => {
+   const {invite , setInvite} = useOutletContext()
+   console.log(setInvite)
   return (
     <header className="w-full min-w-0">
       <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-center 2xl:justify-between">
         {/* Left Side */}
         <div className="min-w-0">
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-950">
-            {title}
+           Team / User Management
           </h1>
 
           <p className="mt-1 text-sm sm:text-base text-slate-500 max-w-2xl">
-    {description}
+  Manage your team members
           </p>
         </div>
 
@@ -32,24 +31,18 @@ const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen}) 
             <input
               type="text"
               className="w-full h-11 border border-slate-200 bg-white rounded-xl pl-10 pr-4 text-sm outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
-              placeholder="Search projects, tasks..."
+              placeholder="Search members..."
             />
           </div>
 
           {/* Actions */}
           <div className="flex items-center gap-3 shrink-0">
-            <button onClick={()=>setIsCreateModalOpen(!isCreateModalOpen)} className="py-2 px-4 bg-indigo-600 text-white rounded-md flex items-center justify-center gap-1 text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer">
+            <button  className="py-2 px-4 bg-indigo-600 text-white rounded-md flex items-center justify-center gap-1 text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer" onClick={()=>setInvite(!invite)}>
               <Plus size={18} />
-              <span>New Project</span>
+              <span>Invite Member</span>
             </button>
       
-            <button className="relative h-11 w-11 bg-white border border-slate-200 rounded-xl flex items-center justify-center hover:bg-slate-50 transition">
-              <Bell size={20} className="text-slate-700" />
-
-              <span className="absolute -top-1.5 -right-1.5 h-5 min-w-5 px-1 bg-red-600 text-white rounded-full flex items-center justify-center text-[11px] font-semibold">
-                12
-              </span>
-            </button>
+          
 
             <img
               src={manImg}
@@ -61,7 +54,7 @@ const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen}) 
       </div>
       
     </header> 
-  );
-};
+  )
+}
 
-export default Navbar;
+export default TeamNavbar

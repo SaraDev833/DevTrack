@@ -5,11 +5,12 @@ import { useParams } from 'react-router-dom'
 import ProjectKanban from './ProjectKanban'
 import TotalProjectBoard from './TotalProjectBoard'
 import ProjectDivide from './ProjectDivide'
+import ProjectModal from './ProjectModal'
 
 const ProjectDetail = () => {
    
-    const {projects} = useOutletContext();
-
+   const {isCreateModalOpen , setIsCreateModalOpen , projects , setProjects} = useOutletContext()
+console.log(isCreateModalOpen)
 const { id } = useParams()
 
     // const project = projects.find((p) => (
@@ -21,7 +22,10 @@ const { id } = useParams()
   
     return (
         <div className='w-full min-w-0 bg-slate-100 space-y-6'>
-            <Navbar title="Project Details" description="Track project progress , tasks and team activity" />
+            <Navbar title="Project Details" description="Track project progress , tasks and team activity" isCreateModalOpen={isCreateModalOpen}
+      setIsCreateModalOpen={setIsCreateModalOpen}  />
+      {/* rendering create project modal  */}
+{isCreateModalOpen && (<ProjectModal setProjects={setProjects} setIsCreateModalOpen={setIsCreateModalOpen} projects={projects} />)}
         <ProjectKanban project ={project}/>
         <TotalProjectBoard project ={project}/>
         <ProjectDivide project = {project}/>

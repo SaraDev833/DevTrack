@@ -8,6 +8,7 @@ const DashboardLayout = () => {
   const [desktopOpen, setDesktopOpen] = useState(true);
   const[projects , setProjects] = useState(projectData)
    const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
+   const [invite , setInvite] = useState(false);
   return (
     <div className="min-h-screen bg-slate-100 flex overflow-x-hidden">
       {/* Mobile dark overlay */}
@@ -37,7 +38,7 @@ const DashboardLayout = () => {
         </div>
 
         <div className="p-4 sm:p-5 lg:p-6 min-w-0">
-          <Outlet context={{projects, setProjects , isCreateModalOpen , setIsCreateModalOpen}}/>
+          <Outlet context={{projects, setProjects , isCreateModalOpen , setIsCreateModalOpen, invite, setInvite}}/>
         </div>
       </main>
     </div>

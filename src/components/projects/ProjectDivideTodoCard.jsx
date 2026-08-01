@@ -4,7 +4,7 @@ import EditTaskModal from './EditTaskModal';
 
 
 const ProjectDivideTodoCard = ({ title, desc, image, date, priority ,isTaskEditModalOpen , setIsTaskEditModalOpen , project , task , handleUpdate}) => {
-   console.log(task)
+  
     const getPriorityColor = (priority) => {
         switch (priority) {
             case "High":

@@ -3,28 +3,31 @@
 const teamMembers = [
   {
     id: 1,
-    name: "Rafi Ahmed",
-    role: "Frontend Developer",
+    name: "Sarah Sheikh",
+    email: "sarah@taskly.com",
+    position: "Workspace Owner",
+    userType: "owner",
   },
   {
     id: 2,
-    name: "Maham Tanvir",
-    role: "UI/UX Designer",
+    name: "Rafi Ahmed",
+    email: "rafi@taskly.com",
+    position: "Frontend Developer",
+    userType: "employee",
   },
   {
     id: 3,
     name: "Hasan Mahmud",
-    role: "Backend Developer",
+    email: "hasan@taskly.com",
+    position: "Backend Developer",
+    userType: "manager",
   },
   {
     id: 4,
     name: "Nusrat Jahan",
-    role: "Full Stack Developer",
-  },
-  {
-    id: 5,
-    name: "Sarah Kim",
-    role: "Marketing Manager",
+    email: "nusrat@taskly.com",
+    position: "Full Stack Developer",
+    userType: "employee",
   },
 ];
 

@@ -9,7 +9,8 @@ const Projects = () => {
   const [currentPage, setCurrentPage] = useState(1);
  const [editModalOpen , setEditModalOpen] = useState(false);
  const [selectedProject , setSelectedProject] = useState(null);
- const {projects , setProjects , isCreateModalOpen , setIsCreateModalOpen} = useOutletContext();
+   const {isCreateModalOpen , setIsCreateModalOpen , projects , setProjects} = useOutletContext()
+ console.log({ isCreateModalOpen, setIsCreateModalOpen, type: typeof setIsCreateModalOpen, });
   const tabs = [
     "All Projects",
     "In Progress",
@@ -18,6 +19,7 @@ const Projects = () => {
     "Completed",
     "Archived",
   ];
+
   const deleteProject = (id) => {
 
     const confirmDelete = window.confirm("Are you sure you want to delete this task?")
@@ -49,8 +51,8 @@ const handleEdit = (project)=>{
   return (
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
       <Navbar
-      isCreateModalOpen={isCreateModalOpen}
-      setIsCreateModalOpen={setIsCreateModalOpen}
+       isCreateModalOpen={isCreateModalOpen}
+      setIsCreateModalOpen={setIsCreateModalOpen} 
         title="Projects"
         description="View and manage all your projects in one place"
       />

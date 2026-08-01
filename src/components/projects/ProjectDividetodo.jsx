@@ -9,7 +9,7 @@ const ProjectDividetodo = ({project, onAddTask , isModalOpen , tasks, setIsModal
 
   const [showAllTasks , setShowAllTasks] = useState(false);
   const lengthOfTasks = showAllTasks? tasks : tasks?.slice(0,4);
-  console.log(lengthOfTasks)
+
   return (
     <div className='flex flex-col gap-4'>
         {lengthOfTasks?.map((task)=>(
