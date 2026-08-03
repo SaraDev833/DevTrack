@@ -6,28 +6,28 @@ const teamMembers = [
     name: "Sarah Sheikh",
     email: "sarah@taskly.com",
     position: "Workspace Owner",
-    userType: "owner",
+    userType: "Owner",
   },
   {
     id: 2,
     name: "Rafi Ahmed",
     email: "rafi@taskly.com",
     position: "Frontend Developer",
-    userType: "employee",
+    userType: "Employee",
   },
   {
     id: 3,
     name: "Hasan Mahmud",
     email: "hasan@taskly.com",
     position: "Backend Developer",
-    userType: "manager",
+    userType: "Manager",
   },
   {
     id: 4,
     name: "Nusrat Jahan",
     email: "nusrat@taskly.com",
     position: "Full Stack Developer",
-    userType: "employee",
+    userType: "Employee",
   },
 ];
 

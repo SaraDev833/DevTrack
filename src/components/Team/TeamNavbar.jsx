@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import manImg from "../../assets/man-1.jfif"
 import { Plus, Search } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom'
-const TeamNavbar = () => {
+const TeamNavbar = ({searchValue}) => {
    const {invite , setInvite} = useOutletContext()
-   console.log(setInvite)
+ 
   return (
     <header className="w-full min-w-0">
       <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-center 2xl:justify-between">
@@ -29,6 +29,7 @@ const TeamNavbar = () => {
             />
 
             <input
+            onChange={(e)=>searchValue(e.target.value)}
               type="text"
               className="w-full h-11 border border-slate-200 bg-white rounded-xl pl-10 pr-4 text-sm outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
               placeholder="Search members..."
