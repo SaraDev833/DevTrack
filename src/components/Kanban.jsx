@@ -1,5 +1,5 @@
 import React from "react";
-import { FolderClosed, ListTodo, ClockAlert, Check } from "lucide-react";
+import { FolderClosed, ListTodo, ClockAlert, Check, ClockCheck } from "lucide-react";
 
 const Kanban = ({projects , setProjects}) => {
   const totalTasks = projects.reduce((total , project)=> {
@@ -11,6 +11,12 @@ const Kanban = ({projects , setProjects}) => {
           task.status === "Completed"
         ))
         return (total + filteredTasks?.length || 0)
+  },0)
+  const inProgressTasks = projects.reduce((total , project)=>{
+    const filteredTasks = project.tasks?.filter((task)=>(
+      task.status === "In Progress"
+    ))
+    return (total + filteredTasks?.length || 0)
   },0)
   const overDueTasks = projects.reduce((total , project)=>{
     const today = new Date();
@@ -45,6 +51,14 @@ const Kanban = ({projects , setProjects}) => {
       icon: Check,
       bgColor: "bg-green-200/50",
       color: "text-green-600",
+    
+    },
+    {
+      name: "In Progress Tasks",
+      count: inProgressTasks,
+      icon: ClockCheck ,
+      bgColor: "bg-sky-200/50",
+      color: "text-sky-600",
     
     },
     {

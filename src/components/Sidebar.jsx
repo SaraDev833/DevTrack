@@ -21,7 +21,7 @@ const Sidebar = ({
   const navItems = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { name: "Projects", path: "/projects", icon: FolderKanban },
-    { name: "Tasks", path: "/tasks", icon: CheckSquare },
+    { name: "Tasks", path: "/task", icon: CheckSquare },
     { name: "Team", path: "/team", icon: Users },
     { name: "Notifications", path: "/notifications", icon: Bell },
     { name: "Profile", path: "/profile", icon: User },

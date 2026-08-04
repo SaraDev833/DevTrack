@@ -20,7 +20,7 @@ const Team = () => {
              <div className='border border-slate-300 shadow-sm rounded-md w-full'>
               <div className='p-5 flex gap-4'>
                 <button className={`${tab === "active" ? "text-indigo-600 font-medium text-sm border-b-2 border-b-indigo-600" : "text-slate-900 font-medium text-sm"} text-nowrap cursor-pointer`} onClick={()=>setSelectedTab("active")}>Active Members</button>
-                <button className={`${tab === "pending" ? "text-indigo-600 font-medium text-sm border-b-2 border-b-indigo-600" : "text-slate-900 font-medium text-sm"} text-nowrap cursor-pointer` } onClick={()=>setSelectedTab("pending")}>Pendin Invitations</button>
+                <button className={`${tab === "pending" ? "text-indigo-600 font-medium text-sm border-b-2 border-b-indigo-600" : "text-slate-900 font-medium text-sm"} text-nowrap cursor-pointer` } onClick={()=>setSelectedTab("pending")}>Pending Invitations</button>
               </div>
               {tab === "active" ?<> <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr] px-5 bg-slate-300/50 py-3 ">
                 <span className='text-sm text-slate-900 font-medium'>Member</span>

@@ -7,6 +7,7 @@ import DashboardLayout from "./components/DashboardLayout"
 import Projects from "./pages/Projects"
 import ProjectDetail from "./components/projects/ProjectDetail"
 import Team from "./pages/Team"
+import Task from "./pages/Task"
 
 
 
@@ -24,6 +25,7 @@ function App() {
     <Route path="/projects" element={<Projects/>}/>
     <Route path="/project-detail/:id" element={<ProjectDetail/>}/>
     <Route path="/team" element={<Team/>}/>
+    <Route path="/task" element={<Task/>}/>
   
 </Route>
    </Routes>
