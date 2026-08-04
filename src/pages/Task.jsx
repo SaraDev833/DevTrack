@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import TaskNavbar from '../components/Task/TaskNavbar'
 import Kanban from '../components/Kanban'
 import { useOutletContext } from 'react-router-dom'
+import TaskTable from '../components/Task/TaskTable'
 
 const Task = () => {
     const { projects, setProjects } = useOutletContext();
     const [selectedTab, setSelectedTab] = useState("All Tasks")
+    const [value , setValue] = useState("");
 
     const tabs = [
         "All Tasks",
@@ -13,9 +15,12 @@ const Task = () => {
         "In Progress",
         "Completed"
     ]
+    const searchedValue = (value) =>{
+        setValue(value);
+    }
     return (
         <div className='w-full min-w-0 bg-slate-100 space-y-6'>
-            <TaskNavbar />
+            <TaskNavbar searchedValue ={searchedValue}/>
             <Kanban projects={projects} setProjects={setProjects} />
             <div className='border border-slate-200 shadow-sm rounded-md w-full '>
                 {/* tabs */}
@@ -27,16 +32,10 @@ const Task = () => {
                     ))}
                 </div>
                 {/* tabs */}
-                <div className='grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr] px-5 py-3 bg-slate-300/50'>
-          <span className='text-sm text-slate-900 font-medium'>Task</span>
-          <span className='text-sm text-slate-900 font-medium'>Project</span>
-          <span className='text-sm text-slate-900 font-medium'>Assignee</span>
-          <span className='text-sm text-slate-900 font-medium'>Priority</span>
-          <span className='text-sm text-slate-900 font-medium'>Status</span>
-          <span className='text-sm text-slate-900 font-medium'>Due Date</span>
-          <span className='text-sm text-slate-900 font-medium'>Action</span>
-                </div>
+               
+          <TaskTable projects = {projects} selectedTab = {selectedTab} setProjects={setProjects} setSelectedTab={setSelectedTab} value={value} setValue = {setValue}/>
             </div>
+            
         </div>
     )
 }

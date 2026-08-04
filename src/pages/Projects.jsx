@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/common/Navbar";
 import ProjectTable from "../components/projects/ProjectTable";
 import ProjectModal from "../components/projects/ProjectModal";
@@ -9,6 +9,7 @@ const Projects = () => {
   const [currentPage, setCurrentPage] = useState(1);
  const [editModalOpen , setEditModalOpen] = useState(false);
  const [selectedProject , setSelectedProject] = useState(null);
+ const [value , setValue] = useState("");
    const {isCreateModalOpen , setIsCreateModalOpen , projects , setProjects} = useOutletContext()
  console.log({ isCreateModalOpen, setIsCreateModalOpen, type: typeof setIsCreateModalOpen, });
   const tabs = [
@@ -41,16 +42,27 @@ const Projects = () => {
 
   const lastIndex = currentPage * taskPerPage;
   const firstIndex = lastIndex - taskPerPage;
-  const currentProjects = filteredProjects.slice(firstIndex, lastIndex);
+  const searchedProjects = filteredProjects.filter((project)=>(
+    project.name.toLowerCase().includes(value.toLowerCase())
+  ))
+useEffect(()=>{
+setCurrentPage(1)
+},[value])
+  const currentProjects = searchedProjects.slice(firstIndex, lastIndex);
 
 const handleEdit = (project)=>{
   setSelectedProject(project);
   setEditModalOpen(true)
 }
 
+// searched value
+const searchedValue = (value) =>{
+  setValue(value);
+}
   return (
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
       <Navbar
+      searchedValue = {searchedValue}
        isCreateModalOpen={isCreateModalOpen}
       setIsCreateModalOpen={setIsCreateModalOpen} 
         title="Projects"
@@ -95,7 +107,7 @@ const handleEdit = (project)=>{
 
         {/* project rows */}
         {currentProjects.map((project) => (
-          <ProjectTable key={project.id} project={project} Ondelete={deleteProject} setEditModalOpen = {setEditModalOpen} editModalOpen={editModalOpen} onEdit={handleEdit}/>
+          <ProjectTable key={project.id} project={project} Ondelete={deleteProject} setEditModalOpen = {setEditModalOpen} editModalOpen={editModalOpen} onEdit={handleEdit} value={value} setValue={setValue}/>
         ))}
 
         {currentProjects.length === 0 && (

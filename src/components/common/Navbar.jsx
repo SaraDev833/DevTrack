@@ -4,7 +4,7 @@ import manImg from "../../assets/man-1.jfif";
 
 
 
-const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen}) => {
+const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , searchedValue}) => {
 
   return (
     <header className="w-full min-w-0">
@@ -30,6 +30,7 @@ const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen}) 
             />
 
             <input
+              onChange={(e)=>searchedValue(e.target.value)}
               type="text"
               className="w-full h-11 border border-slate-200 bg-white rounded-xl pl-10 pr-4 text-sm outline-none focus:border-indigo-300 focus:ring-2 focus:ring-indigo-100"
               placeholder="Search projects, tasks..."
