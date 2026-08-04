@@ -8,6 +8,7 @@ import Projects from "./pages/Projects"
 import ProjectDetail from "./components/projects/ProjectDetail"
 import Team from "./pages/Team"
 import Task from "./pages/Task"
+import Notification from "./pages/Notification"
 
 
 
@@ -26,6 +27,7 @@ function App() {
     <Route path="/project-detail/:id" element={<ProjectDetail/>}/>
     <Route path="/team" element={<Team/>}/>
     <Route path="/task" element={<Task/>}/>
+    <Route path="/notifications" element={<Notification/>}/>
   
 </Route>
    </Routes>
