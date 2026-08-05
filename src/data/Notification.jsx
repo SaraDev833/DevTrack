@@ -15,7 +15,7 @@ const notifications = [
     title: "Task deadline approaching",
     message: "“Design homepage” is due tomorrow.",
     time: "1 hour ago",
-    isRead: false,
+    isRead: true,
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const notifications = [
     title: "Task completed",
     message: "Maham completed “Create homepage wireframe”.",
     time: "3 hours ago",
-    isRead: true,
+    isRead: false,
   },
   {
     id: 4,
