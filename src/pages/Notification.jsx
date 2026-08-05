@@ -12,14 +12,18 @@ const Notification = () => {
     const [isModalOpen , setIsModalOpen] = useState(false);
     const [selectedNotification , setSelectedNotification] = useState(null)
    
+    const deleteAll = ()=>{
+      setData([]);
+    }
     const tabs =[
         "All",
         "Unread",
         "Read"
     ]
+  
   return (
     <div className='w-full min-w-0 space-y-6 bg-slate-100'>
-              <NotifiNavbar/>
+              <NotifiNavbar deleteAll={deleteAll} data={data} setData={setData}/>
   {isModalOpen && (<NotificationModal notification={selectedNotification} setIsModalOpen={setIsModalOpen}/>)}
     <div className='flex gap-4 '>
                {tabs.map((tab)=>(
@@ -29,7 +33,7 @@ const Notification = () => {
                ))}
     </div>
    
-    <NotifiTable isModalOpen={isModalOpen} setIsModalOpen = {setIsModalOpen} setSelectedNotification={setSelectedNotification} data={data} setData={setData}/>
+    <NotifiTable isModalOpen={isModalOpen} setIsModalOpen = {setIsModalOpen} setSelectedNotification={setSelectedNotification} data={data} setData={setData} selectedTab = {selectedTab}/>
     </div>
   )
 }

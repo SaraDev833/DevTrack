@@ -1,12 +1,21 @@
 import React from 'react'
 
 import NotificationModal from './NotificationModal'
-const NotifiTable = ({isModalOpen , setIsModalOpen , setSelectedNotification , data , setData}) => {
+import { Heading2 } from 'lucide-react';
+const NotifiTable = ({isModalOpen , setIsModalOpen , setSelectedNotification , data , setData, selectedTab}) => {
    
+const filteredData = selectedTab === "All"? data : data.filter((notification)=>{
+    if( selectedTab === "Unread"){
+      return notification.isRead === false;
+    }
+    if(selectedTab === "Read"){
+      return notification.isRead === true;
+    }
+})
+
   return (
     <div className='border border-slate-300 shadow-sm rounded-md flex flex-col '>
-
-          {data.map((notification)=>(
+      {filteredData?.length > 0 ?(  filteredData?.map((notification)=>(
                 
             <div key={notification.id} className={`${notification.isRead === false?"bg-slate-200": "bg-white"} flex justify-between gap-2 p-6 border-b border-b-slate-300 cursor-pointer`} onClick={()=>{
               setSelectedNotification(notification);
@@ -36,7 +45,10 @@ const NotifiTable = ({isModalOpen , setIsModalOpen , setSelectedNotification , d
                 </div>
                 </div>
               
-          ))}
+          ))): (
+            <h2 className='text-center font-medium'>No notification found</h2>
+          )}
+        
     </div>
   )
 }

@@ -9,6 +9,7 @@ import ProjectDetail from "./components/projects/ProjectDetail"
 import Team from "./pages/Team"
 import Task from "./pages/Task"
 import Notification from "./pages/Notification"
+import Profile from "./pages/Profile"
 
 
 
@@ -28,6 +29,7 @@ function App() {
     <Route path="/team" element={<Team/>}/>
     <Route path="/task" element={<Task/>}/>
     <Route path="/notifications" element={<Notification/>}/>
+    <Route path="/profile" element={<Profile/>}/>
   
 </Route>
    </Routes>
