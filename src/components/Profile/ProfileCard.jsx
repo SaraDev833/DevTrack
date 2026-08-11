@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import man1 from "../../assets/man-1.jfif"
 import { Mail, UserPen } from 'lucide-react'
-const ProfileCard = ({user}) => {
+const ProfileCard = ({user , editProfileModal , setEditProfileModal}) => {
+    
   
   return (
     <div className='w-full min-w-0 border border-slate-200 shadow-sm bg-white p-6 rounded-md'>
@@ -15,7 +16,7 @@ const ProfileCard = ({user}) => {
        </div>
        </div>
        <div>
-        <button className='flex items-center justify-center bg-indigo-600 text-white cursor-pointer hover:bg-indigo-500 transition text-sm font-medium py-2 px-3 rounded-md gap-2' >
+        <button className='flex items-center justify-center bg-indigo-600 text-white cursor-pointer hover:bg-indigo-500 transition text-sm font-medium py-2 px-3 rounded-md gap-2' onClick={()=>setEditProfileModal(!editProfileModal)}>
             <UserPen size={16}/>
             Edit Profile
         </button>
