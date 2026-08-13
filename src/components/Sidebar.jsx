@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import Logo from "./Logo";
+import { AuthContext } from "../Context/AuthContext";
 
 const Sidebar = ({
   mobileOpen,
@@ -18,7 +19,10 @@ const Sidebar = ({
   desktopOpen,
   setDesktopOpen,
 }) => {
-  const navItems = [
+
+   const {user} = useContext(AuthContext)
+
+  const OwnernavItems = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { name: "Projects", path: "/projects", icon: FolderKanban },
     { name: "Tasks", path: "/task", icon: CheckSquare },
@@ -26,6 +30,23 @@ const Sidebar = ({
     { name: "Notifications", path: "/notifications", icon: Bell },
     { name: "Profile", path: "/profile", icon: User },
   ];
+ const employeeNavItems = [
+  {
+    name:"Dashboard" , path:"/my-dashboard", icon:LayoutDashboard
+  },
+  {
+    name:"My Tasks" , path:"/my-tasks" , icon:CheckSquare
+  },
+  {
+    name:"My Projects" , path:"/my-projects" , icon:FolderKanban
+  },
+  {
+    name:"My Notifications" , path:"/my-notifications" , icon:Bell
+  },
+  {
+    name:"Profile" , path:"/profile" , icon:User
+  }
+ ]
 
   return (
     <aside
@@ -68,8 +89,44 @@ const Sidebar = ({
         </div>
 
         {/* Nav items */}
-        <nav className="flex flex-col gap-2">
-          {navItems.map((item) => {
+        {user.userType === "owner" ?
+         <nav className="flex flex-col gap-2">
+          {OwnernavItems.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <NavLink
+                key={item.name}
+                to={item.path}
+                onClick={() => setMobileOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-center rounded-xl text-sm font-medium transition
+                  ${
+                    desktopOpen
+                      ? "lg:justify-start lg:gap-3 lg:px-4"
+                      : "lg:justify-center lg:px-3"
+                  }
+                  gap-3 px-4 py-3
+                  ${
+                    isActive
+                      ? "bg-indigo-600 text-white"
+                      : "text-slate-300 hover:bg-indigo-900 hover:text-white"
+                  }`
+                }
+              >
+                <Icon size={20} className="shrink-0" />
+
+                <span
+                  className={`${desktopOpen ? "lg:inline" : "lg:hidden"} inline`}
+                >
+                  {item.name}
+                </span>
+              </NavLink>
+            );
+          })}
+        </nav> :
+         <nav className="flex flex-col gap-2">
+          {employeeNavItems.map((item) => {
             const Icon = item.icon;
 
             return (
@@ -103,6 +160,8 @@ const Sidebar = ({
             );
           })}
         </nav>
+        }
+       
       </div>
     </aside>
   );

@@ -5,7 +5,7 @@ import manImg from "../../assets/man-1.jfif";
 
 
 const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , searchedValue}) => {
-
+  
   return (
     <header className="w-full min-w-0">
       <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-center 2xl:justify-between">

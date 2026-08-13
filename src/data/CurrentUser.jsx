@@ -1,11 +1,11 @@
 const currentUser = {
   id: 1,
-  name: "Sarah Sheikh",
-  email: "sarah@taskly.com",
-  avatar: "/images/profile.jpg",
+  name: "Rafi Ahmed",
+  email: "rafi@gmail.com",
+  avatar: "",
 
   position: "Workspace Owner",
-  userType: "owner",
+  userType: "employee",
 
   phone: "+8801712345678",
   location: "Dhaka, Bangladesh",
