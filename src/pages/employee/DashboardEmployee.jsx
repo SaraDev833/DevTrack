@@ -3,18 +3,27 @@ import Navbar from '../../components/common/Navbar';
 import { AuthContext } from '../../Context/AuthContext';
 import Kanban from '../../components/employee/dashboard/Kanban';
 import projects from '../../data/ProjectData'
+import Task from '../../components/employee/dashboard/Task';
+import MyProjects from '../../components/employee/dashboard/MyProjects';
+import Deadlines from '../../components/employee/dashboard/Deadlines';
 const DashboardEmployee = () => {
   const {user} = useContext(AuthContext)
   const [data , setData] = useState(projects);
 
     
     const filterData = data.flatMap((project)=>(
-        
-      project.tasks?.filter((task)=>(
+
+      project.tasks
+      ?.filter((task)=>(
         task.assignedTo.toLowerCase().includes
         (user.name.toLowerCase())
       ))
-      
+      .map((task)=>({
+        ...task,
+        projectName:project.name,
+        projectId:project.id
+      }))
+     
     ));
     
     const inProgresstask = filterData?.filter((task)=>(
@@ -37,6 +46,13 @@ const DashboardEmployee = () => {
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
      <Navbar title="Dashboard" description={`Welcome back ${user.name}! Here's your work summary`}/>
     <Kanban user={user} filterData={filterData} inProgresstask={inProgresstask} completedTask={completedTask} overDue={overDue}/>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
+          <Task data={filterData}/>
+          <div className='grid grid-rows-2 gap-3'>
+            <MyProjects/>
+            <Deadlines/>
+          </div>
+    </div>
     </div>
   );
 }
