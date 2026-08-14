@@ -18,12 +18,12 @@ const Kanban = ({user , filterData, inProgresstask, completedTask , overDue}) =>
       name:"In Progress",
       icon:ClockFading ,
       color:"text-sky-600",
-      bgcolor:"bg-sky-200/50",
+      bgColor:"bg-sky-200/50",
       description: "Total Tasks",
       count:inProgresstask.length
     },
     {
-      name:"My Tasks",
+      name:"Completed",
       icon:CheckCheck,
       color:"text-green-600",
       bgColor:"bg-green-200/50",
@@ -33,6 +33,8 @@ const Kanban = ({user , filterData, inProgresstask, completedTask , overDue}) =>
     {
       name:"Overdue Tasks",
       icon:ClockAlert ,
+      color:"text-red-600",
+      bgColor:"bg-red-200/50",
       description: "Overdue Tasks",
       count:overDue.length
     },

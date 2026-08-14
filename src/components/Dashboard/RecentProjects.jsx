@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 
 const RecentProjects = ({projects}) => {
+
+  
 const recentProjects = [...projects].sort((a, b )=>
   new Date (b.createdAt) - new Date (a.createdAt)
 ).slice(0,5);

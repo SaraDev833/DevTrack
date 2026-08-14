@@ -10,6 +10,14 @@ const DashboardEmployee = () => {
   const {user} = useContext(AuthContext)
   const [data , setData] = useState(projects);
 
+  const CompletedTasks = (id)=>{
+    const updatedProjects = data.map((project)=>({
+      ...project,
+      tasks:(project.tasks || []).map((task)=>
+      task.id === id ? {...task , status: "Completed"}: task)
+    }))
+    setData(updatedProjects);
+  }
     
     const filterData = data.flatMap((project)=>(
 
@@ -47,7 +55,7 @@ const DashboardEmployee = () => {
      <Navbar title="Dashboard" description={`Welcome back ${user.name}! Here's your work summary`}/>
     <Kanban user={user} filterData={filterData} inProgresstask={inProgresstask} completedTask={completedTask} overDue={overDue}/>
     <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-          <Task data={filterData}/>
+          <Task data={filterData} CompletedTasks={CompletedTasks}/>
           <div className='grid grid-rows-2 gap-3'>
             <MyProjects/>
             <Deadlines/>
