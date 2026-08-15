@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 
 const Task = ({data , CompletedTasks}) => {
-console.log(data)
+
 const [showAll , setShowAll] = useState(false);
 
-  const recentTask = [...data].sort((a,b)=>(
- new Date (b.dueDate) - new Date (a.dueDate)
-  ))
+  const recentTask = [...data]
+  .filter((task)=> task.status !== "Completed")
+  .sort((a, b)=> new Date(b.dueDate) - new Date (a.dueDate) );
+
   const displayedTasks = showAll ? recentTask : recentTask.slice(0,4);
-  const showOnlyUncompletedTask = displayedTasks.filter((task)=>(
-    task.status !== "Completed"
-  ))
+
   
   const getPriorityColor = (prioriy)=>{
          switch(prioriy){
@@ -25,14 +24,14 @@ const [showAll , setShowAll] = useState(false);
 
   return (
     
-  <div className='bg-white border border-slate-200 shadow-sm p-4 rounded-md flex justify-between items-center overflow-hidden flex-col'>
-   <div className="title flex justify-between items-center w-full">
+<div className="bg-white border border-slate-200 shadow-sm p-4 rounded-md h-fit">
+   <div className="title flex justify-between items-center w-full mb-3">
        <h2 className='text-sm font-bold text-slate-900 '>My Tasks</h2>
        <p className='text-sm text-indigo-600 font-medium cursor-pointer' onClick={()=>setShowAll(!showAll)}>{showAll ? "View Less" : "View All"}</p>
    </div>
-  {showOnlyUncompletedTask.length !== 0 ?
-   showOnlyUncompletedTask.map((task)=>(
-  <div className='justify-between flex items-center w-full gap-2 mt-5 border-b border-b-slate-200 last:border-b-0'>
+  {displayedTasks.length !== 0 ?
+   displayedTasks.map((task)=>(
+<div className="flex justify-between items-center w-full gap-2 py-3 border-b border-slate-200 last:border-b-0">
     <div className='flex gap-3 items-center'>
       <input type="checkbox"  className="h-5 w-5 appearance-none rounded-full border border-indigo-600 checked:bg-indigo-200/50 cursor-pointer" onClick={()=>CompletedTasks(task.id)}/>
          <div className='flex flex-col mb-2 '>

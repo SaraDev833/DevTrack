@@ -34,6 +34,20 @@ const DashboardEmployee = () => {
      
     ));
     
+    const projectName=data
+    .filter((project)=>(
+      project.teamMembers.includes(user.name) 
+    
+    ))
+    const AssignedTask = projectName.map((project)=>(
+                 project.tasks.filter((task)=>(
+                  task.assignedTo.toLowerCase().includes(user.name.toLowerCase())
+                 ))
+    ))
+    
+    console.log(AssignedTask)
+
+  
     const inProgresstask = filterData?.filter((task)=>(
       task?.status === "In Progress"
     ))
@@ -49,6 +63,7 @@ const DashboardEmployee = () => {
          dueDate.setHours(0,0,0,0);
          return dueDate < today && task.status !== "Completed"
     })
+    const percentage = Math.round(completedTask.length / filterData.length * 100)
   return (
 
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
@@ -57,7 +72,7 @@ const DashboardEmployee = () => {
     <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
           <Task data={filterData} CompletedTasks={CompletedTasks}/>
           <div className='grid grid-rows-2 gap-3'>
-            <MyProjects/>
+            <MyProjects project={projectName} percentage={percentage}/>
             <Deadlines/>
           </div>
     </div>
