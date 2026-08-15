@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
 
-const Task = ({data , CompletedTasks}) => {
+const Task = ({data , CompletedTasks , input}) => {
 
 const [showAll , setShowAll] = useState(false);
+
 
   const recentTask = [...data]
   .filter((task)=> task.status !== "Completed")
   .sort((a, b)=> new Date(b.dueDate) - new Date (a.dueDate) );
 
-  const displayedTasks = showAll ? recentTask : recentTask.slice(0,4);
+ const filteredSearchTask = recentTask.filter((task)=>(
+  task.title.toLowerCase().includes(input.toLowerCase())
+ ))
+
+  const displayedTasks = showAll ? filteredSearchTask : filteredSearchTask.slice(0,4);
 
   
   const getPriorityColor = (prioriy)=>{
