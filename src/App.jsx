@@ -13,6 +13,7 @@ import Notification from "./pages/Notification"
 import Profile from "./pages/Profile"
 import { useContext } from "react"
 import { AuthContext } from "./Context/AuthContext"
+import TaskEmployee from "./pages/employee/TaskEmployee"
 
 
 
@@ -34,6 +35,7 @@ function App() {
     <Route path="/notifications" element={<Notification/>}/>
     <Route path="/profile" element={<Profile/>}/>
     <Route path ="/my-dashboard" element={<DashboardEmployee/>}/>
+    <Route path ="/my-tasks" element={<TaskEmployee/>}/>
   
 </Route>
    </Routes>
