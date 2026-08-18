@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { act, useContext, useState } from 'react'
 import Navbar from '../../components/common/Navbar'
 import TaskToolbar from '../../components/employee/dashboard/Mytask/TaskToolbar'
 import TaskTable from '../../components/employee/dashboard/Mytask/TaskTable'
@@ -7,11 +7,13 @@ import { AuthContext } from '../../Context/AuthContext'
 const TaskEmployee = () => {
     const [data, setData] = useState(projects);
     const {user} = useContext(AuthContext)
+     const [active , setActive] = useState("All");
+     const [searchInput , setSearchInput] = useState("");
     const filterData = data.flatMap((project) => (
     project.tasks
       ?.filter((task) => (
         task.assignedTo.toLowerCase().includes
-          (user.name.toLowerCase())
+          (user.name.toLowerCase()) && (active === "All" || task?.status === active)
       ))
       .map((task) => ({
         ...task,
@@ -20,7 +22,7 @@ const TaskEmployee = () => {
       }))
 
   ));
-  console.log(filterData)
+
   const completedTask=(id)=>{
   const updatedProject = data.map((project)=>({
     ...project,
@@ -33,12 +35,14 @@ const TaskEmployee = () => {
   }))
   setData(updatedProject)
   }
-
+ const searchedValue=(value)=>{
+  setSearchInput(value)
+ }
   return (
     <div className='w-full min-w-0 space-y-6  bg-slate-100'>
-      <Navbar title="My Tasks" description="Tasks assigned to you acrossed all pages"/>
-      <TaskToolbar/>
-      <TaskTable taskInfo = {filterData} completedTask={completedTask}/>
+      <Navbar title="My Tasks" description="Tasks assigned to you acrossed all pages" searchedValue={searchedValue}/>
+      <TaskToolbar setActive={setActive} active={active}/>
+      <TaskTable taskInfo = {filterData} completedTask={completedTask} searchInput={searchInput}/>
     </div>
   )
 }

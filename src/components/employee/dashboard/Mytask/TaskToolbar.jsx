@@ -1,8 +1,8 @@
 import { ArrowUpDown } from 'lucide-react';
 import React, { useState } from 'react'
 
-const TaskToolbar = () => {
-    const [active , setActive] = useState("All");
+const TaskToolbar = ({setActive , active}) => {
+   
     const tabs = [
         "All",
         "To Do",
@@ -10,7 +10,7 @@ const TaskToolbar = () => {
         "Completed"
     ]
   return (
-    <div className='w-full min-w-0 bg-white rounded-md p-4 flex justify-between items-center shadow-sm'>
+    <div className='w-full min-w-0 bg-white rounded-md p-4 shadow-sm'>
        <div className='flex items-center gap-2'>
           {tabs.map((tab)=>(
             <React.Fragment key={tab}>
@@ -18,15 +18,7 @@ const TaskToolbar = () => {
             </React.Fragment>
           ))}
        </div>
-       <div>
-        <select name="" id="" className='border border-slate-200 shadow-xs p-2 rounded-md text-sm cursor-pointer'>
-            <option value="">Sort By : Due Date</option>
-            <option value="" >Today</option>
-            <option value="" >This Week</option>
-            <option value="" >Next Week</option>
-            <option value="" >Overdue</option>
-        </select>
-       </div>
+
     </div>
   )
 }
