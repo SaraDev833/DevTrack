@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import TaskModal from './TaskModal';
 
 const TaskTable = ({taskInfo, completedTask , searchInput}) => {
   const [currentPage , setCurrentPage] = useState(1);
-  console.log(setCurrentPage)
+  const [modelOpen , setModelOpen] = useState(false)
+  
     const getPriority=(priority)=>{
       switch(priority){
         case "High":
@@ -43,7 +45,8 @@ const TaskTable = ({taskInfo, completedTask , searchInput}) => {
     
   return (
     <div className='w-full min-w-0 bg-white shadow-sm border-slate-200 border space-y-6'>
-   <div className='grid grid-cols-1 md:grid-cols-[2fr_2fr_1fr_1fr_1fr] items-center px-5 py-4 bg-slate-50 border-b border-b-slate-300'>
+     
+   <div className='grid grid-cols-1 md:grid-cols-[2fr_2fr_1fr_1fr_1fr] md:items-center md:px-5 md:py-4 bg-slate-50 border-b border-b-slate-300 hidden md:grid'>
         <span  className='text-sm font-medium text-slate-900'>Task</span>
         <span  className='text-sm font-medium text-slate-900'>Project</span>
         <span  className='text-sm font-medium text-slate-900'>Priority</span>
@@ -53,32 +56,36 @@ const TaskTable = ({taskInfo, completedTask , searchInput}) => {
             {currentTasks.map((task)=>{
              
               return (
-      <div className='grid grid-cols-1  md:grid-cols-[2fr_2fr_1fr_1fr_1fr] items-center p-3 border-b border-b-slate-200 last:border-b-0'>
-              <React.Fragment key={task.id}>
+      <div className='grid grid-cols-1 gap-5 md:grid-cols-[2fr_2fr_1fr_1fr_1fr] items-center p-3 border-b border-b-slate-200 last:border-b-0'>
+         {modelOpen && (<TaskModal taskName={task.title} description={task.description} setModelOpen={setModelOpen}/>)}
+              <React.Fragment key={task.id} >
                 <div>
-                       <span className='flex gap-1.5 items-center '>
-                <div>  <input checked={task?.status === "Completed"} type="checkbox" className='accent-indigo-600' onChange={()=>completedTask(task.id)}/></div>
+                       <span className='flex gap-1.5 items-center cursor-pointer' onClick={()=>setModelOpen(!modelOpen)}>
+                <div >  <input checked={task?.status === "Completed"} type="checkbox" className='accent-indigo-600' onChange={()=>completedTask(task.id)}/></div>
                 <div className='flex flex-col gap-1'>  
-                  <h6 className='text-sm font-medium text-slate-900'>{task.title}</h6> 
-                 <p className='text-sm font-medium text-slate-500 truncate max-w-xs'>{task.description}</p>
+                  <h6 className='text-sm font-medium text-slate-900'><span className='md:hidden'>Task: </span>{task.title}</h6> 
+                 <p className='text-sm font-medium text-slate-500 truncate max-w-xs'><span className='md:hidden'>Description: </span>{task.description.length > 25 ? task.description.slice(0,25)+ "..." : task.description}</p>
                 </div>
            
               </span>
                 </div>
          <div>
                  <span  className='text-sm font-medium text-indigo-600'>
-                {task.projectName}
+               <span className='md:hidden'>Project Name : </span> {task.projectName}
               </span>
          </div>
        
               <div>
+                <span className='md:hidden text-sm font-medium'>Priority :</span>
                    <span  className={`${getPriority(task.priority)} p-2 rounded-md text-sm font-medium`}>{task.priority}</span>
               </div>
              <div>
+              <span className='md:hidden text-sm font-medium'>Status: </span>
                 <span className={`${getStatus(task.status)} p-2 rounded-md text-sm font-medium`}>{task.status}</span>
              </div>
             <div>
-                            <span  className={`${new Date(task.dueDate).setHours(0,0,0,0) > new Date().setHours(0,0,0,0) ? "text-red-600": "text-slate-900"} font-medium text-sm `}>{task.dueDate}</span>
+                            <span  className={`${new Date(task.dueDate).setHours(0,0,0,0) > new Date().setHours(0,0,0,0) ? "text-red-600": "text-slate-900"} font-medium text-sm `}>
+                            <span className='md:hidden'>Due Date: </span>{task.dueDate}</span>
             </div>
  
               </React.Fragment>

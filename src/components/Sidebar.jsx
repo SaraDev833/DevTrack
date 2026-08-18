@@ -38,9 +38,6 @@ const Sidebar = ({
     name:"My Tasks" , path:"/my-tasks" , icon:CheckSquare
   },
   {
-    name:"My Projects" , path:"/my-projects" , icon:FolderKanban
-  },
-  {
     name:"My Notifications" , path:"/my-notifications" , icon:Bell
   },
   {
