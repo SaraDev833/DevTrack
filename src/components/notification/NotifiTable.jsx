@@ -2,9 +2,9 @@ import React from 'react'
 
 import NotificationModal from './NotificationModal'
 import { Heading2 } from 'lucide-react';
-const NotifiTable = ({isModalOpen , setIsModalOpen , setSelectedNotification , data , setData, selectedTab}) => {
+const NotifiTable = ({isModalOpen , setIsModalOpen , setSelectedNotification , filterNotifications , setData, selectedTab}) => {
    
-const filteredData = selectedTab === "All"? data : data.filter((notification)=>{
+const filteredData = selectedTab === "All"? filterNotifications : filterNotifications.filter((notification)=>{
     if( selectedTab === "Unread"){
       return notification.isRead === false;
     }

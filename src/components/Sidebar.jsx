@@ -9,6 +9,7 @@ import {
   User,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 import Logo from "./Logo";
 import { AuthContext } from "../Context/AuthContext";
@@ -57,7 +58,7 @@ const Sidebar = ({
         ${desktopOpen ? "lg:w-64" : "lg:w-20"}
       `}
     >
-      <div className="h-full flex flex-col px-4 py-6 overflow-hidden">
+      <div className="h-full flex flex-col px-4 py-6 overflow-hidden ">
         {/* Logo + Toggle */}
         <div
           className={`flex items-center mb-8 ${
@@ -158,7 +159,31 @@ const Sidebar = ({
           })}
         </nav>
         }
-       
+     <button
+  className="
+    fixed bottom-6 left-4
+    flex items-center gap-3
+    w-56 px-4 py-2.5
+    rounded-xl
+    border border-white/10
+    bg-white/5
+    text-slate-300
+    backdrop-blur-md
+    transition-all duration-200
+    hover:bg-red-500/10
+    hover:border-red-400/20
+    hover:text-red-300
+    active:scale-[0.98]
+    group
+    cursor-pointer
+  "
+>
+  <LogOut
+    size={18}
+    className="transition-transform duration-200 group-hover:-translate-x-0.5"
+  />
+  <span className="font-medium text-sm">Logout</span>
+</button>
       </div>
     </aside>
   );

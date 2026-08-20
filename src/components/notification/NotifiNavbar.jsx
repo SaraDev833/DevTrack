@@ -28,13 +28,15 @@ const markRead = ()=>{
         {/* Right Side */}
         <div className="w-full 2xl:w-auto flex flex-col sm:flex-row sm:items-center gap-3 min-w-0">
         
-         <button className='py-1 px-4 border border-indigo-600 text-sm font-medium text-indigo-600 hover:text-white hover:bg-indigo-600 transition duration-75 cursor-pointer' onClick={markRead}>Mark all as read</button>
-
-         <div className='p-1.5 rounded-md bg-indigo-600 text-white cursor-pointer h-8 w-8 flex items-center justify-center ' onClick={deleteAll}>
+         <button className='py-1 px-4 border border-indigo-600 text-sm font-medium text-indigo-600 hover:text-white hover:bg-indigo-600 transition duration-75 cursor-pointer rounded-md' onClick={markRead}>Mark all as read</button>
+  <button className='rounded-md bg-indigo-600 text-white cursor-pointer flex items-center justify-center px-4 py-1.5' onClick={deleteAll}>
+      <div className='h-5 w-5  ' > 
              <Trash2   size={18}/>
          </div>
-        
+          <span className='text-nowrap text-sm font-medium'>Clear All</span>
+  </button>
           </div>
+       
 
           {/* Actions */}
    
