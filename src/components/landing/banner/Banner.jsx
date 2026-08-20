@@ -5,7 +5,7 @@ import Right from './Right'
 const Banner = () => {
   
     return (
-        <div className='md:mt-25 mb-15 flex justify-between lg:gap-4 flex-col lg:flex-row' >
+        <div className='md:mt-15 mb-15 flex justify-between lg:gap-4 flex-col lg:flex-row' >
        <Left/>
            <Right/>
         </div>
