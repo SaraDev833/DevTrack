@@ -1,9 +1,26 @@
 import React from 'react'
 import { Star, ArrowRight, CirclePlay, CircleCheck } from 'lucide-react'
+import {motion} from "framer-motion"
   const lists = ["No credit card required", "Free Forever plan", "Setup in minutes"]
 const Left = () => {
   return (
-        <div className="left flex flex-col gap-7 lg:w-[40%] mt-20 w-full md:order-2 lg:order-1">
+        <motion.div
+        initial={{
+            x:-80,
+            opacity:0
+        }}
+        animate={{
+            opacity: 1,
+            x:0
+        }}
+        transition={{
+            duration:0.7,
+            delay:0.2,
+            ease:"easeOut"
+
+        }}
+        
+        className="left flex flex-col gap-7 lg:w-[40%] mt-20 w-full md:order-2 lg:order-1 ">
                 <span className='flex items-center gap-2 bg-indigo-600/10 w-fit py-2 px-4 rounded-full'>
                     <Star className='text-indigo-600 font-bold !h-5 !w-5' />
                     <p className='text-sm font-bold'>Project and Team Management made simple</p>
@@ -21,7 +38,7 @@ const Left = () => {
                         </div>
                     ))}
                 </div>
-            </div>
+            </motion.div>
   )
 }
 

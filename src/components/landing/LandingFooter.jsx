@@ -1,11 +1,26 @@
 import React from 'react'
 import LandingFooterCard from './LandingFooterCard'
+import {motion} from "framer-motion"
 import { FolderClosed , SquareCheckBig , SquareKanban ,Users , Bell, ChartLine} from 'lucide-react' 
 const LandingFooter = () => {
  
   return (
-    <div className="bg-indigo-600/10 ">
-      <div className="max-w-7xl py-15 mx-auto">
+      <motion.div 
+      initial={{
+        opacity: 0,
+        y:-50
+      }}
+      animate={{
+        opacity:1,
+        y:0
+      }}
+      transition={{
+        duration:0.7,
+        delay:0.2,
+        ease:"ease"
+      }}
+      
+      className="max-w-7xl py-15 mx-auto bg-linear-to-r from-purple-200/50 to-indigo-200/50">
                <div className="title">
                 <h2 className='md:text-2xl lg:text-3xl font-bold text-center mb-3 text-xl'>Everything you need to manage your workflow</h2>
                 <p className='text-slate-600 text-center md:text-lg text-sm'>Powerful Features to keep your team organized and productive</p>
@@ -18,8 +33,8 @@ const LandingFooter = () => {
              <LandingFooterCard icon={<Bell />} title="Smart notification" description="Stay updated with real time notifications and reminders"/>
        
                </div>
-      </div>
-    </div>
+      </motion.div>
+   
   )
 }
 

@@ -5,6 +5,8 @@ import LandingFooter from '../components/landing/LandingFooter'
 import LandingFooter2 from '../components/landing/LandingFooter2'
 import PlanninxWork from '../components/landing/PlanninxWork'
 import Role from '../components/landing/Role'
+import Clarity from '../components/landing/Clarity'
+import Pricing from '../components/landing/pricing/Pricing'
 const Landing = () => {
   
     return (
@@ -15,6 +17,8 @@ const Landing = () => {
                <LandingFooter/>
             <PlanninxWork/>
             <Role/>
+            <Clarity/>
+            <Pricing/>
             </div>
                <LandingFooter2/>
         </div>
