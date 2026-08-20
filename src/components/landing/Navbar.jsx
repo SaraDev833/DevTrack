@@ -18,9 +18,9 @@ const Navbar = () => {
 
             </div>
             <div className='md:hidden '>
-                <Menu className={`relative  cursor pointer z-10 ${isOpen ? "text-indigo-800" : "text-indigo-700 "}`} onClick={() => setIsOpen(!isOpen)} />
+                <Menu className={`relative  cursor pointer z-30 ${isOpen ? "text-indigo-800" : "text-indigo-700 "}`} onClick={() => setIsOpen(!isOpen)} />
                 {isOpen && (
-                    <div className="absolute top-0 right-0 h-screen w-80 bg-indigo-50 shadow-xl transform transition-all duration-500 ease-out">
+                    <div className="absolute top-0 right-0 h-screen w-80 bg-indigo-50 shadow-xl transform z-20 transition-all duration-500 ease-out">
                         <div className="menu flex flex-col items-start gap-5 font-semibold pt-20 px-10">
                             {menu.map((item, index) => (
                                 <ul key={item[index]}>

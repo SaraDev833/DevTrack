@@ -8,7 +8,7 @@ const Left = () => {
                     <Star className='text-indigo-600 font-bold !h-5 !w-5' />
                     <p className='text-sm font-bold'>Project and Team Management made simple</p>
                 </span>
-                <h2 className='lg:text-5xl font-bold lg:leading-13 text-3xl leading-2'>One Workspace.<br /> <span className='my-4'>Every Project.</span><br/> <span className='bg-linear-to-r from-indigo-700 via-indigo-500 to to-purple-600 bg-clip-text text-transparent '>Every Team.</span></h2>
+                <h2 className='lg:text-5xl font-bold lg:leading-13 text-3xl leading-8'>One Workspace.<br /> <span className='my-4'>Every Project.</span><br/> <span className='bg-linear-to-r from-indigo-700 via-indigo-500 to to-purple-600 bg-clip-text text-transparent '>Every Team.</span></h2>
                 <p className='text-slate-600 lg:text-lg font-medium text-sm'>Plannix helps teams plan projects, assign tasks, track progress and deliver better results - together</p>
                 <div className="buttons flex gap-4 ">
                     <button className='bg-linear-to-r from-indigo-700 via-indigo-600 to-purple-700 text-white lg:py-2 lg:px-4  py-1 px-3 text-sm flex font-medium cursor-pointer  justify-center items-center gap-2 text-center rounded-lg' >Get Started Free <ArrowRight className='!h-5 !w-5 mt-[0.8px] ' /></button>
