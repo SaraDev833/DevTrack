@@ -9,7 +9,7 @@ const Free = () => {
         "Basic task management"
     ]
   return (
-    <div className='p-6 bg-white rounded-md flex flex-col w-fit'>
+    <div className='p-6 bg-white rounded-md flex flex-col border border-slate-200'>
         <h6 className='text-sm text-slate-500 font-bold'>Free</h6>
         <p className='text-sm text-slate-900 font-medium'><span className='text-slate-900 text-2xl font-bold '>$0</span>/month</p>
         <ul className='flex flex-col gap-2 mt-2'>

@@ -3,7 +3,7 @@ import React from 'react'
 
 const Clarity = () => {
   return (
-    <div className='py-10 bg-linear-to-r from-purple-200/50 to-indigo-200/50 grid grid-cols-1 md:grid-cols-[0.7fr_1.2fr] shadow-sm my-6'>
+    <div className='p-6 py-10 bg-linear-to-r from-purple-200/50 to-indigo-200/50 grid grid-cols-1 md:grid-cols-[0.7fr_1.2fr] shadow-sm my-6'>
         <div className='flex flex-col items-center justify-center'>
        <h2 className='text-lg font-bold text-slate-900'>Built for teams who want clarity</h2>
        <p className='text-sm text-slate-500 font-medium'>Manage Everything from one dashboard</p>
