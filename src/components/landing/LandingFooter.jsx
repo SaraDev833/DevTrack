@@ -19,8 +19,8 @@ const LandingFooter = () => {
         delay:0.2,
         ease:"ease"
       }}
-      
-      className="max-w-7xl py-15 mx-auto bg-linear-to-r from-purple-200/50 to-indigo-200/50">
+      id='features'
+      className="max-w-7xl py-15 mx-auto bg-linear-to-r from-purple-200/50 to-indigo-200/50 scroll-mt-2 scroll-smooth">
                <div className="title">
                 <h2 className='md:text-2xl lg:text-3xl font-bold text-center mb-3 text-xl'>Everything you need to manage your workflow</h2>
                 <p className='text-slate-600 text-center md:text-lg text-sm'>Powerful Features to keep your team organized and productive</p>

@@ -7,6 +7,8 @@ import PlanninxWork from '../components/landing/PlanninxWork'
 import Role from '../components/landing/Role'
 import Clarity from '../components/landing/Clarity'
 import Pricing from '../components/landing/pricing/Pricing'
+import Manage from '../components/landing/Manage'
+import Footer from '../components/landing/Footer'
 const Landing = () => {
   
     return (
@@ -19,8 +21,10 @@ const Landing = () => {
             <Role/>
             <Clarity/>
             <Pricing/>
+            <Manage/>
             </div>
                <LandingFooter2/>
+               <Footer/>
         </div>
     )
 }

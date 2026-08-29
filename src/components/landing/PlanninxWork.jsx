@@ -30,7 +30,7 @@ const PlanninxWork = () => {
         }
     ]
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-[1fr_5fr]  py-3 my-6'>
+    <div id='##how-it-works' className='grid grid-cols-1 lg:grid-cols-[1fr_5fr]  py-3 my-6'>
         {/* left side */}
       <div className='flex flex-col gap-2 items-center lg:items-start mb-6 lg:mb-0'>
        <h2 className='font-bold text-2xl text-nowrap text-slate-900'>How Plannix Works</h2>
