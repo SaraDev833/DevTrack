@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { Sparkles, User, Building2, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -13,8 +14,13 @@ const RegisterCom = () => {
 
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:3000/api/auth/register", data)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

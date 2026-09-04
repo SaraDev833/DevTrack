@@ -5,7 +5,7 @@ const currentUser = {
   avatar: "",
 
   position: "Workspace Owner",
-  userType: "employee",
+  userType: "owner",
 
   phone: "+8801712345678",
   location: "Dhaka, Bangladesh",
