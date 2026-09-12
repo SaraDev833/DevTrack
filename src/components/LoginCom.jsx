@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Sparkles, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const LoginCom = () => {
   const {
@@ -10,8 +11,17 @@ const LoginCom = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit =async (data) => {
+     try {
+        const response = await axios.post("http://localhost:3000/api/auth/login" , data) 
+      console.log(response)
+      if(response.data.message){
+alert(response.data.message)
+      }
+      
+     } catch (error) {
+      console.log(error)
+     }
   };
 
   return (
