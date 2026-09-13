@@ -14,7 +14,11 @@ const LoginCom = () => {
   const onSubmit =async (data) => {
      try {
         const response = await axios.post("http://localhost:3000/api/auth/login" , data) 
-      console.log(response)
+      const token = response.data.token;
+      {
+      
+      }
+      localStorage.setItem("token" , token);
       if(response.data.message){
 alert(response.data.message)
       }

@@ -104,9 +104,10 @@ const loginUser = async(req, res)=>{
             }
     )
     res.status(200).json({
-       
+        token,
         user:{
-            email: user.email
+            email: user.email,
+           
         }
     })
     } catch (error) {
