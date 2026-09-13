@@ -15,13 +15,16 @@ const InviteMember = ({invite, setInvite}) => {
     <form action=""  className='mt-4'>
       <label htmlFor="email" className='text-sm font-bold text-slate-900 mb-2'>Email Address</label>
       <input type="email" className='w-full p-2 outline-none border border-slate-300 shadow-xs focus:ring-1 mt-2 focus:ring-indigo-600 rounded-md' placeholder='Enter email address' />
+      {/* position */}
+      <label htmlFor="email" className='text-sm font-bold text-slate-900 mb-2 mt-4'>Role/Position</label>
+      <input type="email" className='w-full p-2 outline-none border border-slate-300 shadow-xs focus:ring-1 mt-2 focus:ring-indigo-600 rounded-md' placeholder='Role/Position' />
 
       {/* user Type */}
       <label htmlFor="userType"  className='text-sm font-bold text-slate-900 mt-4 flex flex-col'>User Type</label>
       <select name="userType" id="" className='w-full p-2 outline-none border border-slate-300 shadow-xs focus:ring-1 mt-2 focus:ring-indigo-600 rounded-md' onChange={(e)=>setUserType(e.target.value)}>
         <option value=""></option>
-        <option value="Employee">Employee</option>
-        <option value="Manager">Manager</option>
+        <option value="admin">admin</option>
+        <option value="employee">Employee</option>
       </select>
       {/* extra info */}
       {userType === "" ? "" :  <div className='p-4 bg-indigo-200/50 mt-3 flex flex-col gap-2'>

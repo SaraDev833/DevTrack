@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Sparkles, Mail, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginCom = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -19,6 +20,7 @@ const LoginCom = () => {
       
       }
       localStorage.setItem("token" , token);
+      navigate("/dashboard")
       if(response.data.message){
 alert(response.data.message)
       }
