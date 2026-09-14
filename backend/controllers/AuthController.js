@@ -2,6 +2,7 @@ import User from "../Models/User.js"
 import Workspace from "../Models/Workspace.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import WorkspaceMember from "../Models/WorkspaceMember.js"
 const registerUser = async ( req, res) =>{
     try {
         const {
@@ -44,6 +45,13 @@ const registerUser = async ( req, res) =>{
         name : workspace,
         owner: user._id
      })
+
+     const workspaceMember = await WorkspaceMember.create({
+        user: user._id,
+        workspace:newworkspace._id,
+        userType:"owner",
+        position:"owner of the workspace"
+     })
      res.status(201).json({
         message:"Account created successfully",
         user:{
@@ -55,6 +63,9 @@ const registerUser = async ( req, res) =>{
             id:newworkspace._id,
             name:newworkspace.name,
             owner:newworkspace.owner
+        },
+        workspacemember:{
+            position:workspaceMember.position
         }
      })
         
