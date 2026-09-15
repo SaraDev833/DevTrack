@@ -6,7 +6,7 @@ const InviteMember = ({invite, setInvite}) => {
 
   const [data , setData] = useState({
     email:"",
-    role:"",
+    position:"",
     userType:""
   })
 const handleChange = (e)=>{
@@ -21,6 +21,7 @@ const handleSubmit = async(e)=>{
   
  try {
    const token = localStorage.getItem("token")
+  
   const response = await axios.post("http://localhost:3000/api/invitation", data,{
     headers:{
       Authorization: `Bearer ${token}`
@@ -46,7 +47,7 @@ const handleSubmit = async(e)=>{
       <input type="email" name="email"className='w-full p-2 outline-none border border-slate-300 shadow-xs focus:ring-1 mt-2 focus:ring-indigo-600 rounded-md' placeholder='Enter email address' onChange={handleChange} />
       {/* position */}
       <label htmlFor="role" className='text-sm font-bold text-slate-900 mb-2 mt-4'>Role/Position</label>
-      <input type="text" className='w-full p-2 outline-none border border-slate-300 shadow-xs focus:ring-1 mt-2 focus:ring-indigo-600 rounded-md' placeholder='Role/Position'name='role' onChange={handleChange}/>
+      <input type="text" className='w-full p-2 outline-none border border-slate-300 shadow-xs focus:ring-1 mt-2 focus:ring-indigo-600 rounded-md' placeholder='Role/Position'name='position' onChange={handleChange}/>
 
       {/* user Type */}
       <label htmlFor="userType"  className='text-sm font-bold text-slate-900 mt-4 flex flex-col'>User Type</label>

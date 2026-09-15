@@ -1,16 +1,16 @@
+import mongoose from "mongoose"
 const InvitationSchema = new mongoose.Schema({
     email:{
         type:String,
-        unique:true,
         required: true
     },
     workspace:{
-        type:mongoose.Schema.Types.objectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"Workspace",
         required:true
     },
     invitedBy:{
-        type:mongoose.Schema.Types.objectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref:"User",
         required:true
     },

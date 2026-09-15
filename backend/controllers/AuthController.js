@@ -1,8 +1,9 @@
 import User from "../Models/User.js"
-import Workspace from "../Models/Workspace.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import WorkspaceMember from "../Models/WorkspaceMember.js"
+import workspace from "../Models/Workspace.js"
+import Invitation from "../Models/Invitation.js"
 const registerUser = async ( req, res) =>{
     try {
         const {
@@ -76,6 +77,76 @@ const registerUser = async ( req, res) =>{
         })
     }
 }
+
+const inviteUserRegister=async(req, res)=>{
+    try {
+        const {
+         name,
+          email,
+          password,
+          confirmPassword,
+          terms, 
+          invitationToken
+
+    }= req.body;
+    if(!name || !email || !password || !confirmPassword){
+        return res.status(401).json({
+            message: "You need to fill all the required fields"
+        })
+    }
+    if(!terms){
+        return res.status(401).json({
+            message:"You must agree to the terms and policy"
+        })
+    }
+
+    const exisitingUser = await User.findOne({email})
+    if(exisitingUser){
+        return res.status(401).json({
+            message:"This user already exists"
+        })
+    }
+    if(password !==confirmPassword){
+        return res.status(401).json({
+            message:"passwords do not match"
+        })
+    }
+
+    const user = await User.create({
+        name,
+        email ,
+        password
+    })
+    const Invited = await Invitation.findOne({ token: invitationToken,
+  status: "pending"});
+    if(!Invited){
+        return res.status(401).json({
+            message:"Invalid invitation token or expired"
+        })
+    }
+   const newMember = await WorkspaceMember.create({
+       user:user._id,
+       workspace:Invited.workspace,
+       userType:Invited.userType,
+       position:Invited.position
+   })
+   Invited.status = "Active";
+   await Invitation.save();
+   return res.status(201).json({
+    message:"Account created and invitation accepted",
+    user:{
+        name:user.name,
+        email:user.email
+    },
+  
+   })
+    } catch (error) {
+        console.log(error)
+    }
+
+
+
+}
 const loginUser = async(req, res)=>{
     const {
         email,
@@ -126,4 +197,4 @@ const loginUser = async(req, res)=>{
     }
     
 }
-export {registerUser, loginUser};
+export {registerUser, loginUser ,inviteUserRegister};

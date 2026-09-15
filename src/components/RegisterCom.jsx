@@ -3,8 +3,11 @@ import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { Sparkles, User, Building2, Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { useSearchParams } from "react-router-dom";
 const RegisterCom = () => {
+  const [searchParams] = useSearchParams();
+  const invitationToken = searchParams.get("invitation");
+
   const {
     register,
     handleSubmit,
@@ -15,12 +18,32 @@ const RegisterCom = () => {
   const password = watch("password");
 
   const onSubmit = async (data) => {
+    if(invitationToken){
+      try {
+        const response = await axios.post("http://localhost:3000/api/invite-register",
+          {
+            ...data,
+            invitationToken
+          }
+        )
+        console.log(response.data)
+        
+      } catch (error) {
+       
+  console.log("STATUS:", error.response?.status);
+  console.log("MESSAGE:", error.response?.data);
+
+      }
+    }
+    else{
     try {
       const response = await axios.post("http://localhost:3000/api/auth/register", data)
       console.log(response)
     } catch (error) {
       console.log(error)
     }
+    }
+
   };
 
   return (
@@ -93,7 +116,7 @@ const RegisterCom = () => {
         </div>
 
         {/* Workspace Name */}
-        <div>
+        {!invitationToken && ( <div>
           <label className="block text-sm font-semibold text-slate-800 mb-2">
             Workspace name
           </label>
@@ -119,7 +142,8 @@ const RegisterCom = () => {
               {errors.workspace.message}
             </p>
           )}
-        </div>
+        </div>)}
+       
 
         {/* Email */}
         <div>

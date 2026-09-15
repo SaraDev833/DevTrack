@@ -1,3 +1,4 @@
+import "dotenv/config";
 import dns from 'dns';
 dns.setServers(['8.8.8.8', '1.1.1.1']); 
 import AuthRoute from "./routes/AuthRoute.js"
@@ -22,7 +23,9 @@ app.use(express.json())
 connectDB();
 
 // routes
-app.use("/api/auth" , AuthRoute)
+app.use("/api" , AuthRoute)
+// invitation route
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
