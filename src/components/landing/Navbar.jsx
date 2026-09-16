@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Sparkles, Menu } from 'lucide-react'
 import Logo from '../Logo'
+import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
 const menu = [
@@ -9,7 +10,7 @@ const menu = [
   { name: "How it works", link: "#how-it-works" },
   { name: "About", link: "#about" }
 ]
-
+const navigate = useNavigate();
     return (
         <div className='flex justify-between items-center'>
         <Logo/>
@@ -37,15 +38,15 @@ const menu = [
                         </div>
 
                         <div className="buttons flex flex-col gap-3 pt-10 items-start px-10">
-                            <button className='text-sm font-medium cursor-pointer hover:text-indigo-500'>Sign in</button>
-                            <button className='bg-linear-to-r from-indigo-700  to-indigo-500 text-white font-medium rounded-md py-2 px-4 cursor-pointer'>Get Started Free</button>
+                            <button className='text-sm font-medium cursor-pointer hover:text-indigo-500'onClick={()=>navigate("/register")}>Sign in</button>
+                            <button className='bg-linear-to-r from-indigo-700  to-indigo-500 text-white font-medium rounded-md py-2 px-4 cursor-pointer' onClick={()=>navigate("/register")}>Get Started Free</button>
                         </div>
                     </div>
                 )}
             </div>
             <div className="buttons md:flex gap-3 hidden">
-                <button className='lg:text-sm text-xs font-medium cursor-pointer '>Sign in</button>
-                <button className='bg-linear-to-r from-indigo-700  to-indigo-500 text-white font-medium rounded-md py-1 px-4 cursor-pointer text-xs lg:text-sm'>Get Started Free</button>
+                <button onClick={()=>navigate("/register")} className='lg:text-sm text-xs font-medium cursor-pointer '>Sign in</button>
+                <button className='bg-linear-to-r from-indigo-700  to-indigo-500 text-white font-medium rounded-md py-1 px-4 cursor-pointer text-xs lg:text-sm' onClick={()=>navigate("/register")}>Get Started Free</button>
             </div>
         </div>
     )
