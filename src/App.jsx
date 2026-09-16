@@ -15,6 +15,7 @@ import { useContext } from "react"
 import { AuthContext } from "./Context/AuthContext"
 import TaskEmployee from "./pages/employee/TaskEmployee"
 import NotificationEmployee from "./pages/employee/NotificationEmployee"
+import ProtectedRoute from "../backend/protectedRoute/ProtectedRoute"
 
 
 
@@ -26,7 +27,7 @@ function App() {
     <Route path="/" element={<Landing/>}/>
     <Route path="/register" element={<Register/>}/>
     <Route path="/signin" element={<Login/>}/>
-  
+  <Route element={<ProtectedRoute/>}>
     <Route element={<DashboardLayout/>}>
     <Route path="/dashboard" element={<Dashboard/>}/>
     <Route path="/projects" element={<Projects/>}/>
@@ -39,6 +40,7 @@ function App() {
     <Route path ="/my-tasks" element={<TaskEmployee/>}/>
     <Route path ="/my-notifications" element={<NotificationEmployee/>}/>
   
+</Route>
 </Route>
    </Routes>
     </>

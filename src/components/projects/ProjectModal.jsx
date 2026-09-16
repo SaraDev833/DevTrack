@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import teamMembers from "../../data/teamMembers";
 
 const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
@@ -16,36 +16,43 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
     teamMembers: [],
     
   });
+  console.log(formData)
 
-  const categories = [
-    "Web Development",
-    "Mobile App",
-    "Marketing",
-    "E-commerce",
-    "Dashboard",
-    "CMS",
-    "Education Platform",
-    "Finance App",
-    "Booking System",
-  ];
+  // useEffect(()=>{
+  // const getProjects = async (formdata) =>{
+  //   console.log(formData)
+  // }
+  // },[])
 
-  const priorities = ["High", "Medium", "Low"];
+  // const categories = [
+  //   "Web Development",
+  //   "Mobile App",
+  //   "Marketing",
+  //   "E-commerce",
+  //   "Dashboard",
+  //   "CMS",
+  //   "Education Platform",
+  //   "Finance App",
+  //   "Booking System",
+  // ];
 
-  const handleTeamMembers = (name) => {
-    if (formData.teamMembers.includes(name)) {
-      setFormData({
-        ...formData,
-        teamMembers: formData.teamMembers.filter(
-          (member) => member !== name
-        ),
-      });
-    } else {
-      setFormData({
-        ...formData,
-        teamMembers: [...formData.teamMembers, name],
-      });
-    }
-  };
+  // const priorities = ["High", "Medium", "Low"];
+
+  // const handleTeamMembers = (name) => {
+  //   if (formData.teamMembers.includes(name)) {
+  //     setFormData({
+  //       ...formData,
+  //       teamMembers: formData.teamMembers.filter(
+  //         (member) => member !== name
+  //       ),
+  //     });
+  //   } else {
+  //     setFormData({
+  //       ...formData,
+  //       teamMembers: [...formData.teamMembers, name],
+  //     });
+  //   }
+  // };
 
   const handleChange = (e) => {
     setFormData({
@@ -54,45 +61,25 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e, formData) => {
+  //   e.preventDefault();
+  //   console.log("formdata" , formData)
+    
 
-    if (
-      !formData.name ||
-      !formData.description ||
-      !formData.client ||
-      !formData.budget ||
-      !formData.category ||
-      !formData.priority ||
-      !formData.dueDate ||
-      formData.teamMembers.length === 0
-    ) {
-      alert("You must fill everything!");
-      return;
-    }
+  //   setFormData({
+  //     name: "",
+  //     description: "",
+  //     client: "",
+  //     budget: "",
+  //     category: "",
+  //     priority: "",
+  //     dueDate: "",
+  //     status: "Planning",
+  //     teamMembers: [],
+  //   });
 
-    const newProject = {
-      ...formData,
-      status: "Planning",
-      tasks:[]
-    };
-
-    setProjects([newProject, ...projects]);
-
-    setFormData({
-      name: "",
-      description: "",
-      client: "",
-      budget: "",
-      category: "",
-      priority: "",
-      dueDate: "",
-      status: "Planning",
-      teamMembers: [],
-    });
-
-    setIsCreateModalOpen(false);
-  };
+  //   setIsCreateModalOpen(false);
+  // };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
@@ -115,7 +102,7 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
         </div>
 
 
-        <form onSubmit={handleSubmit}>
+        <form >
 
           {/* Name + Client */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
@@ -166,11 +153,7 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
               >
                 <option value=""></option>
 
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
+         
 
               </select>
             </div>
@@ -211,11 +194,6 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
 
                 <option value=""></option>
 
-                {priorities.map((priority) => (
-                  <option key={priority} value={priority}>
-                    {priority}
-                  </option>
-                ))}
 
               </select>
             </div>

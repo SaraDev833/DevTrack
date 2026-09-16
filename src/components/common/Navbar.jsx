@@ -7,7 +7,8 @@ import { AuthContext } from "../../Context/AuthContext";
 
 const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , searchedValue}) => {
     const {user} = useContext(AuthContext)
-    console.log(user)
+    console.log(user.userType)
+    
   return (
     <header className="w-full min-w-0">
       <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-center 2xl:justify-between">
@@ -41,7 +42,8 @@ const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , 
 
           {/* Actions */}
           <div className="flex items-center gap-3 shrink-0">
-          {user.userType === "owner" || user.userType === "manager" && (
+          {(user?.userType === "owner" || user?.userType === "admin" ) && (
+           
              <button onClick={()=>setIsCreateModalOpen(!isCreateModalOpen)} className="py-2 px-4 bg-indigo-600 text-white rounded-md flex items-center justify-center gap-1 text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer">
               <Plus size={18} />
               <span>New Project</span>

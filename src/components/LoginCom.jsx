@@ -16,9 +16,7 @@ const LoginCom = () => {
      try {
         const response = await axios.post("http://localhost:3000/api/auth/login" , data) 
       const token = response.data.token;
-      {
-      
-      }
+    
       localStorage.setItem("token" , token);
       navigate("/dashboard")
       if(response.data.message){
