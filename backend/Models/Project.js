@@ -50,5 +50,5 @@ teamMembers:[
     }
 ]
 })
-const project = mongoose.model("Project" , ProjectSchema);
-export default project
+const Project = mongoose.model("Project" , ProjectSchema);
+export default Project

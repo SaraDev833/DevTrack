@@ -2,9 +2,10 @@ import React from "react";
 import axios from 'axios';
 import { useForm } from "react-hook-form";
 import { Sparkles, User, Building2, Mail, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 const RegisterCom = () => {
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams();
   const invitationToken = searchParams.get("invitation");
 
@@ -27,6 +28,7 @@ const RegisterCom = () => {
           }
         )
         console.log(response.data)
+        navigate("/signin")
         
       } catch (error) {
        
@@ -39,8 +41,9 @@ const RegisterCom = () => {
     try {
       const response = await axios.post("http://localhost:3000/api/auth/register", data)
       console.log(response)
+      navigate("/signin")
     } catch (error) {
-      console.log(error)
+      console.log(error.response?.data)
     }
     }
 

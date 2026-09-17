@@ -1,10 +1,12 @@
 import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import teamMembers from "../../data/teamMembers";
+import axios from "axios";
 
 const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
+  const [workspaceMembers , setworkspaceMembers] = useState([])
+  console.log(workspaceMembers)
   const [formData, setFormData] = useState({
-    id: Date.now(),
     name: "",
     description: "",
     client: "",
@@ -12,18 +14,43 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
     category: "",
     priority: "",
     dueDate: "",
-    status: "Planning",
     teamMembers: [],
     
   });
-  console.log(formData)
 
-  // useEffect(()=>{
-  // const getProjects = async (formdata) =>{
-  //   console.log(formData)
-  // }
-  // },[])
+  useEffect(()=>{
+  const getMembers =async()=>{
+    const token = localStorage.getItem("token");
+   try {
+     const response = await axios.get("http://localhost:3000/api/workspace-member" , {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+    })
+   setworkspaceMembers(response.data.MembersInfo)
+   } catch (error) {
+    console.log(error.response?.data)
+   }
+  }
+  getMembers()
+  },[])
+const handleTeamMembers=(userId)=>{
+  setFormData((prev)=>{
+    if(prev.teamMembers.includes(userId)){
+       return{
+        ...prev,
+         teamMembers: prev.teamMembers.filter(
+          (id) => id !== userId
+        ),
+       }
+    }
+    return {
+  ...prev,
+  teamMembers: [...prev.teamMembers, userId],
+};
+  })
 
+}
   // const categories = [
   //   "Web Development",
   //   "Mobile App",
@@ -61,25 +88,37 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
     });
   };
 
-  // const handleSubmit = (e, formData) => {
-  //   e.preventDefault();
-  //   console.log("formdata" , formData)
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+    const token = localStorage.getItem("token")
+    try {
+          const response = await axios.post("http://localhost:3000/api/create/project" , formData , {
+            headers:{
+              Authorization: `bearer ${token}`
+            }
+          })
+        
+           console.log(response.data)
+           
+    setIsCreateModalOpen(false);
+        setFormData({
+      name: "",
+      description: "",
+      client: "",
+      budget: "",
+      category: "",
+      priority: "",
+      dueDate: "",
+      teamMembers: [],
+    });
+    } catch (error) {
+      console.log(error.response?.data)
+    }
     
 
-  //   setFormData({
-  //     name: "",
-  //     description: "",
-  //     client: "",
-  //     budget: "",
-  //     category: "",
-  //     priority: "",
-  //     dueDate: "",
-  //     status: "Planning",
-  //     teamMembers: [],
-  //   });
+  
 
-  //   setIsCreateModalOpen(false);
-  // };
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
@@ -229,23 +268,23 @@ const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
 
             <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3">
 
-              {teamMembers.map((member) => (
+              {workspaceMembers.map((member) => (
 
                 <div
-                  key={member.id}
+                  key={member.user._id}
                   className="flex items-center gap-2 py-2 px-3 border border-slate-200 rounded-md bg-slate-100"
                 >
 
                   <input
                     type="checkbox"
-                    checked={formData.teamMembers.includes(member.name)}
-                    onChange={() => handleTeamMembers(member.name)}
+                    checked={formData.teamMembers.includes(member.user._id)}
+                    onChange={() => handleTeamMembers(member.user._id)}
                   />
 
 
                   <div>
                     <p className="text-sm text-slate-900">
-                      {member.name}
+                      {member.user.name}
                     </p>
 
                     <span className="text-xs text-slate-500">

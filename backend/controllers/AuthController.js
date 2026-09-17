@@ -2,7 +2,7 @@ import User from "../Models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import WorkspaceMember from "../Models/WorkspaceMember.js"
-import workspace from "../Models/Workspace.js"
+import Workspace from "../Models/Workspace.js"
 import Invitation from "../Models/Invitation.js"
 const registerUser = async ( req, res) =>{
     try {
@@ -131,7 +131,7 @@ const inviteUserRegister=async(req, res)=>{
        position:Invited.position
    })
    Invited.status = "Active";
-   await Invitation.save();
+   await Invited.save();
    return res.status(201).json({
     message:"Account created and invitation accepted",
     user:{

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   FolderKanban,
@@ -22,7 +22,7 @@ const Sidebar = ({
 }) => {
 
    const {user} = useContext(AuthContext)
-
+   const navigate = useNavigate()
   const OwnernavItems = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { name: "Projects", path: "/projects", icon: FolderKanban },
@@ -45,7 +45,10 @@ const Sidebar = ({
     name:"Profile" , path:"/profile" , icon:User
   }
  ]
-
+const handleLogout= ()=>{
+  localStorage.removeItem("token")
+  navigate("/signin")
+}
   return (
     <aside
       className={`
@@ -182,7 +185,7 @@ const Sidebar = ({
     size={18}
     className="transition-transform duration-200 group-hover:-translate-x-0.5"
   />
-  <span className="font-medium text-sm">Logout</span>
+  <span className="font-medium text-sm" onClick={()=>handleLogout()}>Logout</span>
 </button>
       </div>
     </aside>
