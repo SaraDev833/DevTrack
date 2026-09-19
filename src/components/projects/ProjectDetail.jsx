@@ -10,14 +10,13 @@ import ProjectModal from './ProjectModal'
 const ProjectDetail = () => {
    
    const {isCreateModalOpen , setIsCreateModalOpen , projects , setProjects} = useOutletContext()
-console.log(isCreateModalOpen)
 const { id } = useParams()
 
     // const project = projects.find((p) => (
     //     String(p.id) === String(id)
     // ))
     const project = projects.find((p) => {
-  return p.id === Number(id);
+  return p._id === id;
 });
   
     return (

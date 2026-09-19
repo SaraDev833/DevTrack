@@ -2,7 +2,7 @@ import React from "react";
 import { FolderClosed, ListTodo, ClockAlert, Check, ClockCheck } from "lucide-react";
 
 const Kanban = ({projects , setProjects}) => {
-  const totalTasks = projects.reduce((total , project)=> {
+  const totalTasks = projects?.reduce((total , project)=> {
   
     return (total + project.tasks?.length || 0)
   },0)

@@ -3,7 +3,7 @@ import { registerUser , loginUser, inviteUserRegister } from "../controllers/Aut
 import invitation from "../controllers/InvitationController.js";
 import Authmiddleware from '../Middleware/Authmiddleware.js'
 import  MembersController  from "../controllers/MembersController.js";
-import CreateProject from "../controllers/CreateProjectController.js";
+import {CreateProject, getProjects} from "../controllers/CreateProjectController.js";
 const router= express.Router();
 
 router.post("/auth/register" , registerUser);
@@ -13,5 +13,6 @@ router.post("/invite-register" , inviteUserRegister)
 // invitationRoute
 router.post("/invitation",Authmiddleware ,invitation)
 router.get("/workspace-member", Authmiddleware , MembersController)
-router.post("create/project", Authmiddleware , CreateProject)
+router.post("/create/project", Authmiddleware , CreateProject)
+router.get("/all/projects", Authmiddleware , getProjects)
 export default router;

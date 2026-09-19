@@ -16,7 +16,7 @@ const ProjectTable = ({ project, Ondelete , setEditModalOpen , editModalOpen , o
  const progress = calculateProgress(project.tasks)
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] gap-4 px-5 py-4 border-b border-slate-200 items-center">
-      <Link to={`/project-detail/${project.id}`} >
+      <Link to={`/project-detail/${project._id}`} >
         <h3 className="font-semibold text-slate-900"><span className="lg:hidden">project: </span>{project.name}</h3>
         <p className="text-sm text-slate-500"><span className="lg:hidden font-semibold text-slate-900 ">Description: </span> {project.description}</p>
       </Link>

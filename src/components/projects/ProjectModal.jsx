@@ -5,7 +5,7 @@ import axios from "axios";
 
 const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
   const [workspaceMembers , setworkspaceMembers] = useState([])
-  console.log(workspaceMembers)
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -100,7 +100,7 @@ const handleTeamMembers=(userId)=>{
         
            console.log(response.data)
            
-    setIsCreateModalOpen(false);
+    // setIsCreateModalOpen(false);
         setFormData({
       name: "",
       description: "",
@@ -141,7 +141,7 @@ const handleTeamMembers=(userId)=>{
         </div>
 
 
-        <form >
+        <form onSubmit={handleSubmit}>
 
           {/* Name + Client */}
           <div className="flex flex-col sm:flex-row gap-3 mb-4">
@@ -184,17 +184,13 @@ const handleTeamMembers=(userId)=>{
               <label className="text-sm font-medium text-slate-900">
                 Category
               </label>
-
-              <select
+   <input
+                type="text"
                 name="category"
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
-              >
-                <option value=""></option>
-
+              />
          
-
-              </select>
             </div>
 
 
@@ -225,16 +221,12 @@ const handleTeamMembers=(userId)=>{
                 Priority
               </label>
 
-              <select
+          <input
+                type="text"
                 name="priority"
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
-              >
-
-                <option value=""></option>
-
-
-              </select>
+              />
             </div>
 
 

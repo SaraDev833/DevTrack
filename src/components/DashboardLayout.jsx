@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Sidebar from "../components/Sidebar";
-import projectData from "../data/ProjectData"
+import axios from "axios";
 const DashboardLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [desktopOpen, setDesktopOpen] = useState(true);
-  const[projects , setProjects] = useState(projectData)
+  const[projects , setProjects] = useState([])
    const [isCreateModalOpen , setIsCreateModalOpen] = useState(false);
    const [invite , setInvite] = useState(false);
+
+useEffect(()=>{
+const getProject=async()=>{
+ const token = localStorage.getItem("token");
+   try {
+     const response = await axios.get("http://localhost:3000/api/all/projects",{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+     })
+   
+     setProjects(response.data.projects)
+   } catch (error) {
+     console.log(error.response?.data)
+   }
+}
+getProject()
+}, [])
   return (
     <div className="min-h-screen bg-slate-100 flex overflow-x-hidden">
       {/* Mobile dark overlay */}
