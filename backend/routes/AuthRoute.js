@@ -3,16 +3,18 @@ import { registerUser , loginUser, inviteUserRegister } from "../controllers/Aut
 import invitation from "../controllers/InvitationController.js";
 import Authmiddleware from '../Middleware/Authmiddleware.js'
 import  MembersController  from "../controllers/MembersController.js";
-import {CreateProject, getProjects} from "../controllers/CreateProjectController.js";
+import {CreateProject, getProjects, getTeamMembers, addTask , allTasks} from "../controllers/CreateProjectController.js";
 const router= express.Router();
 
 router.post("/auth/register" , registerUser);
 router.post("/auth/login" , loginUser)
 router.post("/invite-register" , inviteUserRegister)
 
-// invitationRoute
 router.post("/invitation",Authmiddleware ,invitation)
 router.get("/workspace-member", Authmiddleware , MembersController)
 router.post("/create/project", Authmiddleware , CreateProject)
 router.get("/all/projects", Authmiddleware , getProjects)
+router.post("/getTeamMembers" , Authmiddleware, getTeamMembers);
+router.post("/add/task" , Authmiddleware, addTask);
+router.get("/all/tasks", Authmiddleware , allTasks)
 export default router;

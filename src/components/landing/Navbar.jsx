@@ -38,14 +38,14 @@ const navigate = useNavigate();
                         </div>
 
                         <div className="buttons flex flex-col gap-3 pt-10 items-start px-10">
-                            <button className='text-sm font-medium cursor-pointer hover:text-indigo-500'onClick={()=>navigate("/register")}>Sign in</button>
+                            <button className='text-sm font-medium cursor-pointer hover:text-indigo-500'onClick={()=>navigate("/signin")}>Sign in</button>
                             <button className='bg-linear-to-r from-indigo-700  to-indigo-500 text-white font-medium rounded-md py-2 px-4 cursor-pointer' onClick={()=>navigate("/register")}>Get Started Free</button>
                         </div>
                     </div>
                 )}
             </div>
             <div className="buttons md:flex gap-3 hidden">
-                <button onClick={()=>navigate("/register")} className='lg:text-sm text-xs font-medium cursor-pointer '>Sign in</button>
+                <button onClick={()=>navigate("/signin")} className='lg:text-sm text-xs font-medium cursor-pointer '>Sign in</button>
                 <button className='bg-linear-to-r from-indigo-700  to-indigo-500 text-white font-medium rounded-md py-1 px-4 cursor-pointer text-xs lg:text-sm' onClick={()=>navigate("/register")}>Get Started Free</button>
             </div>
         </div>

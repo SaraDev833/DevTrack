@@ -1,21 +1,38 @@
+import axios from 'axios';
 import { Trash2 } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 
 const TaskTable = ({projects ,selectedTab, setSelectedTab , setProjects , value , setValue}) => {
  
  const [currentPage, setCurrentPage] = useState(1);
+const [allTasks , setAllTasks] = useState([])
 
+// const allTasks = projects.flatMap((project)=>(
+//     project.tasks || []
+// ).map((task)=>(
+//     {...task,
+//         projectId:project.id,
+//         projectName:project.name
 
-const allTasks = projects.flatMap((project)=>(
-    project.tasks || []
-).map((task)=>(
-    {...task,
-        projectId:project.id,
-        projectName:project.name
-
+//     }
+// )))
+useEffect(()=>{
+  const token = localStorage.getItem("token")
+   const getAllTask = async()=>{
+    try {
+       const response = await axios.get("http://localhost:3000/api/all/tasks",{
+        headers:{
+           Authorization: `Bearer ${token}`
+        }
+       })
+       console.log(response.data)
+       setAllTasks(response.data.tasks)
+    } catch (error) {
+      console.log(error.response?.data)
     }
-)))
-
+   }
+   getAllTask()
+},[])
 const filteredTask = selectedTab === "All Tasks" ?
 allTasks : allTasks.filter(task => task.status ===selectedTab);
 // search task
@@ -106,7 +123,7 @@ const deleteTask = (id)=>{
               </p>
 
               <p className="text-sm text-slate-600">
-                {task.projectName}
+                {task.project?.name}
               </p>
             </div>
 
@@ -116,7 +133,7 @@ const deleteTask = (id)=>{
               </p>
 
               <p className="text-sm text-slate-600">
-                {task.assignedTo || "Unassigned"}
+                {task.assignedTo?.name || "Unassigned"}
               </p>
             </div>
 

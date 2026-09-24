@@ -1,5 +1,6 @@
+import axios from 'axios'
 import { X } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const TaskModal = ({ closeModal, teamMembers, onAddTask, project }) => {
   const [formData, setFormData] = useState({
@@ -10,41 +11,76 @@ const TaskModal = ({ closeModal, teamMembers, onAddTask, project }) => {
     status: "To Do",
     priority: "",
     assignedTo: "",
-    dueDate: ""
+    dueDate: "",
+    projectId:project._id
   })
-
+  const [members , setMembers] = useState([]);
+  
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+const getMembers= async()=>{
+  try {
+    const response = await axios.post("http://localhost:3000/api/getTeamMembers",
+      {
+        teamMembers
+      },
+      {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    
+    setMembers(response.data.members)
+  } catch (error) {
+    console.log(error.response?.data)
+  }
+}
+getMembers()
+  },[])
   const handleChange = (e) => {
     setFormData({
       ...formData, [e.target.name]: e.target.value,
     })
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.assignedTo || !formData.dueDate || !formData.status || !formData.dueDate || !formData.priority || !formData.description) {
       alert("All fields are required");
       return;
     }
+    const token = localStorage.getItem("token")
+   try {
+        const response = await axios.post("http://localhost:3000/api/add/task" , formData , {
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        })
+        console.log(response.data)
+   } catch (error) {
+    console.log(error.response?.data)
+   }
 
-    const newTask = {
-      id: Date.now(),
-      name: formData.name,
-      description: formData.description,
-      title: formData.title,
-      status: formData.status,
-      priority: formData.priority,
-      assignedTo: formData.assignedTo,
-      dueDate: formData.dueDate
+    // const newTask = {
+    //   id: Date.now(),
+    //   name: formData.name,
+    //   description: formData.description,
+    //   title: formData.title,
+    //   status: formData.status,
+    //   priority: formData.priority,
+    //   assignedTo: formData.assignedTo,
+    //   dueDate: formData.dueDate
 
-    }
-    onAddTask(newTask);
-    setFormData({
-      title: "",
-      description: "",
-      status: "",
-      priority: "",
-      assignedTo: "",
-      dueDate: ""
-    })
+    // }
+    // onAddTask(newTask);
+    // setFormData({
+    //   title: "",
+    //   description: "",
+    //   status: "",
+    //   priority: "",
+    //   assignedTo: "",
+    //   dueDate: ""
+    // })
   }
   return (
 
@@ -88,9 +124,9 @@ const TaskModal = ({ closeModal, teamMembers, onAddTask, project }) => {
               <div className='flex flex-col gap-1.5 w-1/2'>
                 <label htmlFor="" className='text-sm font-medium text-slate-900'>Assign To</label>
                 <select name="assignedTo" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}>
-                  {teamMembers.map((member) => (
-                    <option key={member} value={member}>
-                      {member}
+                  {members.map((member) => (
+                    <option key={member._id} value={member._id}>
+                      {member.name}
                     </option>
                   ))}
 
