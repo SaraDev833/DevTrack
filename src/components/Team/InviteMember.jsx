@@ -22,7 +22,7 @@ const handleSubmit = async(e)=>{
  try {
    const token = localStorage.getItem("token")
   
-  const response = await axios.post("http://localhost:3000/api/invitation", data,{
+  const response = await axios.post("http://localhost:3000/api/send/invitation", data,{
     headers:{
       Authorization: `Bearer ${token}`
     }

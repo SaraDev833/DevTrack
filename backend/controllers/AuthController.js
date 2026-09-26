@@ -130,7 +130,7 @@ const inviteUserRegister=async(req, res)=>{
        userType:Invited.userType,
        position:Invited.position
    })
-   Invited.status = "Active";
+   Invited.status = "active";
    await Invited.save();
    return res.status(201).json({
     message:"Account created and invitation accepted",
@@ -197,4 +197,23 @@ const loginUser = async(req, res)=>{
     }
     
 }
-export {registerUser, loginUser ,inviteUserRegister};
+const getActiveMembers =async(req, res)=>{
+      const currentUser = req.user.userId;
+       const member = await WorkspaceMember.findOne({
+           user:currentUser
+       })
+       if(!member){
+        return res.json({
+            message:"Member not found"
+        })
+       }
+       const activeMembers = await Invitation.find({
+        workspace:member.workspace,
+        status:"active"
+       });
+     
+       return res.json({
+        activeMembers
+       })
+}
+export {registerUser, loginUser ,inviteUserRegister, getActiveMembers};

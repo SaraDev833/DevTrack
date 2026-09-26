@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import man1 from "../../assets/man-1.jfif"
 import man2 from "../../assets/man-2.jfif"
-import teamMembers from '../../data/teamMembers';
+import axios from 'axios';
 const TeamTable = ({value}) => {
-   
+   const [teamMembers , setTeamMembers]= useState([]);
+   useEffect(()=>{
+    const token = localStorage.getItem("token")
+         const getActiveMembers = async(req, res)=>{
+              const response = await axios.get("http://localhost:3000/api/active/members" , {
+                headers:{
+                  Authorization:`Bearer ${token}`
+                }
+              })
+              console.log(response.data)
+         }
+         getActiveMembers()
+   },[])
   const searchedData = teamMembers.filter((member)=>{
     return member.name.toLowerCase().includes(value.toLowerCase())
   }
