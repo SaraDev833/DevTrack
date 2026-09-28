@@ -11,8 +11,8 @@ const Task = () => {
 
     const tabs = [
         "All Tasks",
-        "To Do",
-        "In Progress",
+        "Todo",
+        "In-progress",
         "Completed"
     ]
     const searchedValue = (value) =>{

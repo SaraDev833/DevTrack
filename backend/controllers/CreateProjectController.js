@@ -143,4 +143,24 @@ try {
   
 }
 }
-export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks}
+const deleteTask = async(req, res)=>{
+  const taskId = req.params.id;
+  const currentUser = req.user.userId;
+  const task = await Task.findById(taskId);
+  if(!task){
+    return res.json({
+      message:"Task not found"
+    })
+  }
+  if(task.createdBy.toString() !== currentUser){
+    return res.json({
+        message:"You can not delete this task"
+      })
+    
+  }
+  await Task.findByIdAndDelete(taskId);
+  res.json({
+    message:"Task deleted successfully"
+  })
+}
+export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask}

@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import man1 from "../../assets/man-1.jfif"
 import man2 from "../../assets/man-2.jfif"
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 const TeamTable = ({value}) => {
    const [teamMembers , setTeamMembers]= useState([]);
+    const token = localStorage.getItem("token");
+    const decoded = jwtDecode(token);
+    const currentUser = decoded.userId;
+  
    useEffect(()=>{
     const token = localStorage.getItem("token")
          const getActiveMembers = async(req, res)=>{
@@ -12,12 +17,13 @@ const TeamTable = ({value}) => {
                   Authorization:`Bearer ${token}`
                 }
               })
-              console.log(response.data)
+              // console.log(response.data.activeMembers)
+              setTeamMembers(response.data.activeMembers)
          }
          getActiveMembers()
    },[])
   const searchedData = teamMembers.filter((member)=>{
-    return member.name.toLowerCase().includes(value.toLowerCase())
+    return member.user.name.toLowerCase().includes(value.toLowerCase())
   }
        
     )
@@ -32,36 +38,95 @@ const TeamTable = ({value}) => {
                return 'bg-green-200/50 text-green-600 text-sm'
       }
     }
-    const remove = (id) =>{
-      const filteredData = members.filter(member => member.id !== id);
-      setMembers(filteredData);
+    const remove =async (id) =>{
+      const token = localStorage.getItem("token");
+      try {
+        const response = await axios.delete(`http://localhost:3000/api/remove/member/${id}`, {
+          headers:{
+            Authorization: `Bearer ${token}`
+          }
+        })
+     
+        setTeamMembers((prev)=>
+        prev.filter((member)=>member.user._id !== id)
+      )
+      } catch (error) {
+        console.log(error.response?.data)
+      }
     }
   return (
-    <div className='min-w-0 w-full'>
-     <div     className="grid grid-cols-1 lg:grid-cols-[2fr_1fr_1fr_1fr] px-5 py-4 border-b border-slate-200 items-center " >
-      {searchedData.map((member)=>(
-        <React.Fragment key={member.id}>
-  <div className='flex gap-2 items-center mb-4'>
-    <img src={man1} className='h-10 w-10 rounded-full object-cover object-top' alt="" />
-    <div className='flex flex-col '>
-       <span className='text-sm text-slate-900 font-medium'>{member.name}</span>
-       <span className='text-sm text-slate-900 font-medium'>{member.email}</span>
-    </div>
+<div className="min-w-0 w-full overflow-x-auto">
+  <div className="min-w-[500px]">
+
+    {searchedData.map((member) => (
+      <div
+        key={member._id}
+        className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center gap-4 px-5 py-4 border-b border-slate-200"
+      >
+
+        {/* Member */}
+        <div className="flex items-center gap-3 min-w-0">
+          <img
+            src={man1}
+            className="h-10 w-10 rounded-full object-cover object-top shrink-0"
+            alt=""
+          />
+
+          <div className="flex flex-col min-w-0">
+            <span className="text-sm text-slate-900 font-medium truncate">
+              {member.user.name}
+            </span>
+
+            <span className="text-xs text-slate-500 truncate">
+              {member.user.email}
+            </span>
+          </div>
         </div>
+
+        {/* Position */}
         <div>
-    <span className='text-sm text-slate-900 font-medium mb-4'>{member.position}</span>
+          <span className="text-sm text-slate-700 text-nowrap">
+            {member.position || "—"}
+          </span>
         </div>
+
+        {/* User Type */}
         <div>
-    <span className={`${userType(member.userType)} py-1 px-3 rounded-full mb-4`}>{member.userType}</span>
+          <span
+            className={`${userType(member.userType)} inline-block py-1 px-3 rounded-full text-nowrap`}
+          >
+            {member.userType}
+          </span>
         </div>
-        <div className='flex justify-start items-start mb-4'>
-          <button className='bg-red-700 text-white py-2 px-2 rounded-md cursor-pointer text-xs font-medium' onClick={()=>remove(member.id)}>Remove</button>
+
+        {/* Remove */}
+        <div className="flex justify-start">
+          <button
+            disabled={member.user._id === currentUser}
+            onClick={() => remove(member.user._id)}
+            className={`py-2 px-3 rounded-md text-xs font-medium transition
+              ${
+                member.user._id === currentUser
+                  ? "bg-red-300 text-white cursor-not-allowed"
+                  : "bg-red-700 text-white hover:bg-red-800 cursor-pointer"
+              }
+            `}
+          >
+            Remove
+          </button>
         </div>
-        </React.Fragment>
-      ))}
-       {members.length === 0 && (<div className='font-medium'>There is no active people</div>)}
-     </div>
-    </div>
+
+      </div>
+    ))}
+
+    {searchedData.length === 0 && (
+      <div className="px-5 py-8 text-center text-sm font-medium text-slate-500">
+        There is no active people
+      </div>
+    )}
+
+  </div>
+</div>
   )
 }
 

@@ -2,10 +2,11 @@ import { Camera, X } from 'lucide-react'
 import React, { useState } from 'react'
 import man1 from "../../assets/man-1.jfif"
 import { useForm } from "react-hook-form"
+import axios from 'axios'
 const EditProfile = ({ user, setEditProfileModal , setUser }) => {
-  const [previewImage, setPreviewImage] = useState(user.avatar);
+  const [previewImage, setPreviewImage] = useState();
   const [info , setInfo] = useState(user);
- 
+ const[selectedImage, setSelectedImage] = useState(null)
 
   const {
     register,
@@ -14,11 +15,29 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => {
-    setUser({
-      ...info,
-      avatar:previewImage
-    });
+  const onSubmit =async (data) => {
+     
+    const formData = new FormData();
+   if(selectedImage){
+    formData.append("image", selectedImage);
+   }
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("phone", data.phone);
+    formData.append("location", data.location);
+
+     try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post("http://localhost:3000/api/update-profile", formData,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      });
+      console.log(response)
+     } catch (error) {
+      console.log(error.response?.data)
+     }
+
     setEditProfileModal(false)
   }
   const handleImageChange = (e) => {
@@ -26,6 +45,7 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
     const file = e.target.files[0];
 
     if (file) {
+      setSelectedImage(file);
       const imgUrl = URL.createObjectURL(file);
 
       setPreviewImage(imgUrl)
@@ -37,7 +57,7 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
         [e.target.name]:e.target.value
       })
   }
-  console.log(watch("example"))
+
   return (
     <div className='fixed inset-0 z-50 bg-black/50 backdrop:blur-sm flex items-center justify-center p-4 h-auto'>
       <div className='bg-white w-[95%] sm:w-[90%] md:w-[650px] h-70vh  rounded-lg p-4 sm:p-6 '>
@@ -62,14 +82,13 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
               >
                 <Camera size={14} />
               </label>
-              <input
-                type="file"
-                accept="image/*"
-                id="profileImage"
-                className="hidden"
-                onChange={handleImageChange}
-              />
-            </div>
+<input
+  type="file"
+  accept="image/*"
+  id="profileImage"
+  className="hidden"
+  onChange={handleImageChange}
+/>          </div>
             <p className='text-sm font-medium text-nowrap my-2'>Click the icon to change photo</p>
           </div>
           <div className='flex flex-col w-full gap-1 my-3'>
@@ -88,7 +107,7 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
           </div>
           <div className='flex flex-col w-full gap-1 my-3'>
             <label htmlFor="phone" className='font-medium text-lg'>Phone Number</label>
-            <input type='text' className='rounded-md border outline-none border-indigo-600 focus:ring-2 focus:ring-2-indigo-600 p-2 text-sm font-medium'   {...register("phone", {
+            <input type='phone' className='rounded-md border outline-none border-indigo-600 focus:ring-2 focus:ring-2-indigo-600 p-2 text-sm font-medium'   {...register("phone", {
               required: true
             })} onChange={handleChange} value={info.phone}/>
             {errors.name && <span>This field is required</span>}

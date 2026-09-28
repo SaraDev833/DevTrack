@@ -22,6 +22,8 @@ const WorkspaceMemberSchema = new mongoose.Schema({
         required:true
     },
   
+},{
+    timestamps:true
 })
 const WorkspaceMember = mongoose.model("WorkspaceMember" , WorkspaceMemberSchema);
 

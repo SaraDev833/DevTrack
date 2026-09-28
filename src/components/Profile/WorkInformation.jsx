@@ -1,7 +1,7 @@
 import { BriefcaseBusiness, LocateFixed, UserRound ,Mail } from 'lucide-react'
 import React from 'react'
 
-const WorkInformation = ({user}) => {
+const WorkInformation = ({user,position}) => {
   return (
       <div className="bg-white border border-slate-200 p-6 rounded-md shadow-sm">
       {/* Header */}
@@ -23,7 +23,7 @@ const WorkInformation = ({user}) => {
           <div className="flex flex-col gap-0.5">
             <p className="text-xs text-slate-900 font-medium">Role</p>
             <span className="text-xs font-medium text-slate-900">
-              {user.position}
+              {position.position}
             </span>
           </div>
         </div>
@@ -51,7 +51,7 @@ const WorkInformation = ({user}) => {
           <div className="flex flex-col gap-0.5">
             <p className="text-xs text-slate-900 font-medium">User Type</p>
             <span className="text-xs font-medium text-slate-900 break-all">
-              {user.userType}
+              {position.userType}
             </span>
           </div>
         </div>

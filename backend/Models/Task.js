@@ -39,6 +39,9 @@ const TaskSchema  = new mongoose.Schema({
         type:Date,
         default:null
     }
+},
+{
+    timestamps:true
 })
 const Task = mongoose.model("Task" , TaskSchema);
 export default Task

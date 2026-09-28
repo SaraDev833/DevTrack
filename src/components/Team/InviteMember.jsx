@@ -35,7 +35,7 @@ const handleSubmit = async(e)=>{
 }
 
   return (
-    <div className='w-100 border border-slate-200 shadow-sm min-h-min p-6 '>
+    <div className='min-w-0 border border-slate-200 shadow-sm min-h-min p-6 '>
       <div className='flex justify-between'>
     <div className="title flex flex-col gap-1.5">
       <h2 className='text-lg text-slate-900 font-semibold'>Invite Member</h2>

@@ -44,7 +44,11 @@ const filteredSearchTask = filteredTask.filter((task)=>(
  const firstIndex = lastIndex - projectPerPage;
   const totalPage = Math.ceil(filteredTask.length / projectPerPage);
 
- const filteredtaskSlice = filteredSearchTask.slice(firstIndex , lastIndex);
+  const sortTasks = [...filteredSearchTask].sort((a,b)=>(
+   new Date(b.createdAt) - new Date(a.createdAt)
+  ))
+ const filteredtaskSlice = sortTasks.slice(firstIndex , lastIndex);
+ 
  useEffect(()=>{
   setCurrentPage(1)
  },[value])
@@ -75,15 +79,20 @@ const getStatusStyle=(status)=>{
 }
 
 // delete
-const deleteTask = (id)=>{
-     const updatedProject = projects.map((project)=>(
-        {...project,
-            tasks:(project.tasks || []).filter((task)=>(
-                task.id !== id
-            ))
-        }
-     ))
-     setProjects(updatedProject)
+const deleteTask =async (id)=>{
+ try {
+  const token = localStorage.getItem("token");
+  const response = await axios.delete(`http://localhost:3000/api/delete/task/${id}`, {
+    headers:{
+      Authorization: `Bearer ${token}`
+    }
+  });
+  setAllTasks((prev)=>
+    prev.filter((task)=>task._id !== id)
+  )
+ } catch (error) {
+  console.log(error.response?.data)
+ }
 }
   return (
  <div className=" overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm">
@@ -171,13 +180,13 @@ const deleteTask = (id)=>{
               </p>
 
               <p className="text-sm text-slate-600">
-                {task.dueDate || "No date"}
+                {new Date(task.dueDate).toLocaleDateString() || "No date"}
               </p>
             </div>
 
             <div className="flex lg:justify-center">
               <button
-              onClick={()=>deleteTask(task.id)}
+              onClick={()=>deleteTask(task._id)}
                 type="button"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-red-500 transition hover:bg-red-50 hover:text-red-600"
                 aria-label={`Delete ${task.title}`}

@@ -8,13 +8,13 @@ import express from  "express"
 import mongoose from "mongoose"
 import connectDB from "./config/db.js"
 import dotenv from "dotenv"
-
 dotenv.config()
 
 
 const app = express()
 const port = 3000
 // middleware
+app.use("/uploads",express.static("uploads"))
 app.use(cors());
 app.use(express.json())
 

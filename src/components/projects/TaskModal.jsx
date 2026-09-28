@@ -56,7 +56,8 @@ getMembers()
             Authorization:`Bearer ${token}`
           }
         })
-        console.log(response.data)
+      closeModal(true)
+
    } catch (error) {
     console.log(error.response?.data)
    }

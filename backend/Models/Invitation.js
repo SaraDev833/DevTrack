@@ -35,7 +35,11 @@ const InvitationSchema = new mongoose.Schema({
     },
     expiresAt:{
         type:Date
-    }
+    },
+   
+}
+,{
+    timestamps:true
 })
 const Invitation = new mongoose.model("Invitation" , InvitationSchema)
 export default Invitation
