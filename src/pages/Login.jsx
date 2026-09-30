@@ -4,6 +4,7 @@ import Google from "../components/Google";
 import LoginCom from "../components/LoginCom";
 
 const Login = () => {
+  
   return (
     <div className="min-h-screen w-full bg-slate-100 flex items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-7xl bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify';
 
 const ChangePasswordModel = ({setPassModel}) => {
     const{
@@ -21,9 +22,11 @@ const ChangePasswordModel = ({setPassModel}) => {
                 Authorization: `Bearer ${token}`
             }
         })
-    
+        console.log(response)
+             toast.success(response.data.message);
         setPassModel(false)
          } catch (error) {
+         toast.error(error.response?.data?.message);
             console.log(error)
          }
     }

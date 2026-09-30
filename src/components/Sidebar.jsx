@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Logo from "./Logo";
 import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
 
 const Sidebar = ({
   mobileOpen,
@@ -21,7 +22,8 @@ const Sidebar = ({
   setDesktopOpen,
 }) => {
 
-   const {user} = useContext(AuthContext)
+  const {member} = useContext(AuthContext)
+
    const navigate = useNavigate()
   const OwnernavItems = [
     { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
@@ -49,6 +51,8 @@ const handleLogout= ()=>{
   localStorage.removeItem("token")
   navigate("/signin")
 }
+
+
   return (
     <aside
       className={`
@@ -90,7 +94,7 @@ const handleLogout= ()=>{
         </div>
 
         {/* Nav items */}
-        {user.userType === "owner" ?
+        {member.userType === "owner" ?
          <nav className="flex flex-col gap-2">
           {OwnernavItems.map((item) => {
             const Icon = item.icon;

@@ -6,9 +6,10 @@ import currentUser from '../data/CurrentUser'
 import WorkInformation from '../components/Profile/WorkInformation'
 import EditProfile from '../components/Profile/EditProfile'
 import ChangePasswordModel from '../components/Profile/ChangePasswordModel'
-import axios from 'axios'
+import axios from 'axios' 
 const Profile = () => {
       const [user , setUser] = useState("");
+ console.log("PROFILE USER:", user);
       const[position, setPosition] = useState("");
    
       const [editProfileModal , setEditProfileModal] = useState(false);
@@ -22,7 +23,7 @@ const Profile = () => {
             Authorization:`Bearer ${token}`
           }
         })
-        console.log(response.data)
+      
         setUser(response.data.user)
         setPosition(response.data.position)
      } catch (error) {

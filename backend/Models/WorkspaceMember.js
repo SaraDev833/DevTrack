@@ -10,7 +10,8 @@ const WorkspaceMemberSchema = new mongoose.Schema({
     workspace:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Workspace",
-        required:true
+        required:true,
+        unique:true
     },
     userType:{
         type:String,

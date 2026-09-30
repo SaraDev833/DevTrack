@@ -166,7 +166,7 @@ const loginUser = async(req, res)=>{
         return res.json({
             message:"Email not found"
         })
-        alert("Ëmail not found")
+      
     }
     const isPassCorrect = await bcrypt.compare(password , user.password)
     if(!isPassCorrect){
@@ -186,12 +186,20 @@ const loginUser = async(req, res)=>{
       expiresIn : "7d",
             }
     )
+    const member = await WorkspaceMember.findOne({
+        user:user._id
+    })
+    if(!member){
+        return res.json({
+            message:"Workspace member not found!"
+        })
+    }
     res.status(200).json({
         token,
         user:{
             email: user.email,
-           
-        }
+        },
+        member
     })
     } catch (error) {
          console.log(error)
@@ -303,7 +311,8 @@ const updateProfile = async(req,res)=>{
       }
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        updateData
+        updateData,
+          { new: true }
       )
      if (!updatedUser) {
       return res.status(404).json({
@@ -311,6 +320,7 @@ const updateProfile = async(req,res)=>{
       });
     }
       res.json({
+        updatedUser,
         message:"User updated successfully"
       })
     } catch (error) {
@@ -341,7 +351,8 @@ const currentUser=async(req,res)=>{
         
         res.status(201).json({
             user,
-            position
+            position,
+            member
         })
     } catch (error) {
         console.log(error)

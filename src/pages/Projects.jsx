@@ -4,6 +4,8 @@ import ProjectTable from "../components/projects/ProjectTable";
 import ProjectModal from "../components/projects/ProjectModal";
 import EditModal from "../components/projects/EditModal";
 import { useOutletContext } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 const Projects = () => {
   const [selectedTab, setSelectedTab] = useState("All Projects");
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,15 +23,19 @@ const Projects = () => {
     "Archived",
   ];
 
-  const deleteProject = (id) => {
-
-    const confirmDelete = window.confirm("Are you sure you want to delete this task?")
-    if (!confirmDelete) return;
-    const remainingProjects = projects.filter((project) => (
-      project.id !== id
-    ));
-    setProjects(remainingProjects)
-    alert("Task Deleted!")
+  const deleteProject = async(id) => {
+     const token = localStorage.getItem("token")
+     try {
+      const response = await axios.delete(`http://localhost:3000/api/delete/project/${id}`,{
+        headers:{
+          Authorization:`Bearer ${token }`
+        }
+      })
+      toast.success(response.data.message)
+     } catch (error) {
+      console.log(error)
+      toast.error(error.response?.data?.message)
+     }
   }
   const taskPerPage = 7;
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-const MyProjects = ({ProjectInfo , input}) => {
+const MyProjects = ({projects , input}) => {
  
-
+console.log(projects)
   const[showAll , setShowAll] = useState(false);
-  const filteredSearchTask = ProjectInfo.filter((project)=>(
-    project.projectName.toLowerCase().includes(input.toLowerCase())
+  const filteredSearchTask = projects.filter((project)=>(
+    project.name.toLowerCase().includes(input.toLowerCase())
   ))
   const display = showAll? filteredSearchTask : filteredSearchTask.slice(0,3)
   return (
@@ -17,7 +17,7 @@ const MyProjects = ({ProjectInfo , input}) => {
           {display.map((project)=>(
         <div className='flex justify-between items-center w-full gap-4'> 
          <div className='flex flex-col gap-2 w-full my-2'>
-                 <h2 className='text-slate-900 font-medium text-sm'>{project.projectName}</h2>
+                 <h2 className='text-slate-900 font-medium text-sm'>{project.name}</h2>
                  <div className='h-2 w-full bg-slate-200 rounded-full'>
                   <div style={{width:`${project.percentage}%`}}  className='bg-indigo-600 h-full rounded-full'></div>
                  </div>

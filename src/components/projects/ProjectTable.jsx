@@ -29,7 +29,7 @@ const ProjectTable = ({ project, Ondelete , setEditModalOpen , editModalOpen , o
 
       <div><span className="lg:hidden font-semibold text-slate-900">Status: </span>{project.status}</div>
   <div className="flex  items-center justify-start gap-2">
-      <button onClick={() => Ondelete(project.id)} className="bg-red-700 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
+      <button onClick={() => Ondelete(project._id)} className="bg-red-700 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
       Delete</button>
       <button onClick={()=>onEdit(project)} className="bg-indigo-700/50 text-center font-medium text-white px-3 py-1 rounded-md cursor-pointer">
        Edit</button>

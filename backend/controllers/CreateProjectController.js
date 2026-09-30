@@ -163,4 +163,30 @@ const deleteTask = async(req, res)=>{
     message:"Task deleted successfully"
   })
 }
-export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask}
+const deleteProject = async(req,res)=>{
+try {
+    const projectId= req.params.id;
+  const currentUser = req.user.userId;
+  const project = await Project.findById(projectId);
+  if(!project){
+    return res.json({
+      message:"Project not found"
+    })
+  }
+  if(project.createdBy.toString() !== currentUser){
+    return res.json({
+      message:"You can not delete this project"
+    })
+  }
+  await Project.findByIdAndDelete(projectId);
+  const projects = await Project.find({
+    createdBy:currentUser
+  })
+  res.status(201).json({
+    message:"Project deleted successfully!"
+  })
+} catch (error) {
+  console.log(error)
+}
+}
+export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask, deleteProject}

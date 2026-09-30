@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Sparkles, Mail, Lock } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { AuthContext } from "../Context/AuthContext";
 
 const LoginCom = () => {
+  const {user} = useContext(AuthContext);
+ 
   const navigate = useNavigate()
   const {
     register,
@@ -18,13 +22,17 @@ const LoginCom = () => {
       const token = response.data.token;
     
       localStorage.setItem("token" , token);
-      navigate("/dashboard")
-      if(response.data.message){
-alert(response.data.message)
+      console.log(response)
+      if(response.data.member.userType === "owner"){
+        navigate("/dashboard")
+      }else{
+        navigate("/my-dashboard")
       }
+         toast.success(response.data.message)
       
      } catch (error) {
       console.log(error)
+      toast.error(error.response?.data?.message)
      }
   };
 

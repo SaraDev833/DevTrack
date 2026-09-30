@@ -1,30 +1,49 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../../components/common/Navbar';
 import { AuthContext } from '../../Context/AuthContext';
 import Kanban from '../../components/employee/dashboard/Kanban';
-import projects from '../../data/ProjectData'
 import Task from '../../components/employee/dashboard/Task';
 import MyProjects from '../../components/employee/dashboard/MyProjects';
 import Deadlines from '../../components/employee/dashboard/Deadlines';
+import axios from 'axios';
 const DashboardEmployee = () => {
   const { user } = useContext(AuthContext)
-  const [data, setData] = useState(projects);
-  const[input , setInput] = useState("");
-  const CompletedTasks = (id) => {
-    const updatedProjects = data.map((project) => ({
-      ...project,
-      tasks: (project.tasks || []).map((task) =>
-        task.id === id ? { ...task, status: "Completed" } : task)
-    }))
-    setData(updatedProjects);
-  }
 
-  const filterData = data.flatMap((project) => (
+  const[input , setInput] = useState("");
+ const [projects , setProjects]= useState([])
+console.log(projects)
+useEffect(()=>{
+const token = localStorage.getItem("token");
+const projects = async()=>{
+  try {
+    const response = await axios.get("http://localhost:3000/api/my/projects",{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
+    setProjects(response.data.projects)
+  } catch (error) {
+    console.log(error)
+  }
+}
+projects()
+},[])
+
+  // const CompletedTasks = (id) => {
+  //   const updatedProjects = data.map((project) => ({
+  //     ...project,
+  //     tasks: (project.tasks || []).map((task) =>
+  //       task.id === id ? { ...task, status: "Completed" } : task)
+  //   }))
+  //   setData(updatedProjects);
+  // }
+
+  const filterData = projects.flatMap((project) => (
 
     project.tasks
       ?.filter((task) => (
-        task.assignedTo.toLowerCase().includes
-          (user.name.toLowerCase())
+        task.assignedTo?.toString() === user._id
+        
       ))
       .map((task) => ({
         ...task,
@@ -34,24 +53,24 @@ const DashboardEmployee = () => {
 
   ));
 
-  const ProjectInfo = data
-    .filter((project) => (
-      project.teamMembers.includes(user.name)
-    ))
-    .map((project) => {
-      const mytasks = (project.tasks || []).filter((task) => (
-        task.assignedTo.toLowerCase().includes(user.name.toLowerCase())
-      ));
-      const completed = mytasks.filter((task) => (
-        task.status === "Completed"
-      ))
-      const percentage = completed.length / mytasks.length * 100;
-      return {
-        projectId: project.id,
-        projectName: project.name,
-        percentage: percentage
-      }
-    })
+  // const ProjectInfo = data
+  //   .filter((project) => (
+  //     project.teamMembers.includes(user.name)
+  //   ))
+  //   .map((project) => {
+  //     const mytasks = (project.tasks || []).filter((task) => (
+  //       task.assignedTo.toLowerCase().includes(user.name.toLowerCase())
+  //     ));
+  //     const completed = mytasks.filter((task) => (
+  //       task.status === "Completed"
+  //     ))
+  //     const percentage = completed.length / mytasks.length * 100;
+  //     return {
+  //       projectId: project.id,
+  //       projectName: project.name,
+  //       percentage: percentage
+  //     }
+  //   })
 
 
 
@@ -93,11 +112,11 @@ const DashboardEmployee = () => {
       <Navbar title="Dashboard" description={`Welcome back ${user.name}! Here's your work summary`} searchedValue={searchedValue} />
       <Kanban user={user} filterData={filterData} inProgresstask={inProgresstask} completedTask={completedTask} overDue={overDue} />
       <div className='grid grid-cols-1 md:grid-cols-2 gap-3'>
-        <Task data={filterData} CompletedTasks={CompletedTasks} input = {input}/>
-        <div className='grid grid-rows-2 gap-3'>
-          <MyProjects ProjectInfo={ProjectInfo} input={input} />
+        {/* <Task /> */}
+        
+          <MyProjects projects={projects} input={input} />
           <Deadlines upcoming={upcoming} input={input}/>
-        </div>
+        
       </div>
     </div>
   );

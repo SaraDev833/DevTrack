@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import man1 from "../../assets/man-1.jfif"
 import { useForm } from "react-hook-form"
 import axios from 'axios'
+import { toast } from 'react-toastify'
 const EditProfile = ({ user, setEditProfileModal , setUser }) => {
-  const [previewImage, setPreviewImage] = useState();
-  const [info , setInfo] = useState(user);
+       
+  const [previewImage, setPreviewImage] = useState(null);
+
  const[selectedImage, setSelectedImage] = useState(null)
 
   const {
@@ -13,7 +15,14 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm()
+  } = useForm({
+  defaultValues: {
+    name: user.name,
+    email: user.email,
+    phone: user.phone,
+    location: user.location,
+  },
+});
 
   const onSubmit =async (data) => {
      
@@ -33,12 +42,17 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
           Authorization:`Bearer ${token}`
         }
       });
-      console.log(response)
+      console.log("BACKEND RESPONSE:", response.data);
+
+    setUser(response.data.updatedUser)
+      toast.success("Profile updated successfully!🥳")
+       setEditProfileModal(false)
      } catch (error) {
       console.log(error.response?.data)
+      toast.error("Failed to update the user! 😥")
      }
 
-    setEditProfileModal(false)
+   
   }
   const handleImageChange = (e) => {
 
@@ -51,12 +65,7 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
       setPreviewImage(imgUrl)
     }
   }
-  const handleChange=(e)=>{
-      setInfo({
-        ...info,
-        [e.target.name]:e.target.value
-      })
-  }
+
 
   return (
     <div className='fixed inset-0 z-50 bg-black/50 backdrop:blur-sm flex items-center justify-center p-4 h-auto'>
@@ -68,7 +77,7 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className='my-4  flex items-center justify-center flex-col gap-6'>
             <div className='relative'>
-              <img src={previewImage} className='h-30 w-30 object-cover object-top rounded-full' alt="" />
+              <img src={`http://localhost:3000${user.avater}`} className='h-30 w-30 object-cover object-top rounded-full' alt="" />
               <label
                 htmlFor="profileImage"
                 className="
@@ -95,28 +104,28 @@ const EditProfile = ({ user, setEditProfileModal , setUser }) => {
             <label htmlFor="name" className='font-medium text-lg'>Full Name</label>
             <input type='text' className='rounded-md border outline-none border-indigo-600 focus:ring-2 focus:ring-2-indigo-600 p-2 text-sm font-medium'   {...register("name", {
               required: true
-            })}  onChange={handleChange} value={info.name}/>
+            })}  />
             {errors.name && <span>This field is required</span>}
           </div>
           <div className='flex flex-col w-full gap-1 my-3 my-2'>
             <label htmlFor="email" className='font-medium text-lg'>Email</label>
             <input type='text' className='rounded-md border outline-none border-indigo-600 focus:ring-2 focus:ring-2-indigo-600 p-2 text-sm font-medium'  {...register("email", {
               required: true
-            })} onChange={handleChange} value={info.email}/>
+            })} />
             {errors.name && <span>This field is required</span>}
           </div>
           <div className='flex flex-col w-full gap-1 my-3'>
             <label htmlFor="phone" className='font-medium text-lg'>Phone Number</label>
             <input type='phone' className='rounded-md border outline-none border-indigo-600 focus:ring-2 focus:ring-2-indigo-600 p-2 text-sm font-medium'   {...register("phone", {
               required: true
-            })} onChange={handleChange} value={info.phone}/>
+            })} />
             {errors.name && <span>This field is required</span>}
           </div>
           <div className='flex flex-col w-full gap-1 my-3'>
             <label htmlFor="location" className='font-medium text-lg'>Location</label>
             <input type='text' className='rounded-md border outline-none border-indigo-600 focus:ring-2 focus:ring-2-indigo-600 p-2 text-sm font-medium'   {...register("location", {
               required: true
-            })} onChange={handleChange} value={info.location}/>
+            })} />
             {errors.name && <span>This field is required</span>}
           </div>
           <div className='flex justify-end mt-4'>

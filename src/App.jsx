@@ -16,6 +16,7 @@ import { AuthContext } from "./Context/AuthContext"
 import TaskEmployee from "./pages/employee/TaskEmployee"
 import NotificationEmployee from "./pages/employee/NotificationEmployee"
 import ProtectedRoute from "../backend/protectedRoute/ProtectedRoute"
+import { Bounce, ToastContainer } from "react-toastify"
 
 
 
@@ -23,26 +24,40 @@ function App() {
 
   return (
     <>
-   <Routes>
-    <Route path="/" element={<Landing/>}/>
-    <Route path="/register" element={<Register/>}/>
-    <Route path="/signin" element={<Login/>}/>
-  <Route element={<ProtectedRoute/>}>
-    <Route element={<DashboardLayout/>}>
-    <Route path="/dashboard" element={<Dashboard/>}/>
-    <Route path="/projects" element={<Projects/>}/>
-    <Route path="/project-detail/:id" element={<ProjectDetail/>}/>
-    <Route path="/team" element={<Team/>}/>
-    <Route path="/task" element={<Task/>}/>
-    <Route path="/notifications" element={<Notification/>}/>
-    <Route path="/profile" element={<Profile/>}/>
-    <Route path ="/my-dashboard" element={<DashboardEmployee/>}/>
-    <Route path ="/my-tasks" element={<TaskEmployee/>}/>
-    <Route path ="/my-notifications" element={<NotificationEmployee/>}/>
-  
-</Route>
-</Route>
-   </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+
+      />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/project-detail/:id" element={<ProjectDetail />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/task" element={<Task />} />
+            <Route path="/notifications" element={<Notification />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/my-dashboard" element={<DashboardEmployee />} />
+            <Route path="/my-tasks" element={<TaskEmployee />} />
+            <Route path="/my-notifications" element={<NotificationEmployee />} />
+
+          </Route>
+        </Route>
+      </Routes>
     </>
   )
 }

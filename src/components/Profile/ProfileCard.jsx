@@ -3,7 +3,7 @@ import man1 from "../../assets/man-1.jfif"
 import { Mail, UserPen } from 'lucide-react'
 const ProfileCard = ({user , editProfileModal , setEditProfileModal, position}) => {
     
-console.log(position)
+
   return (
     <div className='w-full min-w-0 border border-slate-200 shadow-sm bg-white p-6 rounded-md'>
        <div className='flex justify-between flex-col md:flex-row gap-6'>

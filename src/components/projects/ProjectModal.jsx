@@ -2,6 +2,7 @@ import { X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import teamMembers from "../../data/teamMembers";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
   const [workspaceMembers , setworkspaceMembers] = useState([])
@@ -98,20 +99,11 @@ const handleTeamMembers=(userId)=>{
             }
           })
         
-           console.log(response.data)
-           
-    // setIsCreateModalOpen(false);
-        setFormData({
-      name: "",
-      description: "",
-      client: "",
-      budget: "",
-      category: "",
-      priority: "",
-      dueDate: "",
-      teamMembers: [],
-    });
+          toast.success(response.data.message)
+    setIsCreateModalOpen(false);
+
     } catch (error) {
+      toast.error(error.response?.data?.message)
       console.log(error.response?.data)
     }
     
