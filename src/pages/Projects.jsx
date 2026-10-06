@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 const Projects = () => {
   const [selectedTab, setSelectedTab] = useState("All Projects");
   const [currentPage, setCurrentPage] = useState(1);
- const [editModalOpen , setEditModalOpen] = useState(false);
- const [selectedProject , setSelectedProject] = useState(null);
- const [value , setValue] = useState("");
-   const {isCreateModalOpen , setIsCreateModalOpen , projects , setProjects} = useOutletContext()
- console.log({ isCreateModalOpen, setIsCreateModalOpen, type: typeof setIsCreateModalOpen, });
+  const [projectId , setProjectId] = useState(null)
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [value, setValue] = useState("");
+  const { isCreateModalOpen, setIsCreateModalOpen, projects, setProjects } = useOutletContext()
+  console.log(editModalOpen)
   const tabs = [
     "All Projects",
     "In Progress",
@@ -23,19 +24,21 @@ const Projects = () => {
     "Archived",
   ];
 
-  const deleteProject = async(id) => {
-     const token = localStorage.getItem("token")
-     try {
-      const response = await axios.delete(`http://localhost:3000/api/delete/project/${id}`,{
-        headers:{
-          Authorization:`Bearer ${token }`
+  const deleteProject = async (id) => {
+    const token = localStorage.getItem("token")
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/delete/project/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       })
+
       toast.success(response.data.message)
-     } catch (error) {
+      setProjects((prevProjects) => prevProjects.filter((project) => project._id !== id))
+    } catch (error) {
       console.log(error)
       toast.error(error.response?.data?.message)
-     }
+    }
   }
   const taskPerPage = 7;
 
@@ -48,40 +51,37 @@ const Projects = () => {
 
   const lastIndex = currentPage * taskPerPage;
   const firstIndex = lastIndex - taskPerPage;
-  const searchedProjects = filteredProjects.filter((project)=>(
+  const searchedProjects = filteredProjects.filter((project) => (
     project.name.toLowerCase().includes(value.toLowerCase())
   ))
-useEffect(()=>{
-setCurrentPage(1)
-},[value])
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [value])
   const currentProjects = searchedProjects.slice(firstIndex, lastIndex);
 
-const handleEdit = (project)=>{
-  setSelectedProject(project);
-  setEditModalOpen(true)
-}
 
-// searched value
-const searchedValue = (value) =>{
-  setValue(value);
-}
+
+  // searched value
+  const searchedValue = (value) => {
+    setValue(value);
+  }
   return (
     <div className="w-full min-w-0 bg-slate-100 space-y-6">
       <Navbar
-      searchedValue = {searchedValue}
-       isCreateModalOpen={isCreateModalOpen}
-      setIsCreateModalOpen={setIsCreateModalOpen} 
+        searchedValue={searchedValue}
+        isCreateModalOpen={isCreateModalOpen}
+        setIsCreateModalOpen={setIsCreateModalOpen}
         title="Projects"
         description="View and manage all your projects in one place"
       />
-      {editModalOpen && selectedProject && (<EditModal 
-            project = {selectedProject}
-             setEditModalOpen={setEditModalOpen}
-             projects ={projects}
-             setProjects = {setProjects}
-            
+      {editModalOpen && (<EditModal
+        projectId = {projectId}
+        setEditModalOpen={setEditModalOpen}
+        projects={projects}
+        setProjects={setProjects}
+
       />)}
-  {isCreateModalOpen && (<ProjectModal setProjects = {setProjects} setIsCreateModalOpen={setIsCreateModalOpen} projects={projects}/>)}
+      {isCreateModalOpen && (<ProjectModal setProjects={setProjects} setIsCreateModalOpen={setIsCreateModalOpen} projects={projects} />)}
       <div className="flex items-center gap-6 border-b border-slate-200 mb-6 overflow-x-auto">
         {tabs.map((tab) => (
           <button
@@ -113,7 +113,7 @@ const searchedValue = (value) =>{
 
         {/* project rows */}
         {currentProjects.map((project) => (
-          <ProjectTable key={project.id} project={project} Ondelete={deleteProject} setEditModalOpen = {setEditModalOpen} editModalOpen={editModalOpen} onEdit={handleEdit} value={value} setValue={setValue}/>
+          <ProjectTable key={project.id} project={project} Ondelete={deleteProject} setEditModalOpen={setEditModalOpen} editModalOpen={editModalOpen}  value={value} setValue={setValue} setProjectId={setProjectId}/>
         ))}
 
         {currentProjects.length === 0 && (

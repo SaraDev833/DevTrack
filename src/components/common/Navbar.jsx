@@ -1,13 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Bell, Plus, Search } from "lucide-react";
+import { Bell, Plus, Search, User } from "lucide-react";
 import manImg from "../../assets/man-1.jfif";
 import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 
 const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , searchedValue}) => {
-    const {user} = useContext(AuthContext)
-    console.log(user.userType)
+    const {user ,member} = useContext(AuthContext)
+  const navigate = useNavigate()
     
   return (
     <header className="w-full min-w-0">
@@ -42,7 +43,7 @@ const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , 
 
           {/* Actions */}
           <div className="flex items-center gap-3 shrink-0">
-          {(user?.userType === "owner" || user?.userType === "admin" ) && (
+          {(member?.userType === "owner" || member?.userType === "admin" ) && (
            
              <button onClick={()=>setIsCreateModalOpen(!isCreateModalOpen)} className="py-2 px-4 bg-indigo-600 text-white rounded-md flex items-center justify-center gap-1 text-sm font-semibold hover:bg-indigo-700 transition cursor-pointer">
               <Plus size={18} />
@@ -58,12 +59,14 @@ const Navbar = ({title, description , isCreateModalOpen, setIsCreateModalOpen , 
                 12
               </span>
             </button>
-
-            <img
-              src={manImg}
-              className="h-11 w-11 rounded-xl object-cover shrink-0 object-top"
+              {user.avater?  <img
+              src={`http://localhost:3000${user.avater}`}
+              className="h-11 w-11 rounded-xl object-cover shrink-0 object-top cursor-pointer" onClick={() => navigate("/profile")}
               alt="Profile"
-            />
+            />:   <div  onClick={() => navigate("/profile")} className='bg-gray-400 w-10 h-10 rounded-full flex items-center justify-center text-white cursor-pointer'>
+            <User />
+          </div> }
+           
           </div>
         </div>
       </div>

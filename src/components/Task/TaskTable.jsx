@@ -7,15 +7,7 @@ const TaskTable = ({projects ,selectedTab, setSelectedTab , setProjects , value 
  const [currentPage, setCurrentPage] = useState(1);
 const [allTasks , setAllTasks] = useState([])
 
-// const allTasks = projects.flatMap((project)=>(
-//     project.tasks || []
-// ).map((task)=>(
-//     {...task,
-//         projectId:project.id,
-//         projectName:project.name
 
-//     }
-// )))
 useEffect(()=>{
   const token = localStorage.getItem("token")
    const getAllTask = async()=>{

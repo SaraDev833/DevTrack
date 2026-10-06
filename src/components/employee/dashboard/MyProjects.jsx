@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const MyProjects = ({projects , input}) => {
  
-console.log(projects)
   const[showAll , setShowAll] = useState(false);
   const filteredSearchTask = projects.filter((project)=>(
     project.name.toLowerCase().includes(input.toLowerCase())

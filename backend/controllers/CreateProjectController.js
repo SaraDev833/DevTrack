@@ -107,12 +107,14 @@ const addTask=async(req , res) =>{
     priority,
     dueDate
   })
-
+const userName = await User.findOne({
+  _id : assignedTo
+})
   if(assignedTo){
     const notification = await Notification.create({
         recipient: assignedTo,
         task:newTask._id,
-        message:`You have been assigned with ${newTask.title}`,
+        message:`${userName.name},you  have been assigned with ${newTask.title}`,
 
     })
   }
@@ -189,4 +191,23 @@ try {
   console.log(error)
 }
 }
-export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask, deleteProject}
+const selectedProjectForEdit= async(req,res)=>{
+ try {
+  const projectId = req.params.projectId;
+ const editProject = await Project.findById(projectId);
+ if(!editProject){
+  res.json({
+    message:"Project is not found"
+  })
+ }
+ res.json({
+  editProject
+ })
+ } catch (error) {
+  console.log(error)
+  res.json({
+    message:"There is something wrong!"
+  })
+ }
+}
+export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask, deleteProject,selectedProjectForEdit}

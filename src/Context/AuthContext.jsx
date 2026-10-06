@@ -6,27 +6,40 @@ import React, { createContext, useEffect, useState } from 'react'
  export const AuthProvider = ({children})=>{
     const [member , setMember] = useState("");
     const[user,setUser] = useState("")
-useEffect(()=>{
+    const[isLoading , setIsLodaing] = useState(true)
+   const getCurrentUser = async()=>{
+   try {
    const token = localStorage.getItem("token");
-const currentUser = async()=>{
-  try {
-    const response = await axios.get("http://localhost:3000/api/current-user-profile", {
+   if(!token){
+    setIsLodaing(false);
+    return
+   }
+   const response = await axios.get( "http://localhost:3000/api/current-user-profile",
+    {
       headers:{
-        Authorization: `Bearer ${token}`
+        Authorization:`Bearer ${token}`
       }
-    })
-    setUser(response.data.user)
+    }
+
+   )
+   setUser(response.data.user);
    setMember(response.data.member)
-  } catch (error) {
-    console.log(error)
-  }
-}
-currentUser()
-},[])
+   } catch (error) {
+    console.log(error.response?.data?.message)
+    setUser(null)
+    setMember(null)
+   }
+   finally{
+setIsLodaing(false)
+   }
+   }
+     useEffect(() => {
+    getCurrentUser();
+  }, []);
       return(
         <AuthContext.Provider
         value={{
-            user , setUser, member , setMember
+            user , setUser, member , setMember, isLoading, setIsLodaing, getCurrentUser
         }}
         >
                   {children}

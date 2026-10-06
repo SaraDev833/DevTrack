@@ -3,9 +3,10 @@ import { registerUser, loginUser, inviteUserRegister, getActiveMembers, removeTe
 import invitation from "../controllers/InvitationController.js";
 import Authmiddleware from '../Middleware/Authmiddleware.js'
 import MembersController from "../controllers/MembersController.js";
-import { CreateProject, getProjects, getTeamMembers, addTask, allTasks, deleteTask,deleteProject } from "../controllers/CreateProjectController.js";
+import { CreateProject, getProjects, getTeamMembers, addTask, allTasks, deleteTask,deleteProject ,selectedProjectForEdit} from "../controllers/CreateProjectController.js";
 import multer from "multer";
-import { myProjects } from "../controllers/EmployeeProjectController.js";
+import { myProjects, updateTaskStatus } from "../controllers/EmployeeProjectController.js";
+import { deleteNotifications, getNotification } from "../controllers/NotificationController.js";
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -35,6 +36,7 @@ router.get("/workspace-member", Authmiddleware, MembersController)
 router.post("/create/project", Authmiddleware, CreateProject)
 router.get("/all/projects", Authmiddleware, getProjects)
 router.delete("/delete/project/:id", Authmiddleware, deleteProject)
+router.get("/get/selectedProject/:projectId" , Authmiddleware , selectedProjectForEdit)
 router.post("/getTeamMembers", Authmiddleware, getTeamMembers);
 router.post("/add/task", Authmiddleware, addTask);
 router.get("/all/tasks", Authmiddleware, allTasks);
@@ -46,4 +48,8 @@ router.delete("/remove/invitation/:id", Authmiddleware, removeInvitation);
 router.put("/change-password", Authmiddleware, changePassword)
 // employee side
 router.get("/my/projects",Authmiddleware, myProjects)
+router.put("/update/taskStatus/:id",Authmiddleware, updateTaskStatus)
+// notification
+router.get("/get/notifications",Authmiddleware, getNotification)
+router.delete("/deleteAll", Authmiddleware, deleteNotifications)
 export default router;

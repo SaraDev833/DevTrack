@@ -152,7 +152,7 @@ const handleLogout= ()=>{
                       ? "bg-indigo-600 text-white"
                       : "text-slate-300 hover:bg-indigo-900 hover:text-white"
                   }`
-                }
+                } 
               >
                 <Icon size={20} className="shrink-0" />
 
@@ -166,12 +166,12 @@ const handleLogout= ()=>{
           })}
         </nav>
         }
-     <button
-  className="
+     <button onClick={()=>handleLogout()}
+  className={`
     fixed bottom-6 left-4
     flex items-center gap-3
-    w-56 px-4 py-2.5
-    rounded-xl
+     px-4 py-2.5
+    rounded-xl ${desktopOpen? "w-56": "w-fit" }
     border border-white/10
     bg-white/5
     text-slate-300
@@ -183,13 +183,13 @@ const handleLogout= ()=>{
     active:scale-[0.98]
     group
     cursor-pointer
-  "
+  `}
 >
   <LogOut
     size={18}
     className="transition-transform duration-200 group-hover:-translate-x-0.5"
   />
-  <span className="font-medium text-sm" onClick={()=>handleLogout()}>Logout</span>
+  {desktopOpen &&( <span className="font-medium text-sm" >Logout</span>)}
 </button>
       </div>
     </aside>

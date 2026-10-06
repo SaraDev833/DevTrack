@@ -48,7 +48,7 @@ projects()
       .map((task) => ({
         ...task,
         projectName: project.name,
-        projectId: project.id
+      
       }))
 
   ));
@@ -119,7 +119,7 @@ projects()
         
       </div>
     </div>
-  );
+  ); 
 }
 
 export default DashboardEmployee

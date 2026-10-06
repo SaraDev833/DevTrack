@@ -30,7 +30,7 @@ const getMembers= async()=>{
         }
       }
     )
-    
+     console.log("members", response.data.members)
     setMembers(response.data.members)
   } catch (error) {
     console.log(error.response?.data)

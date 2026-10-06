@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import man1 from "../../assets/man-1.jfif"
-import { Mail, UserPen } from 'lucide-react'
+import { Mail, User, UserPen } from 'lucide-react'
 const ProfileCard = ({user , editProfileModal , setEditProfileModal, position}) => {
     
 
@@ -8,7 +8,13 @@ const ProfileCard = ({user , editProfileModal , setEditProfileModal, position}) 
     <div className='w-full min-w-0 border border-slate-200 shadow-sm bg-white p-6 rounded-md'>
        <div className='flex justify-between flex-col md:flex-row gap-6'>
        <div className='flex gap-3 items-center'>
-       <img src={`http://localhost:3000${user.avater}`} alt=""  className='h-25 w-25 rounded-full object-cover object-top'/>
+        {user.avater?
+       <img src={`http://localhost:3000${user.avater}`} alt=""  className='h-25 w-25 rounded-full object-cover object-top'/>:
+          <div className='bg-gray-400 w-15 h-15 rounded-full flex items-center justify-center text-white'>
+            <User size={30}/>
+          </div>
+      }
+      
        <div className='flex flex-col gap-2'>
          <h2 className='font-bold text-slate-900'>{user.name}</h2>
          <span className='py-1 px-2 rounded-full bg-sky-200/50 text-sky-600 text-xs font-medium'>{position.position}</span>

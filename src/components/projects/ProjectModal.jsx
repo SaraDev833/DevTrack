@@ -1,12 +1,13 @@
 import { X } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import teamMembers from "../../data/teamMembers";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../Context/AuthContext";
 
 const ProjectModal = ({ setProjects, setIsCreateModalOpen, projects }) => {
   const [workspaceMembers , setworkspaceMembers] = useState([])
-
+const {user} =useContext(AuthContext)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -252,34 +253,30 @@ const handleTeamMembers=(userId)=>{
 
             <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3">
 
-              {workspaceMembers.map((member) => (
+{workspaceMembers
+  .filter((member) => member.user._id !== user?._id)
+  .map((member) => (
+    <div
+      key={member.user._id}
+      className="flex items-center gap-2 py-2 px-3 border border-slate-200 rounded-md bg-slate-100"
+    >
+      <input
+        type="checkbox"
+        checked={formData.teamMembers.includes(member.user._id)}
+        onChange={() => handleTeamMembers(member.user._id)}
+      />
 
-                <div
-                  key={member.user._id}
-                  className="flex items-center gap-2 py-2 px-3 border border-slate-200 rounded-md bg-slate-100"
-                >
+      <div>
+        <p className="text-sm text-slate-900">
+          {member.user.name}
+        </p>
 
-                  <input
-                    type="checkbox"
-                    checked={formData.teamMembers.includes(member.user._id)}
-                    onChange={() => handleTeamMembers(member.user._id)}
-                  />
-
-
-                  <div>
-                    <p className="text-sm text-slate-900">
-                      {member.user.name}
-                    </p>
-
-                    <span className="text-xs text-slate-500">
-                      {member.role}
-                    </span>
-
-                  </div>
-
-                </div>
-
-              ))}
+        <span className="text-xs text-slate-500">
+          {member.role}
+        </span>
+      </div>
+    </div>
+  ))}
 
             </div>
 

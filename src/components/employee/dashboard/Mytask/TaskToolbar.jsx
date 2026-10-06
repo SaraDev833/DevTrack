@@ -4,9 +4,8 @@ import React, { useState } from 'react'
 const TaskToolbar = ({setActive , active}) => {
    
     const tabs = [
-        "All",
-        "To Do",
-        "In Progress",
+        "Todo",
+        "In-progress",
         "Completed"
     ]
   return (

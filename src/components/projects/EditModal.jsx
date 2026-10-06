@@ -1,44 +1,85 @@
 import { X } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import teamMembers from '../../data/teamMembers';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-const EditModal = ({ setEditModalOpen, project, projects, setProjects }) => {
-
-
-
+const EditModal = ({ setEditModalOpen, project, projects, setProjects, projectId  }) => {
+  const[editProject , setEditProject] = useState(null)
+  console.log(editProject)
+  const [members , setMembers] = useState([]);
   const [formData, setFormData] = useState({
-    name: project?.name || "",
-    description: project?.description || "",
-    client: project?.client || "",
-    budget: project?.budget || "",
-    category: project?.category || "",
-    priority: project?.priority || "",
-    dueDate: project?.dueDate || "",
-    status: project?.status || "Planning",
-    teamMembers: project?.teamMembers || [],
-  });
+  name: "",
+  description: "",
+  client: "",
+  budget: "",
+  category: "",
+  priority: "",
+  dueDate: "",
+  status: "Planning",
+  teamMembers: [],
+});
+const editableProjects = async ()=>{
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`http://localhost:3000/api/get/selectedProject/${projectId}`,{
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+   setEditProject(response.data.editProject)
+  } catch (error) {
+    console.log(error.response?.data?.message)
+     toast.error(error.response?.data?.message)
+  }
+}
+useEffect(()=>{
+editableProjects();
 
-  const statuses = [
-    "Planning",
-    "In Progress",
-    "On Hold",
-    "Completed",
-    "Archived",
-  ];
-  const categories = [
-    "Web Development",
-    "Mobile App",
-    "Marketing",
-    "E-commerce",
-    "Dashboard",
-    "CMS",
-    "Education Platform",
-    "Finance App",
-    "Booking System",
-  ];
+},[projectId]);
 
+useEffect(() => {
+  if (editProject) {
+    setFormData({
+      name: editProject.name || "",
+      description: editProject.description || "",
+      client: editProject.client || "",
+      budget: editProject.budget || "",
+      category: editProject.category || "",
+      priority: editProject.priority || "",
+      dueDate: editProject.dueDate || "",
+      status: editProject.status || "Planning",
+      teamMembers: editProject.teamMembers || [],
+    });
+  }
+}, [editProject]);
+
+
+
+ 
   const priorities = ["High", "Medium", "Low"];
-
+  useEffect(()=>{
+    const token = localStorage.getItem("token");
+const getMembers= async()=>{
+  try {
+    const response = await axios.post("http://localhost:3000/api/getTeamMembers",
+      {
+        teamMembers
+      },
+      {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+     console.log("members", response.data.members)
+    setMembers(response.data.members)
+  } catch (error) {
+    console.log(error.response?.data)
+  }
+}
+getMembers()
+  },[])
   const handleTeamMembers = (name) => {
     if (formData.teamMembers.includes(name)) {
       setFormData({
@@ -170,21 +211,14 @@ const EditModal = ({ setEditModalOpen, project, projects, setProjects }) => {
                 Category
               </label>
 
-              <select
+             
+              <input
+                type="text"
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
                 className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
-              >
-                <option ></option>
-
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-
-              </select>
+              />
             </div>
 
 
@@ -233,28 +267,7 @@ const EditModal = ({ setEditModalOpen, project, projects, setProjects }) => {
 
               </select>
             </div>
-            <div className="w-full sm:w-1/2">
-              <label className="text-sm font-medium text-slate-900">
-                Status
-              </label>
 
-              <select
-                name="status"
-                onChange={handleChange}
-                value={formData.status}
-                className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
-              >
-
-                <option value=""></option>
-
-                {statuses.map((status) => (
-                  <option key={status} value={status}>
-                    {status}
-                  </option>
-                ))}
-
-              </select>
-            </div>
 
 
 
@@ -288,7 +301,7 @@ const EditModal = ({ setEditModalOpen, project, projects, setProjects }) => {
 
             <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3">
 
-              {teamMembers.map((member) => (
+              {members.map((member) => (
 
                 <div
                   key={member.id}

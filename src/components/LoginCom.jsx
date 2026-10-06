@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../Context/AuthContext";
 
 const LoginCom = () => {
-  const {user} = useContext(AuthContext);
- 
+  const { setMember,setUser, getCurrentUser} = useContext(AuthContext);
+
   const navigate = useNavigate()
   const {
     register,
@@ -22,7 +22,8 @@ const LoginCom = () => {
       const token = response.data.token;
     
       localStorage.setItem("token" , token);
-      console.log(response)
+
+   getCurrentUser()
       if(response.data.member.userType === "owner"){
         navigate("/dashboard")
       }else{

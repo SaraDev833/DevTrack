@@ -1,3 +1,4 @@
+import Notification from "../Models/Notification.js";
 import Project from "../Models/Project.js";
 import Task from "../Models/Task.js";
 
@@ -34,4 +35,28 @@ try {
 }
 
 }
-export {myProjects}
+const updateTaskStatus=async(req, res)=>{
+const taskId = req.params.id;
+const updatedStatus = req.body.newStatus;
+const newTask = await Task.findByIdAndUpdate(taskId,
+    {
+        status:updatedStatus
+    },
+     { new: true }
+).populate("assignedTo" , "name")
+
+if(newTask){
+    const notification = await Notification.create({
+        recipient:newTask.createdBy,
+        task:newTask._id,
+       message: `${newTask.assignedTo.name}'s assigned task status has been updated to ${newTask.status}`
+    })
+}
+
+res.json({
+    message:"Status updated Successfully!",
+    newTask
+})
+
+}
+export {myProjects,updateTaskStatus }
