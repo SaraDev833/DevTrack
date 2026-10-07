@@ -210,4 +210,30 @@ const selectedProjectForEdit= async(req,res)=>{
   })
  }
 }
-export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask, deleteProject,selectedProjectForEdit}
+const projectStatus= async(req,res)=>{
+const projectId = req.params.projectId;
+ try {
+  const tasks = await Task.find({
+    project:projectId
+  })
+  res.json({
+    tasks
+  })
+ } catch (error) {
+  
+ }
+}
+const projectCreator = async(req,res)=>{
+    try {
+       const createdBy = req.params.projectCreator;
+      const user = await User.findById(createdBy)
+    res.json({
+        user
+    })
+    } catch (error) {
+      res.json({
+        message:"There are some error"
+      })
+    }
+}
+export  {CreateProject , getProjects , getTeamMembers, addTask , allTasks, deleteTask, deleteProject,selectedProjectForEdit,projectStatus,projectCreator}

@@ -59,10 +59,10 @@ const getPriorityStyle=(priority)=>{
 }
 const getStatusStyle=(status)=>{
     switch(status){
-   case "To Do":
+   case "Todo":
     return "text-slate-600 bg-slate-200/50";
 
-   case "In Progress":
+   case "In-progress":
     return "text-sky-600 bg-sky-200/50" ;
     default:
         return "text-green-600 bg-green-200/50"

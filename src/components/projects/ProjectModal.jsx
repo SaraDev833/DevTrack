@@ -213,13 +213,11 @@ const handleTeamMembers=(userId)=>{
               <label className="text-sm font-medium text-slate-900">
                 Priority
               </label>
-
-          <input
-                type="text"
-                name="priority"
-                onChange={handleChange}
-                className="w-full border border-slate-200 rounded-md p-2 outline-none focus:ring-1 focus:ring-indigo-600"
-              />
+             <select name="priority" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
             </div>
 
 

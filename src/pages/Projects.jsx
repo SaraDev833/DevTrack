@@ -14,7 +14,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [value, setValue] = useState("");
   const { isCreateModalOpen, setIsCreateModalOpen, projects, setProjects } = useOutletContext()
-  console.log(editModalOpen)
+
   const tabs = [
     "All Projects",
     "In Progress",
@@ -102,12 +102,17 @@ const Projects = () => {
 
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
         {/* table header */}
-        <div className="hidden lg:grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] gap-4 px-5 py-4 border-b border-slate-200 bg-slate-50">
+        <div className=" grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4 px-5 py-4 border-b border-slate-200 bg-slate-50">
+          <div className="  grid grid-cols-1
+      sm:grid-cols-2
+      lg:grid-cols-[2fr_1.5fr_0.8fr_0.8fr_1fr_1fr]">
           <span className="text-sm text-slate-600 font-semibold">Project</span>
+          <span className="text-sm text-slate-600 font-semibold">Description</span>
           <span className="text-sm text-slate-600 font-semibold">Progress</span>
           <span className="text-sm text-slate-600 font-semibold">Team</span>
           <span className="text-sm text-slate-600 font-semibold">Due Date</span>
           <span className="text-sm text-slate-600 font-semibold">Status</span>
+          </div>
           <span className="text-sm text-slate-600 font-semibold">Actions</span>
         </div>
 

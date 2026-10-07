@@ -85,7 +85,7 @@ getMembers()
   }
   return (
 
-    <div className='fixed inset-0  bg-black/50 backdrop-blur-sm  z-50 flex items-center justify-center'>
+  <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
       <div className=' bg-white w-150 p-6'>
         <div className="flex justify-between items-center">
           <h3 className='text-lg text-slate-900 font-medium'>Add New Task</h3>
@@ -96,13 +96,13 @@ getMembers()
             {/* title */}
             <div className='flex flex-col gap-1.5 '>
               <label htmlFor="" className='text-sm font-medium text-slate-900'>Title</label>
-              <input type="text" placeholder='Enter Project Name' name='title' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange} />
+              <input type="text" placeholder='Enter Task Name' name='title' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange} />
             </div>
 
             {/* description */}
             <div className='flex flex-col gap-1.5 '>
               <label htmlFor="" className='text-sm font-medium text-slate-900'>Description</label>
-              <textarea type="text" placeholder='Enter Project Name' name='description' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange} />
+              <textarea type="text" placeholder='Enter task description' name='description' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange} />
             </div>
 
             {/* priority + status */}
@@ -115,14 +115,7 @@ getMembers()
                   <option value="Low">Low</option>
                 </select>
               </div>
-              <div className='flex flex-col gap-1.5 w-1/2'>
-                <label htmlFor="" className='text-sm font-medium text-slate-900'>Status</label>
-               <input type="text" value={formData.status} name='status' className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange} />
-              </div>
-            </div>
-            {/* start date and due date */}
-            <div className='flex  items-center w-full gap-3'>
-              <div className='flex flex-col gap-1.5 w-1/2'>
+                    <div className='flex flex-col gap-1.5 w-1/2'>
                 <label htmlFor="" className='text-sm font-medium text-slate-900'>Assign To</label>
                 <select name="assignedTo" id="" className='w-full border border-slate-200 outline-none focus:ring-1 focus:ring-indigo-600 rounded-md p-1 placeholder:text-xs placeholder:text-slate-500 placeholder:font-medium' onChange={handleChange}>
                   {members.map((member) => (
@@ -133,6 +126,10 @@ getMembers()
 
                 </select>
               </div>
+            </div>
+            {/* start date and due date */}
+            <div className='flex  items-center w-full gap-3'>
+        
               <div className='flex flex-col gap-1.5 w-1/2'>
                 <label htmlFor="" className='text-sm font-medium text-slate-900'>Due Date</label>
                 <input

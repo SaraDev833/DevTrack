@@ -3,7 +3,7 @@ import { registerUser, loginUser, inviteUserRegister, getActiveMembers, removeTe
 import invitation from "../controllers/InvitationController.js";
 import Authmiddleware from '../Middleware/Authmiddleware.js'
 import MembersController from "../controllers/MembersController.js";
-import { CreateProject, getProjects, getTeamMembers, addTask, allTasks, deleteTask,deleteProject ,selectedProjectForEdit} from "../controllers/CreateProjectController.js";
+import { CreateProject, getProjects, getTeamMembers, addTask, allTasks, deleteTask,deleteProject ,selectedProjectForEdit,projectStatus,projectCreator} from "../controllers/CreateProjectController.js";
 import multer from "multer";
 import { myProjects, updateTaskStatus } from "../controllers/EmployeeProjectController.js";
 import { deleteNotifications, getNotification } from "../controllers/NotificationController.js";
@@ -37,6 +37,8 @@ router.post("/create/project", Authmiddleware, CreateProject)
 router.get("/all/projects", Authmiddleware, getProjects)
 router.delete("/delete/project/:id", Authmiddleware, deleteProject)
 router.get("/get/selectedProject/:projectId" , Authmiddleware , selectedProjectForEdit)
+router.get("/get/projectStatus/:projectId" , Authmiddleware , projectStatus)
+router.get("/get/createdBy/userInfo/:projectCreator" , Authmiddleware , projectCreator)
 router.post("/getTeamMembers", Authmiddleware, getTeamMembers);
 router.post("/add/task", Authmiddleware, addTask);
 router.get("/all/tasks", Authmiddleware, allTasks);
